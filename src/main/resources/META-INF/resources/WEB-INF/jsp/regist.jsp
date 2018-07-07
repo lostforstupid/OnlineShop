@@ -2,45 +2,43 @@
   Created by IntelliJ IDEA.
   User: goponenko
   Date: 07.07.2018
-  Time: 14:58
+  Time: 15:00
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Welcome</title>
+    <title>Registration</title>
 </head>
 <body>
 <div align="center">
-    <%--@elvariable id="userJSP" type=""--%>
-    <form:form action="enter" method="post" modelAttribute="userJSP">
+    <%--@elvariable id="newUser" type=""--%>
+    <form:form action="add_new_user" method="post" modelAttribute="newUser">
         <table border="0">
             <tr>
-                <td colspan="2" align="center"><h2>Welcome</h2></td>
+                <td colspan="2" align="center"><h2>Registration</h2></td>
             </tr>
             <tr>
                 <td>User Name:</td>
-                <td><form:input path="username"/></td>
+                <td><form:input path="username" /></td>
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><form:password path="password"/></td>
+                <td><form:password path="password" /></td>
             </tr>
             <tr>
-                <td colspan="2" align="center"><input type="submit" value="Sign in"/></td>
-
+                <td>Address:</td>
+                <td><form:input path="address" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Register" /></td>
             </tr>
         </table>
-    </form:form>
-    <form:form action="registration" method="post">
-
-        <td colspan="2" align="center"><input type="submit" value="Sign up"/></td>
-
     </form:form>
 </div>
 </body>

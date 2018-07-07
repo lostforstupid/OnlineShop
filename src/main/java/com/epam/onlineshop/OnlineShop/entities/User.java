@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -34,22 +35,11 @@ public class User {
     @Column(name = "address", nullable = false)
     private String address;
 
-    public User() {
-    }
-
-    public User(String role, String username, String password, boolean isBlocked, String address) {
-        this.role = role;
-        this.username = username;
-        this.isBlocked = isBlocked;
+    public User(String user, String user1, String s, boolean b, String address) {
+        this.role = user;
+        this.username = user1;
+        this.password = s;
+        this.isBlocked = b;
         this.address = address;
-        this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }

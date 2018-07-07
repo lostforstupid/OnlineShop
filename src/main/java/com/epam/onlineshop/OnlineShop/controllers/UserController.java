@@ -25,7 +25,7 @@ public class UserController {
         if ((byUsername != null) && ((byUsername.getPassword().equals(user.getPassword())))) {
             modelAndView.setViewName("welcome");
             modelAndView.addObject("userJSP", byUsername);
-        }else{
+        } else {
             modelAndView.setViewName("wrong_enter");
             modelAndView.addObject("userJSP", new User());
         }
@@ -33,8 +33,20 @@ public class UserController {
     }
 
     private void addDummyUser() {
-        User newUser = new User("user", "user", "123", false, "address");
+        User newUser = new User("admin", "admin", "123", false, "address");
         if (userRepository.findByUsername(newUser.getUsername()) == null)
-            userRepository.save(newUser);
+            userRepository.saveAndFlush(newUser);
+    }
+
+    @RequestMapping("/add_new_user")
+    public ModelAndView addNewUser(@ModelAttribute("userJSP") User user) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (userRepository.findByUsername(user.getUsername()) == null) {
+            User newUser = new User("user", user.getUsername(), user.getPassword(), false, user.getAddress());
+            userRepository.saveAndFlush(newUser);
+            modelAndView.setViewName("welcome");
+            modelAndView.addObject("userJSP", newUser);
+        }
+        return modelAndView;
     }
 }

@@ -1,3 +1,4 @@
+<%--@elvariable id="userJSP" type=""--%>
 <%--
   Created by IntelliJ IDEA.
   User: goponenko
@@ -8,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Welcome page</title>
+    <title>Welcome</title>
 </head>
 <body>
 Welcome to our online shop, ${userJSP.username}!
