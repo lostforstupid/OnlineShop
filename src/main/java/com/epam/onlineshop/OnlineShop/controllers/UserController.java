@@ -1,0 +1,40 @@
+package com.epam.onlineshop.OnlineShop.controllers;
+
+import com.epam.onlineshop.OnlineShop.entities.User;
+import com.epam.onlineshop.OnlineShop.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+@RestController
+public class UserController {
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @RequestMapping("/enter")
+    public ModelAndView welcome(@ModelAttribute("userJSP") User user) {
+        ModelAndView modelAndView = new ModelAndView();
+        // Заглушка
+        addDummyUser();
+        //
+        User byUsername = userRepository.findByUsername(user.getUsername());
+        if ((byUsername != null) && ((byUsername.getPassword().equals(user.getPassword())))) {
+            modelAndView.setViewName("welcome");
+            modelAndView.addObject("userJSP", byUsername);
+        }else{
+            modelAndView.setViewName("wrong_enter");
+            modelAndView.addObject("userJSP", new User());
+        }
+        return modelAndView;
+    }
+
+    private void addDummyUser() {
+        User newUser = new User("user", "user", "123", false, "address");
+        if (userRepository.findByUsername(newUser.getUsername()) == null)
+            userRepository.save(newUser);
+    }
+}
