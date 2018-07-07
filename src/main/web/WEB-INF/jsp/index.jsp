@@ -1,19 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: goponenko
-  Date: 07.07.2018
-  Time: 15:29
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <html>
+
 <head>
-    <title>Registration</title>
+    <title>Welcome</title>
 </head>
+
 <body>
+
 <%--@elvariable id="userJSP" type=""--%>
-Sorry, but your username/password is wrong!
 <spring:form method="post"  modelAttribute="userJSP" action="enter">
 
     Name: <spring:input path="username"/> <br/>
@@ -21,5 +17,7 @@ Sorry, but your username/password is wrong!
     <spring:button>Sign in</spring:button>
 
 </spring:form>
+
 </body>
+
 </html>
