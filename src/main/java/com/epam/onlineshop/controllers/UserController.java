@@ -1,7 +1,7 @@
 package com.epam.onlineshop.controllers;
 
 import com.epam.onlineshop.entities.User;
-import com.epam.onlineshop.services.impl.UserServiceImpl;
+import com.epam.onlineshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class UserController {
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @PostMapping("/registration")
     public ModelAndView registerUser() {
