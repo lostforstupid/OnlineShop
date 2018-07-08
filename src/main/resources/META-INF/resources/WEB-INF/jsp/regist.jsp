@@ -18,7 +18,7 @@
 <body>
 <div align="center">
     <%--@elvariable id="newUser" type=""--%>
-    <form:form action="add_new_user" method="post" modelAttribute="newUser">
+    <form:form action="add-new-user" method="post" modelAttribute="newUser">
         <table border="0">
             <tr>
                 <td colspan="2" align="center"><h2>Registration</h2></td>

@@ -3,7 +3,9 @@ package com.epam.onlineshop.controllers;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
@@ -19,15 +21,15 @@ public class UserController {
         return modelAndView;
     }
 
-    @PostMapping("/enter")
+    @PostMapping("/welcome")
     public ModelAndView signIn(@ModelAttribute("userJSP") User user) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName(userService.checkUserInSystem(user));
+        modelAndView.setViewName(userService.signInUser(user));
         modelAndView.addObject("userJSP", user);
         return modelAndView;
     }
 
-    @PostMapping("/add_new_user")
+    @PostMapping("/add-new-user")
     public ModelAndView addNewUser(@ModelAttribute("userJSP") User user) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("welcome");

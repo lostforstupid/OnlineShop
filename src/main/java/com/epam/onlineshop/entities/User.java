@@ -1,18 +1,18 @@
 package com.epam.onlineshop.entities;
 
-import lombok.*;
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 @Entity
-@Component
-@Getter
-@Setter
-@EqualsAndHashCode
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
-@Table(name = "users")
+@AllArgsConstructor
+@Builder
+@Table(name = "user")
 public class User {
 
     @Id
@@ -34,12 +34,4 @@ public class User {
 
     @Column(name = "address", nullable = false)
     private String address;
-
-    public User(String role, String username, String password, Boolean isBlocked, String address) {
-        this.role = role;
-        this.username = username;
-        this.password = password;
-        this.isBlocked = isBlocked;
-        this.address = address;
-    }
 }

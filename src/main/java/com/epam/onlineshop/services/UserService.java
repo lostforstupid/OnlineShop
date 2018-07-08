@@ -5,5 +5,5 @@ import com.epam.onlineshop.entities.User;
 public interface UserService {
 
     User addNewUser(User user);
-    String checkUserInSystem(User user);
+    String signInUser(User user);
 }

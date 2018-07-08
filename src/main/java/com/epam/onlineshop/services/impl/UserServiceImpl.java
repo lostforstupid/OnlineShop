@@ -5,6 +5,7 @@ import com.epam.onlineshop.repository.UserRepository;
 import com.epam.onlineshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -12,20 +13,28 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
     @Override
     public User addNewUser(User user) {
 
-        if (userRepository.findByUsername(user.getUsername()) == null) {
-            User newUser = new User("user", user.getUsername(), user.getPassword(), false, user.getAddress());
-            userRepository.saveAndFlush(newUser);
-            return newUser;
+        String username = user.getUsername();
+        if (userRepository.findByUsername(username) != null) {
+            // TODO Add check when user is already exist. Create method existByUsername(String) in UserRepository
+            return user;
+        } else {
+            return userRepository.save(User.builder()
+                    .id(0L)
+                    .role("user")
+                    .username(username)
+                    .isBlocked(false)
+                    .password(user.getPassword())
+                    .address(user.getAddress())
+                    .build());
         }
-        // TODO Added check when user is already exist.
-        return user;
     }
 
     @Override
-    public String checkUserInSystem(User user) {
+    public String signInUser(User user) {
         User byUsername = userRepository.findByUsername(user.getUsername());
         if ((byUsername != null) && ((byUsername.getPassword().equals(user.getPassword())))) {
             return "welcome";
