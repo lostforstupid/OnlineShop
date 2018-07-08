@@ -1,5 +1,6 @@
 package com.epam.onlineshop.services.impl;
 
+import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.repository.UserRepository;
 import com.epam.onlineshop.services.UserService;
@@ -19,12 +20,11 @@ public class UserServiceImpl implements UserService {
 
         String username = user.getUsername();
         if (userRepository.findByUsername(username) != null) {
-            // TODO Add check when user is already exist. Create method existByUsername(String) in UserRepository
+            // TODO Add checking when user is already exist. Create method existByUsername(String) in UserRepository
             return user;
         } else {
             return userRepository.save(User.builder()
-                    .id(0L)
-                    .role("user")
+                    .role(Role.USER)
                     .username(username)
                     .isBlocked(false)
                     .password(user.getPassword())

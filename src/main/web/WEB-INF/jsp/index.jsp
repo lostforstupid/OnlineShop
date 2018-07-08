@@ -18,7 +18,7 @@
 <body>
 <div align="center">
     <%--@elvariable id="userJSP" type=""--%>
-    <form:form action="enter" method="post" modelAttribute="userJSP">
+    <form:form action="enter" modelAttribute="userJSP">
         <table border="0">
             <tr>
                 <td colspan="2" align="center"><h2>Welcome</h2></td>
