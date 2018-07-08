@@ -18,7 +18,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
-    private long id;
+    private Long id;
 
     @Column(name = "role", nullable = false)
     private String role;
@@ -30,12 +30,12 @@ public class User {
     private String password;
 
     @Column(name = "isBlocked")
-    private boolean isBlocked;
+    private Boolean isBlocked;
 
     @Column(name = "address", nullable = false)
     private String address;
 
-    public User(String role, String username, String password, boolean isBlocked, String address) {
+    public User(String role, String username, String password, Boolean isBlocked, String address) {
         this.role = role;
         this.username = username;
         this.password = password;
