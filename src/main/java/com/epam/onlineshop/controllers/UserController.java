@@ -1,7 +1,7 @@
-package com.epam.onlineshop.OnlineShop.controllers;
+package com.epam.onlineshop.controllers;
 
-import com.epam.onlineshop.OnlineShop.entities.User;
-import com.epam.onlineshop.OnlineShop.repository.UserRepository;
+import com.epam.onlineshop.entities.User;
+import com.epam.onlineshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;

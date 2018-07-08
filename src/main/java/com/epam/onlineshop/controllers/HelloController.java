@@ -1,7 +1,7 @@
-package com.epam.onlineshop.OnlineShop.controllers;
+package com.epam.onlineshop.controllers;
 
 import org.springframework.stereotype.Controller;
-import com.epam.onlineshop.OnlineShop.entities.User;
+import com.epam.onlineshop.entities.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Map;
 

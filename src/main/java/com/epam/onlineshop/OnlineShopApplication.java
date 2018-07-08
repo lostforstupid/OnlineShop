@@ -1,4 +1,4 @@
-package com.epam.onlineshop.OnlineShop;
+package com.epam.onlineshop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
