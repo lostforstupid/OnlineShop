@@ -1,4 +1,4 @@
-package com.epam.onlineshop.OnlineShop.controllers;
+package com.epam.onlineshop.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

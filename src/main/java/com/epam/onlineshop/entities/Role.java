@@ -1,4 +1,4 @@
-package com.epam.onlineshop.OnlineShop.entities;
+package com.epam.onlineshop.entities;
 
 public enum Role {
     ADMIN, USER, ANONYMOUS

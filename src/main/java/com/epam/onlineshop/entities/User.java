@@ -1,4 +1,4 @@
-package com.epam.onlineshop.OnlineShop.entities;
+package com.epam.onlineshop.entities;
 
 import lombok.*;
 
