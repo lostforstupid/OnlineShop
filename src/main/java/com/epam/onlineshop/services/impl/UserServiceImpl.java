@@ -3,16 +3,14 @@ package com.epam.onlineshop.services.impl;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.repository.UserRepository;
 import com.epam.onlineshop.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private UserRepository userRepository;
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public User addNewUser(User user) {
