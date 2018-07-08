@@ -16,7 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
-    private long id;
+    private Long id;
 
     @Column(name = "role", nullable = false)
     @Enumerated(value = EnumType.STRING)
@@ -26,7 +26,7 @@ public class User {
     private String username;
 
     @Column(name = "isBlocked")
-    private boolean isBlocked;
+    private Boolean isBlocked;
 
     @Column(name = "address", nullable = false)
     private String address;
