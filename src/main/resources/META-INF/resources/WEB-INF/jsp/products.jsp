@@ -9,7 +9,7 @@
     <title>Products</title>
     <style>
         table, tr, td {border: 1px solid grey; border-collapse: collapse;}
-        table {width: 60%; text-align: center;}
+        table {width: 60%;}
         td {padding: 5px 0px 5px 0px;}
         td.count, td.buy {width: 15%;}
         td.name, td.price {padding-left: 10px;}
