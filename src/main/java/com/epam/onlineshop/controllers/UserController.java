@@ -3,7 +3,6 @@ package com.epam.onlineshop.controllers;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,11 +16,8 @@ public class UserController {
 
     private final UserService userService;
 
-    @Value("${signin.message.error}")
-    private String wrongSignin;
-
-    @Value("${signup.message.error}")
-    private String wrongSignup;
+    private final static String WRONG_SIGNIN = "Username or Password is wrong!";
+    private final static String WRONG_SIGNUP = "This username is already exist!";
 
     @PostMapping("/registration")
     public ModelAndView registerUser(ModelAndView modelAndView) {
@@ -33,12 +29,12 @@ public class UserController {
 
     @PostMapping("/signin")
     public ModelAndView signIn(@ModelAttribute("userJSP") User user, ModelAndView modelAndView) {
-        if (userService.isExistsByUser(user)) {
+        if (userService.isExistsByUsername(user.getUsername())) {
             modelAndView.setViewName(getViewName(user));
             modelAndView.addObject("userJSP", user);
         } else {
             modelAndView.setViewName("index");
-            modelAndView.addObject("message", this.wrongSignin);
+            modelAndView.addObject("message", WRONG_SIGNIN);
         }
         return modelAndView;
     }
@@ -52,7 +48,7 @@ public class UserController {
         } else {
             modelAndView.setViewName("regist");
             modelAndView.addObject("newUser", user);
-            modelAndView.addObject("message", this.wrongSignup);
+            modelAndView.addObject("message", WRONG_SIGNUP);
         }
         return modelAndView;
     }
