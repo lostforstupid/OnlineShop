@@ -4,38 +4,35 @@ import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.repository.UserRepository;
 import com.epam.onlineshop.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     @Override
-    public boolean addNewUser(User user) {
-
+    public User addUser(User user) {
         String username = user.getUsername();
-
-        if (null != userRepository.findByUsername(username)) {
-                return false;
+        if (userRepository.findByUsername(username) != null) {
+            return null;
         } else {
-            userRepository.save(User.builder()
+            return userRepository.save(User.builder()
                     .role(Role.USER)
                     .username(username)
                     .isBlocked(false)
                     .password(user.getPassword())
                     .address(user.getAddress())
                     .build());
-            return true;
         }
     }
 
     @Override
-    public boolean existsByUser(User user) {
+    public Boolean isExistsByUser(User user) {
         User byUsername = userRepository.findByUsername(user.getUsername());
         return (byUsername != null) && ((byUsername.getPassword().equals(user.getPassword())));
     }

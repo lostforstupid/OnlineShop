@@ -33,6 +33,7 @@
 
 <div align="center">
     <%--@elvariable id="userJSP" type=""--%>
+    <%--@elvariable id="message" type=""--%>
     <form:form action="signin"  modelAttribute="userJSP">
 
 

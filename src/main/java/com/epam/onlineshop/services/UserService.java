@@ -5,7 +5,7 @@ import com.epam.onlineshop.entities.User;
 
 public interface UserService {
 
-    User addNewUser(User user);
-    boolean existsByUser(User user);
+    User addUser(User user);
+    Boolean isExistsByUser(User user);
     Role getRoleByUser(User user);
 }
