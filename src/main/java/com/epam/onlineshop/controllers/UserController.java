@@ -17,7 +17,6 @@ public class UserController {
     public ModelAndView registerUser() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("newUser", new User());
-
         modelAndView.setViewName("regist");
         return modelAndView;
     }
@@ -37,14 +36,14 @@ public class UserController {
 
     @PostMapping("/user")
     public ModelAndView addNewUser(@ModelAttribute("userJSP") User user) {
-        ModelAndView modelAndView;
-        User newUser = userService.addNewUser(user);
-        if (null != newUser) {
-            modelAndView = new ModelAndView(userService.getViewNameByRole(newUser));
+        ModelAndView modelAndView = new ModelAndView();
+        if (userService.addNewUser(user)) {
+            modelAndView.setViewName("welcome");
             modelAndView.addObject("userJSP", user);
         } else {
-            modelAndView = new ModelAndView("regist");
-            modelAndView.addObject("registerErrorMessage", "This user is already exist!");
+            modelAndView.setViewName("regist");
+            modelAndView.addObject("newUser", user);
+            modelAndView.addObject("registerErrorMessage", "User with this login is already exists.");
         }
         return modelAndView;
     }
