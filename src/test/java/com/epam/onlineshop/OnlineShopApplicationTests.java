@@ -1,4 +1,4 @@
-package com.epam.onlineshop.OnlineShop;
+package com.epam.onlineshop;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

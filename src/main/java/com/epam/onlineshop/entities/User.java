@@ -1,15 +1,17 @@
 package com.epam.onlineshop.entities;
 
+import javax.persistence.*;
+
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "user")
 public class User {
 
@@ -24,6 +26,9 @@ public class User {
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "isBlocked")
     private Boolean isBlocked;
