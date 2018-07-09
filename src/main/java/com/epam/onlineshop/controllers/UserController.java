@@ -17,18 +17,19 @@ public class UserController {
     public ModelAndView registerUser() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("newUser", new User());
+
         modelAndView.setViewName("regist");
         return modelAndView;
     }
 
     @PostMapping("/signin")
     public ModelAndView signIn(@ModelAttribute("userJSP") User user) {
-        ModelAndView modelAndView;
-        if (null != userService.signInUser(user)) {
-            modelAndView = new ModelAndView(userService.getViewNameByRole(user));
+        ModelAndView modelAndView = new ModelAndView();
+        if (userService.existsByUser(user)) {
+            modelAndView.setViewName(getViewName(user));
             modelAndView.addObject("userJSP", user);
         } else {
-            modelAndView = new ModelAndView("index");
+            modelAndView.setViewName("index");
             modelAndView.addObject("message", "Username or Password is wrong!!");
         }
         return modelAndView;
@@ -37,14 +38,31 @@ public class UserController {
     @PostMapping("/user")
     public ModelAndView addNewUser(@ModelAttribute("userJSP") User user) {
         ModelAndView modelAndView = new ModelAndView();
-        if (userService.addNewUser(user)) {
-            modelAndView.setViewName("welcome");
+        User newUser = userService.addNewUser(user);
+        if (null != newUser) {
+            modelAndView.setViewName(getViewName(newUser));
             modelAndView.addObject("userJSP", user);
         } else {
-            modelAndView.setViewName("regist");
+            modelAndView.setViewName("index");
             modelAndView.addObject("newUser", user);
-            modelAndView.addObject("registerErrorMessage", "User with this login is already exists.");
+            modelAndView.addObject("message", "This user is already exist!");
         }
         return modelAndView;
+    }
+
+    String getViewName(User newUser) {
+        String viewName = "";
+        switch (userService.getRoleByUser(newUser)) {
+            case USER:
+                viewName = "welcome";
+                break;
+            case ADMIN:
+                viewName = "admin";
+                break;
+            case ANONYMOUS:
+                viewName = "welcome";
+                break;
+        }
+        return viewName;
     }
 }

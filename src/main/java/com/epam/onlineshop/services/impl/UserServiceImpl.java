@@ -35,27 +35,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User signInUser(User user) {
+    public boolean existsByUser(User user) {
         User byUsername = userRepository.findByUsername(user.getUsername());
-
-        if ((byUsername != null) && ((byUsername.getPassword().equals(user.getPassword())))) {
-            return byUsername;
-        } else {
-            return null;
-        }
+        return (byUsername != null) && ((byUsername.getPassword().equals(user.getPassword())));
     }
 
     @Override
-    public String getViewNameByRole(User user) {
-        switch (user.getRole()) {
-            case ADMIN:
-                return "admin";
-            case USER:
-                return "welcome";
-            case ANONYMOUS:
-                return "welcome";
-            default:
-                return "welcome";
-        }
+    public Role getRoleByUser(User user) {
+        return userRepository.findByUsername(user.getUsername()).getRole();
     }
 }

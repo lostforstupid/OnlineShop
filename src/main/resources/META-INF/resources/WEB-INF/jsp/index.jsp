@@ -33,7 +33,7 @@
 
 <div align="center">
     <%--@elvariable id="userJSP" type=""--%>
-    <form:form action="signin"  modelAttribute="userJSP"><jsp:useBean id="message"/>
+    <form:form action="signin"  modelAttribute="userJSP">
 
 
         <table border="0">

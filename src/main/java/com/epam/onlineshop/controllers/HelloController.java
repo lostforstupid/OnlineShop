@@ -14,6 +14,5 @@ public class HelloController {
         model.put("userJSP", new User());
         model.put("message", "");
         return "index";
-
     }
 }
