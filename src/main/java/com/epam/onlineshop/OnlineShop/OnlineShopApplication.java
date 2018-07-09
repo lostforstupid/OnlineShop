@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import static org.springframework.boot.SpringApplication.*;
 
-
 @SpringBootApplication
 public class OnlineShopApplication {
 
