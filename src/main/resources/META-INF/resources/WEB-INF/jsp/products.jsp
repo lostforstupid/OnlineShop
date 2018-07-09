@@ -7,16 +7,29 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
     <title>Products</title>
+    <style>
+        table, tr, td {border: 1px solid grey; border-collapse: collapse;}
+        table {width: 60%; text-align: center;}
+        td {padding: 5px 0px 5px 0px;}
+        td.count, td.buy {width: 15%;}
+        td.name, td.price {padding-left: 10px;}
+        td.name {width: 45%;}
+        td.price {width: 25%;}
+    </style>
 </head>
 <body>
 <h1>Catalog</h1>
-<table style="width:100%">
+<table>
         <c:forEach var="product" items="${productList}">
             <tr>
-                <th>${product.name}</th>
-                <th>${product.price}</th>
-                <th><input type = text></th>
-                <th><buy:form><button type = "submit">Add to cart</button></buy:form></th>
+                <td class = "name">${product.name}</td>
+                <td class = "price">${product.price}</td>
+                <td class = "count"><input type = "text" size = 5></td>
+                <td class = "buy">
+                    <buy:form>
+                        <button type = "submit">Add to cart</button>
+                    </buy:form>
+                </td>
             </tr>
         </c:forEach>
 </table>

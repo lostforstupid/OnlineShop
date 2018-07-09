@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    Product addNewProduct(Product product);
+    boolean addNewProduct(Product product);
     List<Product> getAllProducts();
     Product findByName(String name);
 }
