@@ -15,6 +15,7 @@
             <tr>
                 <th>${product.name}</th>
                 <th>${product.price}</th>
+                <th><input type = text></th>
                 <th><buy:form><button type = "submit">Add to cart</button></buy:form></th>
             </tr>
         </c:forEach>
