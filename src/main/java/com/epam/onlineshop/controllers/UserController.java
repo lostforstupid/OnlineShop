@@ -21,7 +21,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @PostMapping("/welcome")
+    @PostMapping("/signin")
     public ModelAndView signIn(@ModelAttribute("userJSP") User user) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(userService.signInUser(user));
@@ -29,7 +29,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @PostMapping("/add-new-user")
+    @PostMapping("/user")
     public ModelAndView addNewUser(@ModelAttribute("userJSP") User user) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("welcome");
