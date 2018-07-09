@@ -16,20 +16,20 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User addNewUser(User user) {
+    public boolean addNewUser(User user) {
 
         String username = user.getUsername();
-        if (userRepository.findByUsername(username) != null) {
-            // TODO Add checking when user is already exist. Create method existByUsername(String) in UserRepository
-            return user;
+        if (null != userRepository.findByUsername(username)) {
+                return false;
         } else {
-            return userRepository.save(User.builder()
+            userRepository.save(User.builder()
                     .role(Role.USER)
                     .username(username)
                     .isBlocked(false)
                     .password(user.getPassword())
                     .address(user.getAddress())
                     .build());
+            return true;
         }
     }
 
