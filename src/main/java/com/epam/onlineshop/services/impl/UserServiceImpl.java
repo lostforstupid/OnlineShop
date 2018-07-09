@@ -20,8 +20,7 @@ public class UserServiceImpl implements UserService {
 
         String username = user.getUsername();
         if (userRepository.findByUsername(username) != null) {
-            // TODO Add checking when user is already exist. Create method existByUsername(String) in UserRepository
-            return user;
+            return null;
         } else {
             return userRepository.save(User.builder()
                     .role(Role.USER)
@@ -34,12 +33,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String signInUser(User user) {
+    public User signInUser(User user) {
         User byUsername = userRepository.findByUsername(user.getUsername());
+
         if ((byUsername != null) && ((byUsername.getPassword().equals(user.getPassword())))) {
-            return "welcome";
+            return byUsername;
         } else {
-            return "wrong_enter";
+            return null;
+        }
+    }
+
+    @Override
+    public String getViewNameByRole(User user) {
+        switch (user.getRole()) {
+            case ADMIN:
+                return "admin";
+            case USER:
+                return "welcome";
+            case ANONYMOUS:
+                return "welcome";
+            default:
+                return "welcome";
         }
     }
 }

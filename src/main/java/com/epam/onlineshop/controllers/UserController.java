@@ -17,23 +17,35 @@ public class UserController {
     public ModelAndView registerUser() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("newUser", new User());
+
         modelAndView.setViewName("regist");
         return modelAndView;
     }
 
     @PostMapping("/signin")
     public ModelAndView signIn(@ModelAttribute("userJSP") User user) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName(userService.signInUser(user));
-        modelAndView.addObject("userJSP", user);
+        ModelAndView modelAndView;
+        if (null != userService.signInUser(user)) {
+            modelAndView = new ModelAndView(userService.getViewNameByRole(user));
+            modelAndView.addObject("userJSP", user);
+        } else {
+            modelAndView = new ModelAndView("index");
+            modelAndView.addObject("message", "Username or Password is wrong!!");
+        }
         return modelAndView;
     }
 
     @PostMapping("/user")
     public ModelAndView addNewUser(@ModelAttribute("userJSP") User user) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("welcome");
-        modelAndView.addObject("userJSP", userService.addNewUser(user));
+        ModelAndView modelAndView;
+        User newUser = userService.addNewUser(user);
+        if (null != newUser) {
+            modelAndView = new ModelAndView(userService.getViewNameByRole(newUser));
+            modelAndView.addObject("userJSP", user);
+        } else {
+            modelAndView = new ModelAndView("regist");
+            modelAndView.addObject("registerErrorMessage", "This user is already exist!");
+        }
         return modelAndView;
     }
 }
