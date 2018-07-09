@@ -1,14 +1,18 @@
 package com.epam.onlineshop.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.epam.onlineshop.entities.User;
+import org.springframework.web.bind.annotation.GetMapping;
+import java.util.Map;
 
 @Controller
 public class HelloController {
-    @RequestMapping("/")
-    @ResponseBody
-    String hello() {
-        return "Hello World! Online Shop will be here soon!";
+
+    @GetMapping("/")
+    public String main(Map<String, Object> model) {
+        model.put("userJSP", new User());
+        return "index";
+
     }
 }
