@@ -16,7 +16,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean addNewProduct(Product product) {
-        return (existsByName(product.getName()) || productRepository.saveAndFlush(product) != null);
+        return (isProductExists(product.getName()) || productRepository.saveAndFlush(product) != null);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean existsByName(String name) {
+    public boolean isProductExists(String name) {
         return productRepository.existsByName(name);
     }
 }
