@@ -21,7 +21,7 @@ public class ProductController {
         ModelAndView catalog = new ModelAndView();
         catalog.addObject(productService.getAllProducts());
         catalog.addObject("product", new Product());
-        catalog.setViewName(getViewName(Role.ADMIN));
+        catalog.setViewName(getViewName(Role.ADMIN)); //пока нет сессии, всё показывается как для админа
         return catalog;
     }
 
