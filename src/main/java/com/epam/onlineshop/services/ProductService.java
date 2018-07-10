@@ -8,5 +8,5 @@ public interface ProductService {
 
     boolean addNewProduct(Product product);
     List<Product> getAllProducts();
-    Product findByName(String name);
+    boolean findByName(String name);
 }

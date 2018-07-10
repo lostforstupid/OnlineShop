@@ -1,14 +1,14 @@
 package com.epam.onlineshop.controllers;
 
 import com.epam.onlineshop.entities.Product;
+import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,15 +19,27 @@ public class ProductController {
     @GetMapping("/catalog")
     public ModelAndView showProducts() {
         ModelAndView catalog = new ModelAndView();
-        catalog.addObject("productList", getDemoProducts()); //productService.getAllProducts());
-        catalog.setViewName("products");
+        catalog.addObject(productService.getAllProducts());
+        catalog.addObject("product", new Product());
+        catalog.setViewName(getViewName(Role.ADMIN));
         return catalog;
     }
 
-    private List<Product> getDemoProducts() {
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product(0L, "Black hat", 100));
-        productList.add(new Product(1L, "Red notebook", 45));
-        return productList;
+    @PostMapping("/catalog")
+    public ModelAndView addProduct(@ModelAttribute("product") Product product) {
+        ModelAndView catalog = new ModelAndView();
+        productService.addNewProduct(product);
+        catalog.addObject(productService.getAllProducts());
+        catalog.setViewName(getViewName(Role.ADMIN));
+        return catalog;
+    }
+
+    private String getViewName(Role role) {
+        switch (role) {
+            case ADMIN:
+                return "products_admin";
+            default:
+                return "products";
+        }
     }
 }

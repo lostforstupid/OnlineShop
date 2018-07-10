@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class UserController {
+
     @Autowired
     private UserService userService;
 
@@ -32,15 +33,14 @@ public class UserController {
 
     @PostMapping("/user")
     public ModelAndView addNewUser(@ModelAttribute("userJSP") User user) {
-        ModelAndView modelAndView = new ModelAndView();
         if (userService.addNewUser(user)) {
-            modelAndView.setViewName("welcome");
-            modelAndView.addObject("userJSP", user);
+            return new ModelAndView("redirect:/catalog");
         } else {
+            ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("regist");
             modelAndView.addObject("newUser", user);
             modelAndView.addObject("registerErrorMessage", "User with this login is already exists.");
+            return modelAndView;
         }
-        return modelAndView;
     }
 }
