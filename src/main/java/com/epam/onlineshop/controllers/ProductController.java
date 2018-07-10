@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 public class ProductController {
 
-    final ProductService productService;
+    private final ProductService productService;
 
     @GetMapping("/catalog")
     public ModelAndView showProducts() {
