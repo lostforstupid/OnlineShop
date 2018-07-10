@@ -1,9 +1,10 @@
 package com.epam.onlineshop.controllers;
 
+import lombok.RequiredArgsConstructor;
+import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.services.UserService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequiredArgsConstructor
-@PropertySource("classpath:/application.properties")
 public class UserController {
 
     private final UserService userService;
@@ -19,53 +19,48 @@ public class UserController {
     private final static String WRONG_SIGNIN = "Username or Password is wrong!";
     private final static String WRONG_SIGNUP = "This username is already exist!";
 
-    @PostMapping("/registration")
-    public ModelAndView registerUser(ModelAndView modelAndView) {
-        modelAndView.addObject("newUser", new User());
-
-        modelAndView.setViewName("regist");
-        return modelAndView;
+    @GetMapping(value = "/registration")
+    public ModelAndView registration(ModelAndView model) {
+        model.addObject("newUser", new User());
+        model.setViewName("registration");
+        return model;
     }
 
-    @PostMapping("/signin")
-    public ModelAndView signIn(@ModelAttribute("userJSP") User user, ModelAndView modelAndView) {
-        if (userService.isExistsByUsername(user.getUsername())) {
-            modelAndView.setViewName(getViewName(user));
-            modelAndView.addObject("userJSP", user);
+    @PostMapping(value = "/registration")
+    public ModelAndView addUser(@ModelAttribute("userJSP") User user, ModelAndView model) {
+        if (userService.addUser(user)) {
+            model.setViewName("welcome");
+            model.addObject("userJSP", user);
         } else {
-            modelAndView.setViewName("index");
-            modelAndView.addObject("message", WRONG_SIGNIN);
+            model.setViewName("registration");
+            model.addObject("newUser", user);
+            model.addObject("registerErrorMessage", WRONG_SIGNUP);
         }
-        return modelAndView;
+        return model;
     }
 
-    @PostMapping("/user")
-    public ModelAndView addUser(@ModelAttribute("userJSP") User user, ModelAndView modelAndView) {
-        User newUser = userService.addUser(user);
-        if (null != newUser) {
-            modelAndView.setViewName(getViewName(newUser));
-            modelAndView.addObject("userJSP", user);
+    @PostMapping("/login")
+    public ModelAndView login(@ModelAttribute("userJSP") User user, ModelAndView model) {
+        if (userService.isUserValidated(user.getPassword(), user.getUsername())) {
+            model.setViewName(getViewNameByRole(userService.getRoleByUsername(user.getUsername())));
+            model.addObject("userJSP", user);
         } else {
-            modelAndView.setViewName("regist");
-            modelAndView.addObject("newUser", user);
-            modelAndView.addObject("message", WRONG_SIGNUP);
+            model.setViewName("index");
+            model.addObject("message", WRONG_SIGNIN);
         }
-        return modelAndView;
+        return model;
     }
 
-    String getViewName(User newUser) {
-        String viewName = "";
-        switch (userService.getRoleByUser(newUser)) {
+    String getViewNameByRole(Role userRole) {
+        switch (userRole) {
             case USER:
-                viewName = "welcome";
-                break;
+                return "welcome";
             case ADMIN:
-                viewName = "admin";
-                break;
+                return "admin";
             case ANONYMOUS:
-                viewName = "welcome";
-                break;
+                return "welcome";
+            default:
+                return "welcome";
         }
-        return viewName;
     }
 }

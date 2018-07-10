@@ -5,7 +5,9 @@ import com.epam.onlineshop.entities.User;
 
 public interface UserService {
 
-    User addUser(User user);
-    Boolean isExistsByUsername(String username);
-    Role getRoleByUser(User user);
+    boolean addUser(User user);
+
+    boolean isUserValidated(String password, String username);
+
+    Role getRoleByUsername(String username);
 }

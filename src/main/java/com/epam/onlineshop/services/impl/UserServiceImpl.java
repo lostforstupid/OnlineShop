@@ -16,29 +16,29 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User addUser(User user) {
+    public boolean addUser(User user) {
         String username = user.getUsername();
         if (userRepository.findByUsername(username) != null) {
-            return null;
+            return false;
         } else {
-            return userRepository.save(User.builder()
+            userRepository.save(User.builder()
                     .role(Role.USER)
                     .username(username)
                     .isBlocked(false)
                     .password(user.getPassword())
                     .address(user.getAddress())
                     .build());
+            return true;
         }
     }
 
     @Override
-    public Boolean isExistsByUsername(String username) {
-        User byUsername = userRepository.findByUsername(username);
-        return (byUsername != null) && ((byUsername.getPassword().equals(byUsername.getPassword())));
+    public boolean isUserValidated(String password, String username) {
+        return userRepository.findByUsernameAndPassword(username, password);
     }
 
     @Override
-    public Role getRoleByUser(User user) {
-        return userRepository.findByUsername(user.getUsername()).getRole();
+    public Role getRoleByUsername(String username) {
+        return userRepository.findByUsername(username).getRole();
     }
 }

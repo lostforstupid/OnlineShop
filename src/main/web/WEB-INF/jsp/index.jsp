@@ -33,7 +33,8 @@
 
 <div align="center">
     <%--@elvariable id="userJSP" type=""--%>
-    <form:form action="signin"  modelAttribute="userJSP">
+    <%--@elvariable id="message" type=""--%>
+    <form:form action="login"  modelAttribute="userJSP">
 
 
         <table border="0">
@@ -58,7 +59,7 @@
         </table>
     </form:form>
 
-    <form:form action="registration" method="post">
+    <form:form action="registration" method="get">
 
         <td colspan="2" align="center"><input type="submit" value="Sign up"/></td>
 
