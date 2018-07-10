@@ -24,8 +24,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll();
     }
 
-    @Override
-    public boolean isProductExist(String name) {
+    private boolean isProductExist(String name) {
         return productRepository.existsByName(name);
     }
 }

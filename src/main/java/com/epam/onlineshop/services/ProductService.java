@@ -8,5 +8,4 @@ public interface ProductService {
 
     boolean addNewProduct(Product product);
     List<Product> getAllProducts();
-    boolean isProductExist(String name);
 }
