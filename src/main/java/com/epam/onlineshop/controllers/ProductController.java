@@ -27,7 +27,6 @@ public class ProductController {
         return catalog;
     }
 
-    @Transactional
     @PostMapping("/catalog")
     public ModelAndView addProduct(@ModelAttribute("product") Product product) {
         ModelAndView catalog = new ModelAndView();

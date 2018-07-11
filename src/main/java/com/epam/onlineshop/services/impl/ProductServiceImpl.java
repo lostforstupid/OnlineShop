@@ -15,6 +15,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
+    @Transactional
     @Override
     public boolean addNewProduct(Product product) {
         if (!isProductExist(product.getName())) {
