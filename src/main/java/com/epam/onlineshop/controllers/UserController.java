@@ -29,7 +29,7 @@ public class UserController {
     @PostMapping(value = "/registration")
     public ModelAndView addUser(@ModelAttribute("userJSP") User user, ModelAndView model) {
         if (userService.addUser(user)) {
-            model.setViewName("welcome");
+            model.setViewName(getViewNameByRole(userService.getRoleByUsername(user.getUsername())));
             model.addObject("userJSP", user);
         } else {
             model.setViewName("registration");
@@ -54,13 +54,13 @@ public class UserController {
     String getViewNameByRole(Role userRole) {
         switch (userRole) {
             case USER:
-                return "main";
+                return "welcome";
             case ADMIN:
                 return "main_admin";
             case ANONYMOUS:
-                return "admin";
+                return "welcome";
             default:
-                return "admin";
+                return "welcome";
         }
     }
 }
