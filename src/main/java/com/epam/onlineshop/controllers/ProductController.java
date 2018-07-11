@@ -38,9 +38,9 @@ public class ProductController {
     private String getViewName(Role role) {
         switch (role) {
             case ADMIN:
-                return "products_admin";
+                return "main_admin";
             default:
-                return "products";
+                return "main";
         }
     }
 }
