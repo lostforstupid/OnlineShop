@@ -5,16 +5,17 @@ import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.repository.UserRepository;
 import com.epam.onlineshop.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
     @Override
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
                     .role(Role.USER)
                     .username(username)
                     .isBlocked(false)
-                    .password(user.getPassword())
+                    .password(bCryptPasswordEncoder.encode(user.getPassword()))
                     .address(user.getAddress())
                     .build());
             return true;
@@ -35,17 +36,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isUserValidated(String password, String username) {
-        return userRepository.findByUsernameAndPassword(username, password);
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override
     public Role getRoleByUsername(String username) {
         return userRepository.findByUsername(username).getRole();
-    }
-
-    @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
     }
 }

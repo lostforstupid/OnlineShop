@@ -2,10 +2,14 @@ package com.epam.onlineshop.controllers;
 
 import com.epam.onlineshop.services.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class CartController {
 
@@ -19,7 +23,7 @@ public class CartController {
         return model;
     }
 
-    @RequestMapping(value = "/cart/{id}/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/cart/{id}/delete", method = RequestMethod.GET)
     public ModelAndView deleteProduct(@PathVariable("id") Long id, ModelAndView model) {
         productService.deleteById(id);
         model.setViewName("redirect:/cart");

@@ -23,7 +23,4 @@ public class Product {
 
     @Column(name = "price", nullable = false)
     private Integer price;
-
-    @Column(name = "img", nullable = false)
-    private String img;
 }
