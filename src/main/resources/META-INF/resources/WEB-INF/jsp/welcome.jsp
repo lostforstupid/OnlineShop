@@ -1,4 +1,3 @@
-<%--@elvariable id="userJSP" type=""--%>
 <%--
   Created by IntelliJ IDEA.
   User: goponenko

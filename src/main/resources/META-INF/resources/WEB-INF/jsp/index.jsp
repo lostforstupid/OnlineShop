@@ -16,6 +16,9 @@
     <title>Welcome</title>
 </head>
 <body>
+
+<jsp:include page="main.jsp"></jsp:include>
+
 <div align="center">
     <%--@elvariable id="userJSP" type=""--%>
     <form:form action="signin"  modelAttribute="userJSP">

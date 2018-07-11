@@ -17,12 +17,14 @@
 </head>
 <body>
 <div align="center">
+
     <%--@elvariable id="newUser" type=""--%>
     <form:form action="user" modelAttribute="newUser">
         <table border="0">
             <tr>
-                <td colspan="2" align="center"><h2>Registration</h2></td>
+                <td colspan="2" align="center"><h3> ${registerErrorMessage}</h3></td>
             </tr>
+
             <tr>
                 <td>User Name:</td>
                 <td><form:input path="username" /></td>
