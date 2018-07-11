@@ -56,7 +56,7 @@ public class UserController {
             case USER:
                 return "welcome";
             case ADMIN:
-                return "main_admin";
+                return "admin";
             case ANONYMOUS:
                 return "welcome";
             default:
