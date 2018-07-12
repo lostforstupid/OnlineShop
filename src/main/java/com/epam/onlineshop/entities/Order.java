@@ -20,7 +20,7 @@ public class Order {
     private Long id;
 
     @Column(name = "userId", nullable = false)
-    private String userId;
+    private Long userId;
 
     @Column(name = "dateAndTime", nullable = false)
     private LocalDateTime dateAndTime;
