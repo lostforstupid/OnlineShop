@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -40,5 +42,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public Role getRoleByUsername(String username) {
         return userRepository.findByUsername(username).getRole();
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public boolean blockUser(User user) {
+        if (user.getIsBlocked()) {
+            user.setIsBlocked(false);
+        } else {
+            user.setIsBlocked(true);
+        }
+
+        return true;
     }
 }

@@ -18,12 +18,6 @@ public class HelloController {
         return "main";
     }
 
-    @GetMapping("/admin")
-    public ModelAndView admin(ModelAndView model) {
-        model.setViewName("main_admin");
-        return model;
-    }
-
     @GetMapping("/login")
     public String login(Map<String, Object> model) {
         return "login";

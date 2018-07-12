@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -42,13 +45,26 @@ public class UserController {
     @PostMapping("/login")
     public ModelAndView login(@ModelAttribute("userJSP") User user, ModelAndView model) {
         if (userService.isUserValidated(user.getPassword(), user.getUsername())) {
-            model.setViewName("main");   //getViewNameByRole(userService.getRoleByUsername(user.getUsername())));
+            model.setViewName(getViewNameByRole(userService.getRoleByUsername(user.getUsername())));
             model.addObject("userJSP", user);
         } else {
             model.setViewName("index");
             model.addObject("message", WRONG_SIGNIN);
         }
         return model;
+    }
+
+    @GetMapping("/admin/users")
+    public ModelAndView getAllUsers(ModelAndView model) {
+        model.setViewName("main_admin_users");
+        model.addObject(userService.getAllUsers());
+        return model;
+    }
+
+    @PostMapping("admin/users/block")
+    public ModelAndView blockUser(@ModelAttribute("user") User user, ModelAndView model) {
+        userService.blockUser(user);
+        return new ModelAndView("redirect:/admin/users");
     }
 
     String getViewNameByRole(Role userRole) {

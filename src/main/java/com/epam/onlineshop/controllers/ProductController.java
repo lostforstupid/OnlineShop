@@ -36,6 +36,13 @@ public class ProductController {
         return catalog;
     }
 
+    @GetMapping("/admin/products")
+    public ModelAndView getAllUsers(ModelAndView model) {
+        model.setViewName("main_admin_products");
+        model.addObject(productService.getAllProducts());
+        return model;
+    }
+
     private String getViewName(Role role) {
         switch (role) {
             case ADMIN:
