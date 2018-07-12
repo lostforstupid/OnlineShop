@@ -7,12 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-    final ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Override
     public List<Product> getAllProducts() {
@@ -27,22 +28,39 @@ public class ProductServiceImpl implements ProductService {
     // When we created entity for ordering it can be deleted
     @Override
     public void incrementCount(Long id) {
-        Product product = productRepository.findById(id).get();
-        product.setCount(product.getCount() + 1);
-        productRepository.save(product);
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            product.setCount(product.getCount() + 1);
+            productRepository.save(product);
+        } else{
+            System.out.println("Product didn't find!");
+        }
+
     }
 
     // When we created entity for ordering it can be deleted
     @Override
     public void decrementCount(Long id) {
-        Product product = productRepository.findById(id).get();
-        product.setCount(product.getCount() - 1);
-        productRepository.save(product);
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            product.setCount(product.getCount() - 1);
+            productRepository.save(product);
+        } else{
+            System.out.println("Product didn't find!");
+        }
     }
 
     // When we created entity for ordering it can be deleted
     @Override
     public Integer getCountById(Long id) {
-        return productRepository.findById(id).get().getCount();
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        if (optionalProduct.isPresent()) {
+            return optionalProduct.get().getCount();
+        } else{
+            System.out.println("Product didn't find!");
+            return -1; // or null?
+        }
     }
 }

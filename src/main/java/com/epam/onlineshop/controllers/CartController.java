@@ -17,9 +17,8 @@ public class CartController {
     private final ProductService productService;
 
     @GetMapping(value = "/cart")
-    public ModelAndView cart(ModelAndView model) {
+    public ModelAndView openCart(ModelAndView model) {
         model.addObject("products", productService.getAllProducts());
-        model.addObject("productService", productService);
         model.setViewName("cart");
         return model;
     }
