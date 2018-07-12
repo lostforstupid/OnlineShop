@@ -5,10 +5,7 @@ import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
@@ -41,6 +38,19 @@ public class ProductController {
         model.setViewName("main_admin_products");
         model.addObject(productService.getAllProducts());
         return model;
+    }
+
+    @GetMapping("/admin/products/{id}/edit")
+    public ModelAndView getAllUsers(@PathVariable Long id,  ModelAndView model) {
+        model.setViewName("edit_product");
+        model.addObject(productService.getProductById(id));
+        return model;
+    }
+
+    @PostMapping("/admin/products/{id}/save")
+    public ModelAndView saveProduct(@PathVariable Long id, @ModelAttribute("product") Product product) {
+        productService.saveProduct(product);
+        return new ModelAndView("redirect:/admin/products");
     }
 
     private String getViewName(Role role) {

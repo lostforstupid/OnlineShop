@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+
+import static java.lang.String.*;
 
 @Service
 @RequiredArgsConstructor
@@ -50,13 +53,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean blockUser(User user) {
+    public boolean blockUser(Long id) {
+        Optional<User> result = userRepository.findById(id);
+        User user = result.get();
+
+        System.out.println(user.getUsername());
+
         if (user.getIsBlocked()) {
             user.setIsBlocked(false);
         } else {
             user.setIsBlocked(true);
         }
 
-        return true;
+        return userRepository.save(user) != null;
     }
 }

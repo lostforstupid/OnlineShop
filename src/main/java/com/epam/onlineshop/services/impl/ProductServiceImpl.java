@@ -1,6 +1,7 @@
 package com.epam.onlineshop.services.impl;
 
 import com.epam.onlineshop.entities.Product;
+import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.repository.ProductRepository;
 import com.epam.onlineshop.services.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean addNewProduct(Product product) {
         if (!isProductExist(product.getName())) {
-            productRepository.saveAndFlush(product);
+            productRepository.save(product);
         }
 
         return isProductExist(product.getName());
@@ -30,7 +32,19 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll();
     }
 
+    @Override
+    public Product getProductById(Long id) {
+        Optional<Product> result = productRepository.findById(id);
+        return result.get();
+    }
+
     boolean isProductExist(String name) {
         return productRepository.existsByName(name);
+    }
+
+    @Override
+    public boolean saveProduct(Product product) {
+        productRepository.save(product);
+        return isProductExist(product.getName());
     }
 }

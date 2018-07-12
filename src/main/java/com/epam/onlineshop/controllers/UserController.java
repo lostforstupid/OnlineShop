@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.services.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -55,15 +52,16 @@ public class UserController {
     }
 
     @GetMapping("/admin/users")
-    public ModelAndView getAllUsers(ModelAndView model) {
+    public ModelAndView getAllUsers(@ModelAttribute("user") User user, ModelAndView model) {
         model.setViewName("main_admin_users");
+        model.addObject("user", new User());
         model.addObject(userService.getAllUsers());
         return model;
     }
 
-    @PostMapping("admin/users/block")
-    public ModelAndView blockUser(@ModelAttribute("user") User user, ModelAndView model) {
-        userService.blockUser(user);
+    @PostMapping("admin/users/{id}/block")
+    public ModelAndView blockUser(@PathVariable Long id) {
+        userService.blockUser(id);
         return new ModelAndView("redirect:/admin/users");
     }
 
