@@ -58,9 +58,9 @@ public class UserController {
             case ADMIN:
                 return "main_admin";
             case ANONYMOUS:
-                return "admin";
+                return "main";
             default:
-                return "admin";
+                return "main";
         }
     }
 }

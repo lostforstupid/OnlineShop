@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 
 import com.epam.onlineshop.entities.User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.util.Map;
 
 @Controller
@@ -15,8 +17,16 @@ public class HelloController {
         model.put("message", "");
         return "main";
     }
+
+    @GetMapping("/admin")
+    public ModelAndView admin(ModelAndView model) {
+        model.setViewName("main_admin");
+        return model;
+    }
+
     @GetMapping("/login")
     public String login(Map<String, Object> model) {
         return "login";
     }
+
 }
