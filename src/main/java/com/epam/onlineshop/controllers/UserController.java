@@ -61,7 +61,12 @@ public class UserController {
 
     @PostMapping("admin/users/{id}/block")
     public ModelAndView blockUser(@PathVariable Long id) {
-        userService.blockUser(id);
+        User user = userService.findById(id);
+
+        if (user.getRole() != Role.ADMIN) {
+            userService.blockUser(user);
+        }
+
         return new ModelAndView("redirect:/admin/users");
     }
 

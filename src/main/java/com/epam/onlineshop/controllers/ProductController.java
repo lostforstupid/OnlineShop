@@ -53,6 +53,12 @@ public class ProductController {
         return new ModelAndView("redirect:/admin/products");
     }
 
+    @PostMapping("/admin/products/{id}/delete")
+    public ModelAndView deleteProduct(@PathVariable Long id) {
+        productService.deleteProductById(id);
+        return new ModelAndView("redirect:/admin/products");
+    }
+
     private String getViewName(Role role) {
         switch (role) {
             case ADMIN:

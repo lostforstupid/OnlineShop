@@ -52,19 +52,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    public User findById(Long id) {
+        return userRepository.findById(id).get();
+    }
+
     @Override
-    public boolean blockUser(Long id) {
-        Optional<User> result = userRepository.findById(id);
-        User user = result.get();
-
-        System.out.println(user.getUsername());
-
-        if (user.getIsBlocked()) {
-            user.setIsBlocked(false);
-        } else {
-            user.setIsBlocked(true);
-        }
-
+    public boolean blockUser(User user) {
+        user.setIsBlocked(!user.getIsBlocked());
         return userRepository.save(user) != null;
     }
 }

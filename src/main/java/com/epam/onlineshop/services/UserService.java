@@ -15,5 +15,7 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    boolean blockUser(Long id);
+    boolean blockUser(User user);
+
+    User findById(Long id);
 }

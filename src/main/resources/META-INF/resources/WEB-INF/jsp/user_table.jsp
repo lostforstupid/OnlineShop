@@ -17,16 +17,18 @@
                 <td>
                     <blocking:form action = "users/${user.id}/block" method = "post">
 
-                        <button type="submit" class="btn btn-default">
-                            <c:choose>
-                                <c:when test="${user.isBlocked == 'false'}">
-                                    Block
-                                </c:when>
-                                <c:otherwise>
-                                    Unblock
-                                </c:otherwise>
-                            </c:choose>
-                        </button>
+                        <c:if test = "${user.role != 'ADMIN'}">
+                            <button type="submit" class="btn btn-default">
+                                <c:choose>
+                                    <c:when test="${user.isBlocked == 'false'}">
+                                        Block
+                                    </c:when>
+                                    <c:otherwise>
+                                        Unblock
+                                    </c:otherwise>
+                                </c:choose>
+                            </button>
+                        </c:if>
 
                     </blocking:form>
                 </td>
