@@ -19,7 +19,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userid", nullable = false)
+    @Column(name = "userId", nullable = false)
     private String userId;
 
     @Column(name = "dateAndTime", nullable = false)
