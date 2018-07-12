@@ -26,5 +26,6 @@ public class Order {
     private LocalDateTime dateAndTime;
 
     @Column(name = "status", nullable = false)
-    private String status;
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
 }
