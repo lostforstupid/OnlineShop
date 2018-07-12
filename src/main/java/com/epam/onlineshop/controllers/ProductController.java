@@ -41,7 +41,7 @@ public class ProductController {
     }
 
     @GetMapping("/admin/products/{id}/edit")
-    public ModelAndView getAllUsers(@PathVariable Long id,  ModelAndView model) {
+    public ModelAndView editProduct(@PathVariable Long id,  ModelAndView model) {
         model.setViewName("edit_product");
         model.addObject(productService.getProductById(id));
         return model;
