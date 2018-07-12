@@ -44,17 +44,17 @@
                                 </td>
                                 <td class="cart_quantity">
                                     <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1"
-                                               autocomplete="off" size="2">
-                                        <a href= "/cart/${product.id}/delete" class="cart_quantity_down"> - </a>
+                                        <a class="cart_quantity_up" href="/cart/${product.id}/inc"> + </a>
+                                        <input class="cart_quantity_input" type="text" name="quantity" value="${product.count}"
+                                               autocomplete="off" size="2" readonly="readonly">
+                                        <a href= "/cart/${product.id}/decrement" class="cart_quantity_down"> - </a>
                                     </div>
                                 </td>
                                 <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
+                                    <p class="cart_total_price">$42</p>
                                 </td>
                                 <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                                    <a class="cart_quantity_delete" href="/cart/${product.id}/delete"><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>

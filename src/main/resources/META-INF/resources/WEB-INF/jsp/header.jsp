@@ -4,8 +4,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="/welcome"><img src="/static/images/home/logo.png" /></a>
-                        LOOOOKK: ${pageContext.request.contextPath}
+                        <a href="/welcome"><img src="${pageContext.request.contextPath}images/home/logo.png" /></a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">

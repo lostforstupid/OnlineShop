@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 public class CartController {
 
+    // TODO After creating entity for ordering CHANGED at all
     private final ProductService productService;
 
     @GetMapping(value = "/cart")
@@ -26,6 +27,24 @@ public class CartController {
     @RequestMapping(value = "/cart/{id}/delete", method = RequestMethod.GET)
     public ModelAndView deleteProduct(@PathVariable("id") Long id, ModelAndView model) {
         productService.deleteById(id);
+        model.setViewName("redirect:/cart");
+        return model;
+    }
+
+    @RequestMapping(value = "/cart/{id}/inc", method = RequestMethod.GET)
+    public ModelAndView incrementCount(@PathVariable("id") Long id, ModelAndView model) {
+        productService.incrementCount(id);
+        model.setViewName("redirect:/cart");
+        return model;
+    }
+
+    @RequestMapping(value = "/cart/{id}/decrement", method = RequestMethod.GET)
+    public ModelAndView decrementCount(@PathVariable("id") Long id, ModelAndView model) {
+        if (productService.getCountById(id) > 1) {
+            productService.decrementCount(id);
+        } else {
+            productService.deleteById(id);
+        }
         model.setViewName("redirect:/cart");
         return model;
     }

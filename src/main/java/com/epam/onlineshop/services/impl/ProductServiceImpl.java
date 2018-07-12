@@ -23,4 +23,26 @@ public class ProductServiceImpl implements ProductService {
     public void deleteById(Long id) {
         productRepository.deleteById(id);
     }
+
+    // When we created entity for ordering it can be deleted
+    @Override
+    public void incrementCount(Long id) {
+        Product product = productRepository.findById(id).get();
+        product.setCount(product.getCount() + 1);
+        productRepository.save(product);
+    }
+
+    // When we created entity for ordering it can be deleted
+    @Override
+    public void decrementCount(Long id) {
+        Product product = productRepository.findById(id).get();
+        product.setCount(product.getCount() - 1);
+        productRepository.save(product);
+    }
+
+    // When we created entity for ordering it can be deleted
+    @Override
+    public Integer getCountById(Long id) {
+        return productRepository.findById(id).get().getCount();
+    }
 }
