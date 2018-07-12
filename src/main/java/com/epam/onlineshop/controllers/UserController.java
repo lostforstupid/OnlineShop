@@ -33,12 +33,12 @@ public class UserController {
 
         if (bindingResult.hasErrors()) {
             model.setViewName("registration");
+        }else {
+            userService.addUser(user);
+            securityService.autologin(user.getUsername(), user.getPassword());
+            model.setViewName("redirect:/login");
         }
 
-        userService.addUser(user);
-
-        securityService.autologin(user.getUsername(), user.getPassword());
-        model.setViewName("main");
         //model.setViewName("redirect:/login");
         return model;
     }

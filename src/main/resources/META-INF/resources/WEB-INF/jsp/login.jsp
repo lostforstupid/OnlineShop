@@ -1,10 +1,9 @@
-<jsp:include page="init.jsp"></jsp:include>
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="init.jsp"/>
+<jsp:include page="header.jsp"/>
 <section>
     <div>
-        <jsp:include page="loginForm.jsp"></jsp:include>
+        <jsp:include page="loginForm.jsp"/>
     </div>
-    ${userJSP.name} Hi
 </section>
 </body>
 </html>
