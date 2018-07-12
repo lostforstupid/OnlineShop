@@ -34,7 +34,7 @@ public class ProductController {
     }
 
     @GetMapping("/admin/products")
-    public ModelAndView getAllUsers(ModelAndView model) {
+    public ModelAndView getAllProducts(ModelAndView model) {
         model.setViewName("main_admin_products");
         model.addObject(productService.getAllProducts());
         return model;
