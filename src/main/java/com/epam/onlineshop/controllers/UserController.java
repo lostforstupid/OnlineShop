@@ -29,7 +29,8 @@ public class UserController {
     @PostMapping(value = "/registration")
     public ModelAndView addUser(@ModelAttribute("userJSP") User user, ModelAndView model) {
         if (userService.addUser(user)) {
-            model.setViewName("welcome");
+            Role userRole = userService.getRoleByUsername(user.getUsername());
+            model.setViewName(getViewNameByRole(userRole));
             model.addObject("userJSP", user);
         } else {
             model.setViewName("registration");
@@ -42,7 +43,8 @@ public class UserController {
     @PostMapping("/login")
     public ModelAndView login(@ModelAttribute("userJSP") User user, ModelAndView model) {
         if (userService.isUserValidated(user.getPassword(), user.getUsername())) {
-            model.setViewName(getViewNameByRole(userService.getRoleByUsername(user.getUsername())));
+            Role userRole = userService.getRoleByUsername(user.getUsername());
+            model.setViewName(getViewNameByRole(userRole));
             model.addObject("userJSP", user);
         } else {
             model.setViewName("index");
