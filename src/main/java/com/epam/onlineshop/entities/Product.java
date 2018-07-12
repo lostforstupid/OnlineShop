@@ -23,4 +23,7 @@ public class Product {
 
     @Column(name = "price", nullable = false)
     private Integer price;
+
+    @Column(name = "imageurl")
+    private String imageLink;
 }
