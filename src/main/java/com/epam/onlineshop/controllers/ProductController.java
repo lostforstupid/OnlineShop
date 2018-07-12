@@ -4,6 +4,7 @@ import com.epam.onlineshop.entities.Product;
 import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.services.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
