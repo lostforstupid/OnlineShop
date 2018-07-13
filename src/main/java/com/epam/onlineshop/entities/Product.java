@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,4 +24,7 @@ public class Product {
 
     @Column(name = "price", nullable = false)
     private Integer price;
+
+    @OneToMany(mappedBy = "productId")
+    private List<ProductInOrder> productInOrderList;
 }

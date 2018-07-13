@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,4 +29,11 @@ public class Order {
     @Column(name = "status", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @OneToMany(mappedBy = "orderId")
+    private List<ProductInOrder> productsInOrder;
 }
