@@ -15,7 +15,6 @@ public interface ProductService {
     void decrementCount(Long id);
 
     Integer getCountById(Long id);
-}
+
     boolean addNewProduct(Product product);
-    List<Product> getAllProducts();
 }

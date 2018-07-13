@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
             return -1; // or null?
         }
     }
-}
+
     @Transactional
     @Override
     public boolean addNewProduct(Product product) {
@@ -77,10 +77,6 @@ public class ProductServiceImpl implements ProductService {
         return isProductExist(product.getName());
     }
 
-    @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
 
     boolean isProductExist(String name) {
         return productRepository.existsByName(name);
