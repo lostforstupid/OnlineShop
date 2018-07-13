@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.util.Collection;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -20,9 +22,9 @@ public class User {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "roleEnum", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private Role role;
+    private Role_enum roleEnum;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -35,4 +37,7 @@ public class User {
 
     @Column(name = "address", nullable = false)
     private String address;
+
+    @ManyToMany
+    private Collection<Role> roles;
 }

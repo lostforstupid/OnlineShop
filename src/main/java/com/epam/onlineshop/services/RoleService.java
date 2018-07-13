@@ -1,4 +1,11 @@
-package com.epam.onlineshop.services.security;
+package com.epam.onlineshop.services;
 
-public class RoleService {
+import com.epam.onlineshop.entities.Role;
+
+import java.util.List;
+
+public interface RoleService {
+
+    List<Role> getAllRoles();
+    Role findByName(String name);
 }

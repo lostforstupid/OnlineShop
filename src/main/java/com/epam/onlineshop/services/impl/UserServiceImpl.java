@@ -1,6 +1,6 @@
 package com.epam.onlineshop.services.impl;
 
-import com.epam.onlineshop.entities.Role;
+import com.epam.onlineshop.entities.Role_enum;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.repository.UserRepository;
 import com.epam.onlineshop.services.UserService;
@@ -28,8 +28,9 @@ public class UserServiceImpl implements UserService {
             return false;
         } else {
             userRepository.save(User.builder()
-                    .role(Role.USER)
+                    .roleEnum(Role_enum.USER)
                     .username(username)
+                    //.roles.add()
                     .isBlocked(false)
                     .password(bCryptPasswordEncoder.encode(user.getPassword()))
                     .address(user.getAddress())
@@ -44,8 +45,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Role getRoleByUsername(String username) {
-        return userRepository.findByUsername(username).getRole();
+    public Role_enum getRoleByUsername(String username) {
+        return userRepository.findByUsername(username).getRoleEnum();
     }
 
     @Override

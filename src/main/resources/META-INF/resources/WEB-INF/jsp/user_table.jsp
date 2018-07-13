@@ -12,12 +12,12 @@
         <c:forEach var = "user" items = "${userList}">
             <tr class = "cart_product">
                 <td>"${user.username}"</td>
-                <td>"${user.role}"</td>
+                <td>"${user.roleEnum}"</td>
                 <td>"${user.address}"</td>
                 <td>
                     <blocking:form action = "users/${user.id}/block" method = "post">
 
-                        <c:if test = "${user.role != 'ADMIN'}">
+                        <c:if test = "${user.roleEnum != 'ADMIN'}">
                             <button type="submit" class="btn btn-default">
                                 <c:choose>
                                     <c:when test="${user.isBlocked == 'false'}">

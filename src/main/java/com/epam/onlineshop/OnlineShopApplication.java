@@ -15,6 +15,7 @@ public class OnlineShopApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OnlineShopApplication.class, args);
+
 	}
 
 }

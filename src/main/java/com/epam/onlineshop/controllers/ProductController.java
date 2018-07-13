@@ -1,12 +1,11 @@
 package com.epam.onlineshop.controllers;
 
 import com.epam.onlineshop.entities.Product;
-import com.epam.onlineshop.entities.Role;
+import com.epam.onlineshop.entities.Role_enum;
 import com.epam.onlineshop.services.ProductService;
 import com.epam.onlineshop.utils.ImageWriter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +23,7 @@ public class ProductController {
         ModelAndView catalog = new ModelAndView();
         catalog.addObject(productService.getAllProducts());
         catalog.addObject("product", new Product());
-        catalog.setViewName(getViewName(Role.ADMIN)); //access to admin page is open for all users for now
+        catalog.setViewName(getViewName(Role_enum.ADMIN)); //access to admin page is open for all users for now
                                                         // (will be changed after the addition of sessions)
         return catalog;
     }
@@ -42,6 +41,7 @@ public class ProductController {
         return catalog;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/admin/products")
     public ModelAndView getAllProducts(ModelAndView model) {
         model.setViewName("main_admin_products");
@@ -68,8 +68,8 @@ public class ProductController {
         return new ModelAndView("redirect:/admin/products");
     }
 
-    private String getViewName(Role role) {
-        switch (role) {
+    private String getViewName(Role_enum roleEnum) {
+        switch (roleEnum) {
             case ADMIN:
                 return "main_admin";
             default:
