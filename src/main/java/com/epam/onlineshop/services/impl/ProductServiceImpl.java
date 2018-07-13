@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -62,5 +65,24 @@ public class ProductServiceImpl implements ProductService {
             System.out.println("Product didn't find!");
             return -1; // or null?
         }
+    }
+}
+    @Transactional
+    @Override
+    public boolean addNewProduct(Product product) {
+        if (!isProductExist(product.getName())) {
+            productRepository.saveAndFlush(product);
+        }
+
+        return isProductExist(product.getName());
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
+    boolean isProductExist(String name) {
+        return productRepository.existsByName(name);
     }
 }

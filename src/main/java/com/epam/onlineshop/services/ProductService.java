@@ -16,3 +16,6 @@ public interface ProductService {
 
     Integer getCountById(Long id);
 }
+    boolean addNewProduct(Product product);
+    List<Product> getAllProducts();
+}
