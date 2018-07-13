@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "user")
+@Table(name = "customer")
 public class User {
 
     @Id
@@ -38,6 +38,6 @@ public class User {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "user_id")
+    @OneToMany(mappedBy = "user")
     private List<Order> orders;
 }

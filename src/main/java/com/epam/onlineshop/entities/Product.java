@@ -28,6 +28,6 @@ public class Product {
     @Column(name = "image_url")
     private String imageLink;
 
-    @OneToMany(mappedBy = "product_id")
+    @OneToMany(mappedBy = "product")
     private List<ProductInOrder> productInOrderList;
 }
