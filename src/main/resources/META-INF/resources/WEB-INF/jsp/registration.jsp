@@ -5,13 +5,12 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
-<html lang="en"><jsp:include page="init.jsp"></jsp:include>
-<jsp:include page="header.jsp"></jsp:include>
+<html lang="en"><jsp:include page="init.jsp"/>
+<jsp:include page="header.jsp"/>
 <section>
     <div>
-        <jsp:include page="registrationForm.jsp"></jsp:include>
+        <jsp:include page="registrationForm.jsp"/>
     </div>
-    ${userJSP.name} Hi
 </section>
 </body>
 </html>
