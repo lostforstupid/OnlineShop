@@ -1,9 +1,13 @@
 package com.epam.onlineshop.controllers;
 
+import com.epam.onlineshop.services.security.SecurityService;
+import com.epam.onlineshop.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
 import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.services.UserService;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,39 +17,43 @@ public class UserController {
 
     private final UserService userService;
 
-    private final static String WRONG_SIGNIN = "Username or Password is wrong!";
-    private final static String WRONG_SIGNUP = "This username is already exist!";
+    private final SecurityService securityService;
 
-    @GetMapping(value = "/registration")
+    private final UserValidator userValidator;
+
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registration(ModelAndView model) {
-        model.addObject("newUser", new User());
+        model.addObject("userJSP", new User());
         model.setViewName("registration");
         return model;
     }
 
     @PostMapping(value = "/registration")
-    public ModelAndView addUser(@ModelAttribute("userJSP") User user, ModelAndView model) {
-        if (userService.addUser(user)) {
-            model.setViewName("welcome");
-            model.addObject("userJSP", user);
-        } else {
+    public ModelAndView addUser(@ModelAttribute("userJSP") User user, BindingResult bindingResult, ModelAndView model) {
+        userValidator.validate(user, bindingResult);
+
+        if (bindingResult.hasErrors()) {
             model.setViewName("registration");
-            model.addObject("newUser", user);
-            model.addObject("registerErrorMessage", WRONG_SIGNUP);
+        }else {
+            userService.addUser(user);
+            securityService.autologin(user.getUsername(), user.getPassword());
+            model.setViewName("redirect:/login");
         }
+
+        //model.setViewName("redirect:/login");
         return model;
     }
 
-    @PostMapping("/login")
-    public ModelAndView login(@ModelAttribute("userJSP") User user, ModelAndView model) {
-        if (userService.isUserValidated(user.getPassword(), user.getUsername())) {
-            Role userRole = userService.getRoleByUsername(user.getUsername());
-            model.setViewName(getViewNameByRole(userRole));
-            model.addObject("userJSP", user);
-        } else {
-            model.setViewName("index");
-            model.addObject("message", WRONG_SIGNIN);
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login(ModelAndView model, String error, String logout) {
+        if (error != null) {
+            model.addObject("error", "Your username and password is invalid.");
         }
+
+        if (logout != null) {
+            model.addObject("message", "You have been logged out successfully.");
+        }
+        model.setViewName("login");
         return model;
     }
 

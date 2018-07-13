@@ -9,9 +9,9 @@ public interface UserService {
 
     boolean addUser(User user);
 
-    boolean isUserValidated(String password, String username);
-
     Role getRoleByUsername(String username);
+
+    User findByUsername(String username);
 
     List<User> getAllUsers();
 
