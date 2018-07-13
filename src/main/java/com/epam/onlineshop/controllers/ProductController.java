@@ -4,18 +4,12 @@ import com.epam.onlineshop.entities.Product;
 import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.services.ProductService;
 import com.epam.onlineshop.utils.ImageWriter;
-import com.epam.onlineshop.utils.RandomString;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,8 +30,8 @@ public class ProductController {
     @PostMapping("/catalog")
     public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {
         ModelAndView catalog = new ModelAndView();
-        RandomString randomString = new RandomString(32);
-        String name = randomString.nextString();
+        long currentTime = new Date().getTime();
+        String name = String.valueOf(currentTime);
         catalog = ImageWriter.writeImage(catalog, file, name);
         product.setImageLink(name + ".jpg");
         productService.addNewProduct(product);
