@@ -3,6 +3,9 @@
 <%@ taglib prefix="addproduct" uri="http://www.springframework.org/tags/form" %>
     <%--@elvariable id="product" type=""--%>
 
+<jsp:include page="init.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-4 col-sm-offset-1">
