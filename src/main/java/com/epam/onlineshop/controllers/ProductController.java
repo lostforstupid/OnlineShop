@@ -3,10 +3,15 @@ package com.epam.onlineshop.controllers;
 import com.epam.onlineshop.entities.Product;
 import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.services.ProductService;
+import com.epam.onlineshop.utils.ImageWriter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,11 +30,15 @@ public class ProductController {
     }
 
     @PostMapping("/catalog")
-    public ModelAndView addProduct(@ModelAttribute("product") Product product) {
+    public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {
         ModelAndView catalog = new ModelAndView();
+        long currentTime = new Date().getTime();
+        String name = String.valueOf(currentTime);
+        catalog = ImageWriter.writeImage(catalog, file, name);
+        product.setImageLink(name + ".jpg");
+        product.setCount(100); //TEMPORARY
         productService.addNewProduct(product);
         catalog.addObject(productService.getAllProducts());
-        catalog.setViewName(getViewName(Role.ADMIN));
         return catalog;
     }
 
