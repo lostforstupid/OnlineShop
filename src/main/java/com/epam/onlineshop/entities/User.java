@@ -32,12 +32,12 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "isBlocked")
+    @Column(name = "is_blocked")
     private Boolean isBlocked;
 
     @Column(name = "address", nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "user_id")
     private List<Order> orders;
 }

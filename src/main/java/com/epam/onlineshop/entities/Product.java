@@ -25,6 +25,9 @@ public class Product {
     @Column(name = "price", nullable = false)
     private Integer price;
 
-    @OneToMany(mappedBy = "productId")
+    @Column(name = "image_url")
+    private String imageLink;
+
+    @OneToMany(mappedBy = "product_id")
     private List<ProductInOrder> productInOrderList;
 }

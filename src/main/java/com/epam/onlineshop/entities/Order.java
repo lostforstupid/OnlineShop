@@ -20,10 +20,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userId", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(name = "dateAndTime", nullable = false)
+    @Column(name = "date_and_time", nullable = false)
     private LocalDateTime dateAndTime;
 
     @Column(name = "status", nullable = false)
@@ -31,9 +31,9 @@ public class Order {
     private Status status;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "orderId")
+    @OneToMany(mappedBy = "order_id")
     private List<ProductInOrder> productsInOrder;
 }
