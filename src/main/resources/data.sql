@@ -7,6 +7,7 @@ INSERT INTO product (id, name, price, image_url) VALUES
     (1, 'Browser', 400,'girl2.jpg'),
     (2, 'Fun tea', 38,'girl3.jpg'),
     (3,'Door', 1400, 'gallery1.jpg');
+//This conflict is to be resolved.
 //=======
 //INSERT INTO user VALUES (default, 'Address', false, '$2a$10$OUwX3BY0RWAA71PjsLHvwu6CwnqKsqQMVBV/FNywy1a0xMvkg0NAS', 'ADMIN', 'user12345');
 
