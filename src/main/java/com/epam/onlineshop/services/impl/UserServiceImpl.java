@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean blockUser(Long id) {
+    public boolean changeBlockedStatus(Long id) {
         Optional<User> result = userRepository.findById(id);
         User user = result.get();
 

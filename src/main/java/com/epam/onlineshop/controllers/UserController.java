@@ -7,9 +7,6 @@ import com.epam.onlineshop.services.UserService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -42,7 +39,8 @@ public class UserController {
     @PostMapping("/login")
     public ModelAndView login(@ModelAttribute("userJSP") User user, ModelAndView model) {
         if (userService.isUserValidated(user.getPassword(), user.getUsername())) {
-            model.setViewName(getViewNameByRole(userService.getRoleByUsername(user.getUsername())));
+            Role userRole = userService.getRoleByUsername(user.getUsername());
+            model.setViewName(getViewNameByRole(userRole));
             model.addObject("userJSP", user);
         } else {
             model.setViewName("index");
@@ -60,8 +58,8 @@ public class UserController {
     }
 
     @PostMapping("admin/users/{id}/block")
-    public ModelAndView blockUser(@PathVariable Long id) {
-        userService.blockUser(id);
+    public ModelAndView changeBlockedStatus(@PathVariable Long id) {
+        userService.changeBlockedStatus(id);
         return new ModelAndView("redirect:/admin/users");
     }
 
