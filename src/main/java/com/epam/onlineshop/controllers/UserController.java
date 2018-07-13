@@ -61,8 +61,8 @@ public class UserController {
     public ModelAndView changeBlockedStatus(@PathVariable Long id) {
         User user = userService.findById(id);
 
-        if (user.getRole() != Role.ADMIN) {
-            userService.changeBlockedStatus(id);
+        if ((user != null) && (user.getRole() != Role.ADMIN)) {
+            userService.changeBlockedStatus(user);
         }
 
         return new ModelAndView("redirect:/admin/users");

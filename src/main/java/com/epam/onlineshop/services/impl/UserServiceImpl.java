@@ -51,22 +51,19 @@ public class UserServiceImpl implements UserService {
     }
 
     public User findById(Long id) {
-        return userRepository.findById(id).get();
+        Optional<User> result = userRepository.findById(id);
+
+        if (result != null) {
+            User user = result.get();
+            return user;
+        }
+
+        return null;
     }
 
     @Override
-    public boolean changeBlockedStatus(Long id) {
-        Optional<User> result = userRepository.findById(id);
-        User user = result.get();
-
-        System.out.println(user.getUsername());
-
-        if (user.getIsBlocked()) {
-            user.setIsBlocked(false);
-        } else {
-            user.setIsBlocked(true);
-        }
-
+    public boolean changeBlockedStatus(User user) {
+        user.setIsBlocked(!user.getIsBlocked());
         return userRepository.save(user) != null;
     }
 }
