@@ -1,5 +1,4 @@
-INSERT INTO user (id, role, username, password, is_Blocked, address) VALUES
-    ('1', 'ADMIN', 'admin', 'pass', 'false', 'Address');
+INSERT INTO user VALUES (default, 'Address', false, '$2a$10$OUwX3BY0RWAA71PjsLHvwu6CwnqKsqQMVBV/FNywy1a0xMvkg0NAS', 'USER', 'user12345');
 
 INSERT INTO product VALUES (0, 'girl1.jpg', 'Noses (20 per pack)', 7500);
 INSERT INTO product VALUES (1,'girl2.jpg', 'Browser', 400);
