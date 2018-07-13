@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="/welcome"><img src="${pageContext.request.contextPath}/images/home/logo.png" /></a>
+                        <a href="/welcome"><img src="${pageContext.request.contextPath}/images/content/logo.png" /></a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">
