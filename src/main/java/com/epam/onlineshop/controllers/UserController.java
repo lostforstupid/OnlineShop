@@ -59,7 +59,12 @@ public class UserController {
 
     @PostMapping("admin/users/{id}/block")
     public ModelAndView changeBlockedStatus(@PathVariable Long id) {
-        userService.changeBlockedStatus(id);
+        User user = userService.findById(id);
+
+        if (user.getRole() != Role.ADMIN) {
+            userService.changeBlockedStatus(id);
+        }
+
         return new ModelAndView("redirect:/admin/users");
     }
 

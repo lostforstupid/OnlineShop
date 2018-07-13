@@ -1,7 +1,6 @@
 package com.epam.onlineshop.services.impl;
 
 import com.epam.onlineshop.entities.Product;
-import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.repository.ProductRepository;
 import com.epam.onlineshop.services.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +33,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(Long id) {
-        Optional<Product> result = productRepository.findById(id);
-        return result.get();
+        return productRepository.findById(id).get();
     }
 
     boolean isProductExist(String name) {
@@ -46,5 +44,12 @@ public class ProductServiceImpl implements ProductService {
     public boolean saveProduct(Product product) {
         productRepository.save(product);
         return isProductExist(product.getName());
+    }
+
+    @Override
+    public boolean deleteProductById(Long id) {
+        Product product = getProductById(id);
+        productRepository.delete(product);
+        return (!isProductExist(product.getName()));
     }
 }

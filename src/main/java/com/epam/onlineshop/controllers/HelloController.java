@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 
 import com.epam.onlineshop.entities.User;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 

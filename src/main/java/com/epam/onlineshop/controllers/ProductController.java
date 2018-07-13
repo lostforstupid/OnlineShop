@@ -34,14 +34,14 @@ public class ProductController {
     }
 
     @GetMapping("/admin/products")
-    public ModelAndView getAllUsers(ModelAndView model) {
+    public ModelAndView getAllProducts(ModelAndView model) {
         model.setViewName("main_admin_products");
         model.addObject(productService.getAllProducts());
         return model;
     }
 
     @GetMapping("/admin/products/{id}/edit")
-    public ModelAndView getAllUsers(@PathVariable Long id,  ModelAndView model) {
+    public ModelAndView editProduct(@PathVariable Long id,  ModelAndView model) {
         model.setViewName("edit_product");
         model.addObject(productService.getProductById(id));
         return model;
@@ -50,6 +50,12 @@ public class ProductController {
     @PostMapping("/admin/products/{id}/save")
     public ModelAndView saveProduct(@PathVariable Long id, @ModelAttribute("product") Product product) {
         productService.saveProduct(product);
+        return new ModelAndView("redirect:/admin/products");
+    }
+
+    @PostMapping("/admin/products/{id}/delete")
+    public ModelAndView deleteProduct(@PathVariable Long id) {
+        productService.deleteProductById(id);
         return new ModelAndView("redirect:/admin/products");
     }
 

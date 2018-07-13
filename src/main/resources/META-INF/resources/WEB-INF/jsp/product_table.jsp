@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="blocking" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="editing" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="deleting" uri="http://www.springframework.org/tags/form" %>
 <%--@elvariable id="product" type=""--%>
 <div class="table-responsive cart_info">
     <table class = "table table-condensed">
@@ -8,15 +9,20 @@
             <th>Name</th>
             <th>Price</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
         <c:forEach var = "product" items = "${productList}">
-            <editing:form action = "products/${product.id}/edit" method = "get">
                 <tr class = "cart_product">
                     <td>"${product.name}"</td>
                     <td>"${product.price}"</td>
-                    <td><button type="submit" class="btn btn-default">Edit</button></td>
+                    <editing:form action = "products/${product.id}/edit" method = "get">
+                        <td><button type="submit" class="btn btn-default">Edit</button></td>
+                    </editing:form>
+                    <deleting:form action = "products/${product.id}/delete" method = "post">
+                        <td><button type="submit" class="btn btn-default">Delete</button></td>
+                    </deleting:form>
                 </tr>
-            </editing:form>
+
         </c:forEach>
     </table>
 </div>
