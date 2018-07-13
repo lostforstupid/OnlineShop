@@ -9,13 +9,18 @@
             <div class="login-form"><!--/form for adding a product-->
                 <h2>Add product</h2>
                 <!--<form action="catalog">-->
-                    <addproduct:form action = "catalog" method = "post" modelAttribute = "product">
-                        <addproduct:input type = "text" path = "name"/>
-                        <addproduct:input class = "product-price" path = "price"/>
+                    <addproduct:form action = "catalog" method = "post" enctype="multipart/form-data" modelAttribute = "product">
+                        <input type="file" class="btn btn-default" name="file" id="upload_hidden" style="position: absolute; display: block; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;"
+                               onchange="document.getElementById('upload_visible').value = this.value;" >
+                        <input type="text" readonly="1" id="upload_visible"
+                               onclick="document.getElementById('upload_hidden').click();" placeholder="Click here to upload image" />
+                        <addproduct:input type = "text" path = "name" placeholder="Product name"/>
+                        <addproduct:input class = "product-price" path = "price" placeholder="Price"/>
                         <button type="submit" class="btn btn-default">Add product</button>
                     </addproduct:form>
                 <!--</form>-->
             </div>
+
         </div>
     </div>
 </div>
