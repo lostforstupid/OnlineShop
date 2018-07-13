@@ -3,6 +3,7 @@ package com.epam.onlineshop.controllers;
 import com.epam.onlineshop.entities.Product;
 import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.services.ProductService;
+import com.epam.onlineshop.utils.ImageWriter;
 import com.epam.onlineshop.utils.RandomString;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,29 +36,12 @@ public class ProductController {
     @PostMapping("/catalog")
     public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {
         ModelAndView catalog = new ModelAndView();
-        RandomString randomString = new RandomString(6);
-        //String name = randomString.nextString();
-        String name = "image";
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                Path currentRelativePath = Paths.get("");
-                String s = currentRelativePath.toAbsolutePath().toString();
-                BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File(s + "/src/main/resources/static/images/products/" + name + ".jpg")));
-                stream.write(bytes);
-                stream.close();
-                catalog.setViewName("redirect:/catalog");
-            } catch (Exception e) {
-                catalog.setViewName("redirect:/error");
-            }
-        } else {
-            catalog.setViewName("redirect:/error");
-        }
+        RandomString randomString = new RandomString(32);
+        String name = randomString.nextString();
+        catalog = ImageWriter.writeImage(catalog, file, name);
         product.setImageLink(name + ".jpg");
         productService.addNewProduct(product);
         catalog.addObject(productService.getAllProducts());
-        catalog.setViewName("redirect:/catalog");
         return catalog;
     }
 
