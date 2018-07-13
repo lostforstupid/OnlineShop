@@ -23,4 +23,8 @@ public class Product {
 
     @Column(name = "price", nullable = false)
     private Integer price;
+
+    // When we created entity for ordering it can be deleted
+    @Column(name = "count", nullable = false)
+    private Integer count;
 }
