@@ -1,7 +1,7 @@
 package com.epam.onlineshop.controllers;
 
 import com.epam.onlineshop.entities.Product;
-import com.epam.onlineshop.entities.Role_enum;
+import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.services.ProductService;
 import com.epam.onlineshop.utils.ImageWriter;
 import lombok.RequiredArgsConstructor;
@@ -22,33 +22,33 @@ public class ProductController {
     public ModelAndView showProducts() {
         ModelAndView catalog = new ModelAndView();
         catalog.addObject(productService.getAllProducts());
-        catalog.addObject("product", new Product());
-        catalog.setViewName(getViewName(Role_enum.ADMIN)); //access to admin page is open for all users for now
-                                                        // (will be changed after the addition of sessions)
+        catalog.setViewName("main");
         return catalog;
     }
 
-    @PostMapping("/catalog")
-    public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {
-        ModelAndView catalog = new ModelAndView();
-        long currentTime = new Date().getTime();
-        String name = String.valueOf(currentTime);
-        catalog = ImageWriter.writeImage(catalog, file, name);
-        product.setImageLink(name + ".jpg");
-        product.setCount(100); //TEMPORARY
-        productService.addNewProduct(product);
-        catalog.addObject(productService.getAllProducts());
-        return catalog;
-    }
-
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/admin/products")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @GetMapping("/products")
     public ModelAndView getAllProducts(ModelAndView model) {
         model.setViewName("main_admin_products");
         model.addObject(productService.getAllProducts());
         return model;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PostMapping("/products")
+    public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {
+        ModelAndView model = new ModelAndView();
+        long currentTime = new Date().getTime();
+        String name = String.valueOf(currentTime);
+        model = ImageWriter.writeImage(model, file, name);
+        product.setImageLink(name + ".jpg");
+        //product.setCount(100); //TEMPORARY
+        productService.addNewProduct(product);
+        model.addObject(productService.getAllProducts());
+        return model;
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/admin/products/{id}/edit")
     public ModelAndView editProduct(@PathVariable Long id,  ModelAndView model) {
         model.setViewName("edit_product");
@@ -56,24 +56,17 @@ public class ProductController {
         return model;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/admin/products/{id}/save")
     public ModelAndView saveProduct(@PathVariable Long id, @ModelAttribute("product") Product product) {
         productService.saveProduct(product);
         return new ModelAndView("redirect:/admin/products");
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/admin/products/{id}/delete")
     public ModelAndView deleteProduct(@PathVariable Long id) {
         productService.deleteProductById(id);
         return new ModelAndView("redirect:/admin/products");
-    }
-
-    private String getViewName(Role_enum roleEnum) {
-        switch (roleEnum) {
-            case ADMIN:
-                return "main_admin";
-            default:
-                return "main";
-        }
     }
 }

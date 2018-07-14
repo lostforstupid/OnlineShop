@@ -1,6 +1,6 @@
 package com.epam.onlineshop.services.security;
 
-import com.epam.onlineshop.entities.Role_enum;
+import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +27,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findByUsername(username);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(Role_enum.USER.toString()));
-        grantedAuthorities.add(new SimpleGrantedAuthority(Role_enum.ADMIN.toString()));
-        grantedAuthorities.add(new SimpleGrantedAuthority(Role_enum.ANONYMOUS.toString()));
+
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ANONYMOUS"));
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+        if (user.getRole() == Role.ADMIN) {
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }

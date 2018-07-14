@@ -3,7 +3,7 @@ package com.epam.onlineshop.controllers;
 import com.epam.onlineshop.services.security.SecurityService;
 import com.epam.onlineshop.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
-import com.epam.onlineshop.entities.Role_enum;
+import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.services.UserService;
 import org.springframework.security.access.annotation.Secured;
@@ -11,6 +11,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -58,8 +60,8 @@ public class UserController {
         return model;
     }
 
-    @Secured("ROLE_ADMIN")
-    @GetMapping("/admin/users")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @GetMapping("/users")
     public ModelAndView getAllUsers(@ModelAttribute("user") User user, ModelAndView model) {
         model.setViewName("main_admin_users");
         model.addObject("user", new User());
@@ -67,18 +69,19 @@ public class UserController {
         return model;
     }
 
-    @PostMapping("admin/users/{id}/block")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PostMapping("/users/{id}/block")
     public ModelAndView changeBlockedStatus(@PathVariable Long id) {
         User user = userService.findById(id);
 
-        if ((user != null) && (user.getRoleEnum() != Role_enum.ADMIN)) {
+        if ((user != null) && (user.getRole() != Role.ADMIN)) {
             userService.changeBlockedStatus(user);
         }
 
-        return new ModelAndView("redirect:/admin/users");
+        return new ModelAndView("redirect:/users");
     }
 
-    String getViewNameByRole(Role_enum userRoleEnum) {
+    String getViewNameByRole(Role userRoleEnum) {
         switch (userRoleEnum) {
             case USER:
                 return "main";

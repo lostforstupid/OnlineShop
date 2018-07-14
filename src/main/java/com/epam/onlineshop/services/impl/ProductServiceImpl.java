@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
@@ -35,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
-            product.setCount(product.getCount() + 1);
+            //product.setCount(product.getCount() + 1);
             productRepository.save(product);
         } else{
             System.out.println("Product didn't find!");
@@ -49,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
-            product.setCount(product.getCount() - 1);
+            //product.setCount(product.getCount() - 1);
             productRepository.save(product);
         } else{
             System.out.println("Product didn't find!");
@@ -61,7 +58,8 @@ public class ProductServiceImpl implements ProductService {
     public Integer getCountById(Long id) {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
-            return optionalProduct.get().getCount();
+            //return optionalProduct.get().getCount();
+            return 0;
         } else{
             System.out.println("Product didn't find!");
             return -1; // or null?
