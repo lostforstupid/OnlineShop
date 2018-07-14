@@ -9,12 +9,14 @@ import lombok.AllArgsConstructor;
 
 import java.util.Collection;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "user")
+@Table(name = "customer")
 public class User {
 
     @Id
@@ -32,7 +34,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "isBlocked")
+    @Column(name = "is_blocked")
     private Boolean isBlocked;
 
     @Column(name = "address", nullable = false)
@@ -40,4 +42,7 @@ public class User {
 
     @ManyToMany
     private Collection<Role> roles;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 }
