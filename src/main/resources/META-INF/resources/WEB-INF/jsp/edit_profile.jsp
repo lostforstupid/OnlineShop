@@ -8,10 +8,10 @@
     <div>
         <div class="col-sm-4 col-sm-offset-1">
             <div class="login-form"><!--login form-->
-                <h2>Profile</h2>
-                <c:if test="${pageContext.request.userPrincipal.name != null}">
                 <h2>Edit your profile!</h2>
                 <%--@elvariable id="userJSP" type=""--%>
+                    <form:input type="text" path="username" class="form-control" placeholder="First name"
+                                autofocus="true"/>
                 <form:form method="POST" action="user/edit" modelAttribute="userJSP" class="form-signin">
                     <spring:bind path="name">
                         <div class="form-group ${status.error ? 'has-error' : ''}">
@@ -50,8 +50,6 @@
                     </spring:bind>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
                 </form:form>
-            </div>
-                </c:if>
             </div><!--/login form-->
         </div>
         <div class="col-sm-1">
