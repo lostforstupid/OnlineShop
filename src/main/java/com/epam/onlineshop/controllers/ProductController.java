@@ -4,7 +4,9 @@ import com.epam.onlineshop.entities.Product;
 import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.services.ProductService;
 import com.epam.onlineshop.utils.ImageWriter;
+import com.epam.onlineshop.validator.ProductValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,6 +18,7 @@ import java.util.Date;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductValidator productValidator;
 
     @GetMapping("/catalog")
     public ModelAndView showProducts() {
@@ -28,15 +31,22 @@ public class ProductController {
     }
 
     @PostMapping("/catalog")
-    public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {
+    public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file, BindingResult bindingResult) {
         ModelAndView catalog = new ModelAndView();
-        long currentTime = new Date().getTime();
-        String name = String.valueOf(currentTime);
-        catalog = ImageWriter.writeImage(catalog, file, name);
-        product.setImageLink(name + ".jpg");
-        product.setCount(100); //TEMPORARY
-        productService.addNewProduct(product);
-        catalog.addObject(productService.getAllProducts());
+        productValidator.validate(product, bindingResult);
+
+        catalog.setViewName(getViewName(Role.ADMIN));
+        if (!bindingResult.hasErrors()) {
+            long currentTime = new Date().getTime();
+            String name = String.valueOf(currentTime);
+            catalog = ImageWriter.writeImage(catalog, file, name);
+            product.setImageLink(name + ".jpg");
+            product.setCount(100); //TEMPORARY
+            productService.addNewProduct(product);
+            catalog.addObject(productService.getAllProducts());
+        }else{
+            catalog.addObject(productService.getAllProducts());
+        }
         return catalog;
     }
 
