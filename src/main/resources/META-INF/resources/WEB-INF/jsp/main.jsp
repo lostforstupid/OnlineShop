@@ -1,8 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="init.jsp"></jsp:include>
 <jsp:include page="header.jsp"></jsp:include>
 <c:if test="${role == ADMIN}">
-    <jsp:include page="add_product.jsp"></jsp:include>
 </c:if>
 <section>
     <div class="container">
@@ -12,5 +12,4 @@
                 <jsp:include page="products.jsp"></jsp:include>
 
 
-</body>
-</html>
+
