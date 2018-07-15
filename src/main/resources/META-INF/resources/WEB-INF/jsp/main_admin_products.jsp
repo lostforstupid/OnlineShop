@@ -1,7 +1,7 @@
 
 <jsp:include page="init.jsp"></jsp:include>
 <jsp:include page="header.jsp"></jsp:include>
-<jsp:include page="add_product.jsp"></jsp:include>
+<%--<jsp:include page="add_product.jsp"></jsp:include>--%>
 
 <section>
     <div class="container">

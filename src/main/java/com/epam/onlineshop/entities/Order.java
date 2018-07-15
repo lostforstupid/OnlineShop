@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Order {
     private Long id;
 
     @Column(name = "date_and_time", nullable = false)
-    private LocalDateTime dateAndTime;
+    private Timestamp dateAndTime;
 
     @Column(name = "status", nullable = false)
     @Enumerated(value = EnumType.STRING)

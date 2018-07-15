@@ -1,7 +1,6 @@
 package com.epam.onlineshop.controllers;
 
 import com.epam.onlineshop.entities.Product;
-import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.services.ProductService;
 import com.epam.onlineshop.utils.ImageWriter;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +37,7 @@ public class ProductController {
     @PostMapping("/products")
     public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {
         ModelAndView model = new ModelAndView();
+        model.setViewName("main_admin_products");
         long currentTime = new Date().getTime();
         String name = String.valueOf(currentTime);
         model = ImageWriter.writeImage(model, file, name);
