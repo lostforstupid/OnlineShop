@@ -8,5 +8,5 @@ INSERT INTO product (id, name, price, image_url) VALUES
     (3, 'Fun tea', 38,'girl3.jpg'),
     (4,'Door', 1400, 'gallery1.jpg');
 
-    INSERT INTO order (id, date_and_time, status, user_id) VALUES
+INSERT INTO order (id, date_and_time, status, user_id) VALUES
     (1, '2017-11-15 15:30:14.332', 'NEW', 2);
