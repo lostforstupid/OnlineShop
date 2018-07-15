@@ -34,7 +34,7 @@ public class ProductController {
         String name = String.valueOf(currentTime);
         catalog = ImageWriter.writeImage(catalog, file, name);
         product.setImageLink(name + ".jpg");
-        product.setCount(100); //TEMPORARY
+        //product.setCount(100); //TEMPORARY
         productService.addNewProduct(product);
         catalog.addObject(productService.getAllProducts());
         return catalog;
