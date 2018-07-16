@@ -21,7 +21,7 @@ public class CartController {
 
     @GetMapping(value = "/cart")
     public ModelAndView openCart(ModelAndView model, Principal principal) {
-        model.addObject("products", productInOrderService.findAllByOrderId(
+        model.addObject("products", productInOrderService.findAllNewOrderByUser(
                 userService.findByUsername(principal.getName())));
         model.setViewName("cart");
         return model;
