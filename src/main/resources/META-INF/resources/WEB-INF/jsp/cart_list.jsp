@@ -1,4 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+    function handleClick(countProduct)
+    {
+        if(countProduct > 0)
+            document.getElementById('productCountText').value = countProduct - 1;
+        else
+            document.getElementById('productCountText').value = 0;
+    }
+</script>
 <section id="cart_items">
     <div class="container">
         <div class="breadcrumbs">
@@ -30,31 +39,31 @@
                         </tr>
                     </c:when>
                     <c:otherwise>
-                        <c:forEach items="${products}" var="product">
+                        <c:forEach items="${products}" var="item">
                             <tr>
                                 <td class="cart_product">
                                     <a href=""><img src="" alt=""></a>
                                 </td>
                                 <td class="cart_description">
-                                    <h4><a href="">${product.name}</a></h4>
-                                    <p>Web ID: ${product.id}</p>
+                                    <h4><a href="">${item.product.name}</a></h4>
+                                    <p>Web ID: ${item.id}</p>
                                 </td>
                                 <td class="cart_price">
-                                    <p>$${product.price}</p>
+                                    <p>$${item.product.price}</p>
                                 </td>
                                 <td class="cart_quantity">
                                     <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href="/cart/${product.id}/inc"> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="${product.count}"
+                                        <a class="cart_quantity_up" href="handlerClick(${item.quantity})"> + </a>
+                                        <input class="cart_quantity_input" type="text" name="quantity" value = ${item.quantity} id="productCountText"
                                                autocomplete="off" size="2" readonly="readonly">
-                                        <a href= "/cart/${product.id}/decrement" class="cart_quantity_down"> - </a>
+                                        <a href= "/cart/${item.id}/decrement" class="cart_quantity_down"> - </a>
                                     </div>
                                 </td>
                                 <td class="cart_total">
                                     <p class="cart_total_price">$42</p>
                                 </td>
                                 <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href="/cart/${product.id}/delete"><i class="fa fa-times"></i></a>
+                                    <a class="cart_quantity_delete" href="/cart/${item.id}/delete"><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
