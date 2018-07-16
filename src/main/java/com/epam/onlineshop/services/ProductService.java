@@ -9,4 +9,6 @@ public interface ProductService {
     List<Product> getAllProducts();
 
     boolean addNewProduct(Product product);
+
+    boolean isProductExist(String name);
 }
