@@ -7,13 +7,17 @@
 
         <div class="col-sm-4">
             <div class="product-image-wrapper">
-                <div class="single-products">
-                    <div class="productinfo text-center">
-                        <img src="${pageContext.request.contextPath}/images/products/${product.imageLink}" alt=""/>
+                <div class="single-products parent-product">
+                    <div class="productinfo text-center min-size image-fix-size">
+<div class="border-for-image">
+                        <img class="border-for-img" src="${pageContext.request.contextPath}/images/products/${product.imageLink}" alt=""/>
+</div>
                         <h2>$${product.price}</h2>
                         <p>${product.name}</p>
+                        <div class="for-cart">
                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
                             to cart</a>
+                         </div>
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
@@ -23,12 +27,6 @@
                                     class="fa fa-shopping-cart"></i>Add to cart</a>
                         </div>
                     </div>
-                </div>
-                <div class="choose">
-                    <ul class="nav nav-pills nav-justified">
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-                    </ul>
                 </div>
             </div>
         </div>

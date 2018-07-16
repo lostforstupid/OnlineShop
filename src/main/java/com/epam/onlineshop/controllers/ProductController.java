@@ -6,7 +6,9 @@ import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.services.ProductService;
 import com.epam.onlineshop.services.UserService;
 import com.epam.onlineshop.utils.ImageWriter;
+import com.epam.onlineshop.validator.ProductValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.BindingResult;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,7 @@ import java.util.Date;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductValidator productValidator;
 
     private final UserService userService;
 
@@ -32,6 +35,24 @@ public class ProductController {
         return model;
     }
 
+    @PostMapping("/catalog")
+    public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file, BindingResult bindingResult) {
+        ModelAndView catalog = new ModelAndView();
+        productValidator.validate(product, bindingResult);
+
+        catalog.setViewName(getViewName(Role.ADMIN));
+        if (!bindingResult.hasErrors()) {
+            long currentTime = new Date().getTime();
+            String name = String.valueOf(currentTime);
+            catalog = ImageWriter.writeImage(catalog, file, name);
+            product.setImageLink(name + ".jpg");
+            //product.setCount(100); //TEMPORARY
+            productService.addNewProduct(product);
+            catalog.addObject(productService.getAllProducts());
+        }else{
+            catalog.addObject(productService.getAllProducts());
+        }
+        return catalog;
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/products")
     public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {

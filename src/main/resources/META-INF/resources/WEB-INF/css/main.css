@@ -855,6 +855,37 @@ h2.title {
   position: relative;
 }
 
+.min-size{
+  height: 350px;
+  width: 200px;
+}
+.for-cart {
+
+}
+
+.border-for-image{
+  min-height: 200px;
+  max-height: 200px;
+}
+.border-for-img{
+  max-height: 200px;
+}
+.image-fix-size{
+  height: 350px;
+  width: 200px;
+}
+.center{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.parent-product {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .new, .sale {
   position: absolute;
   top: 0;

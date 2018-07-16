@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="buy" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="addproduct" uri="http://www.springframework.org/tags/form" %>
-    <%--@elvariable id="product" type=""--%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--@elvariable id="product" type=""--%>
 
 <div class="container">
     <div class="row">
@@ -14,8 +15,12 @@
                                onchange="document.getElementById('upload_visible').value = this.value;" >
                         <input type="text" readonly="1" id="upload_visible"
                                onclick="document.getElementById('upload_hidden').click();" placeholder="Click here to upload image" />
+                    <div class="form-group ${status.error ? 'has-error' : ''}">
                         <addproduct:input type = "text" path = "name" placeholder="Product name"/>
+                        <form:errors path="name"/>
+                        <div class="form-group ${status.error ? 'has-error' : ''}">
                         <addproduct:input class = "product-price" path = "price" placeholder="Price"/>
+                            <form:errors path="price"/>
                         <button type="submit" class="btn btn-default">Add product</button>
                     </addproduct:form>
                 <!--</form>-->
