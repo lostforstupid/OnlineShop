@@ -1,13 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script type="text/javascript">
-    function handleClick(countProduct)
-    {
-        if(countProduct > 0)
-            document.getElementById('productCountText').value = countProduct - 1;
-        else
-            document.getElementById('productCountText').value = 0;
-    }
-</script>
 <section id="cart_items">
     <div class="container">
         <div class="breadcrumbs">

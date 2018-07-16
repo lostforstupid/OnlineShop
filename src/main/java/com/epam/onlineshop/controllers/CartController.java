@@ -1,5 +1,6 @@
 package com.epam.onlineshop.controllers;
 
+import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.services.ProductInOrderService;
 import com.epam.onlineshop.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,9 @@ public class CartController {
 
     @GetMapping(value = "/cart")
     public ModelAndView openCart(ModelAndView model, Principal principal) {
-        model.addObject("products", productInOrderService.findAllNewOrderByUser(
-                userService.findByUsername(principal.getName())));
+        String username = principal.getName();
+        User currentUser = userService.findByUsername(username);
+        model.addObject("products", productInOrderService.findAllNewOrderByUser(currentUser));
         model.setViewName("cart");
         return model;
     }
