@@ -7,11 +7,10 @@ import java.util.List;
 
 public interface ProductInOrderService {
 
-    List<ProductInOrder> findAllNewByUser(User user);
-
     List<ProductInOrder> findAllOrderedByUser(User user);
 
     void addOrderInCart(Long product_id, User user);
+    List<ProductInOrder> findAllNewOrderByUser(User user);
 
     void deleteById(Long id);
 

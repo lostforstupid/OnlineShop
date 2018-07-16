@@ -26,7 +26,7 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
     private final OrderRepository orderRepository;
 
     @Override
-    public List<ProductInOrder> findAllNewByUser(User user) {
+    public List<ProductInOrder> findAllNewOrderByUser(User user) {
         return productInOrderRepository.findAllNewOrderByUser(user);
     }
 
