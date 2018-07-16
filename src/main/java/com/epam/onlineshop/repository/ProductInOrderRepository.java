@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface ProductInOrderRepository extends JpaRepository<ProductInOrder, Long> {
 
-    //@Query("SELECT productInOrder FROM product_in_order WHERE product_in_order.order_id = order_table.id")
     List<ProductInOrder> findByOrderId (Long order_id);
 }

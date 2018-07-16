@@ -10,8 +10,7 @@ INSERT INTO product (id, name, price, image_url) VALUES
 
 INSERT INTO order_table (id, date_and_time, status, user_id) VALUES
     (1, '2017-11-15 15:30:14.332', 'NEW', 2);
-/*
+
 INSERT INTO product_in_order (id, quantity, order_id, product_id) VALUES
     (1, 3, 1, 1),
     (2, 1, 1, 3);
-    */

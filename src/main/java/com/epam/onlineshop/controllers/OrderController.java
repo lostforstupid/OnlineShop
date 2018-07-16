@@ -1,6 +1,8 @@
 package com.epam.onlineshop.controllers;
 
 import com.epam.onlineshop.entities.Order;
+import com.epam.onlineshop.entities.Product;
+import com.epam.onlineshop.entities.ProductInOrder;
 import com.epam.onlineshop.services.OrderService;
 import com.epam.onlineshop.services.ProductInOrderService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,6 +39,13 @@ public class OrderController {
         Order order = orderService.findById(orderId);
         model.addObject("order", order);
         model.addObject("productsInOrder", productInOrderService.getProductsFromThisOrder(order.getId()));
+        return model;
+    }
+
+    @GetMapping("/orders/{id}/edit")
+    public ModelAndView editOrder(ModelAndView model, @PathVariable("id") Long orderId) {
+        Order order = orderService.findById(orderId);
+        model.addObject("order", order);
         return model;
     }
 }
