@@ -4,10 +4,7 @@ import com.epam.onlineshop.services.ProductInOrderService;
 import com.epam.onlineshop.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -27,10 +24,19 @@ public class CartController {
         return model;
     }
 
-    @GetMapping(value = "/cart/order")
-    public ModelAndView deleteProduct(ModelAndView model, Principal principal) {
+    @GetMapping(value = "/cart/payment")
+    public ModelAndView openPayment(ModelAndView model, Principal principal) {
+        model.addObject("isPaid", false);
+        model.setViewName("payment0");
+        return model;
+    }
+
+    @PostMapping(value = "/cart/order")
+    public ModelAndView payOrder(ModelAndView model, Principal principal) {
         productInOrderService.makeOrder(userService.findByUsername(principal.getName()));
-        model.setViewName("redirect:/cart");
+        model.addObject("message", "You have been paid successfully.");
+        model.addObject("isPaid", true);
+        model.setViewName("payment0");
         return model;
     }
 

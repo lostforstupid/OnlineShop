@@ -73,9 +73,17 @@
                 </tbody>
             </table>
             <div>
-                <form method="GET" action="${contextPath}/cart/order" class="form-signin">
+                <form method="GET" action="${contextPath}/cart/payment" class="form-signin">
                     <h4>Final price: 000 $</h4>
-                    <button class="btn btn-default" type="submit">Order</button>
+                    <c:choose>
+                        <c:when test="${products.size() <= 0}">
+                            <button class="btn btn-default" type="submit" disabled = "disabled">Order</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button class="btn btn-default" type="submit" >Order</button>
+                        </c:otherwise>
+                    </c:choose>
+
                 </form>
             </div>
         </div>
