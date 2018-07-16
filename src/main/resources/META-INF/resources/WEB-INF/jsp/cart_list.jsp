@@ -67,6 +67,10 @@
                                 </td>
                             </tr>
                         </c:forEach>
+                        <form method="GET" action="${contextPath}/cart/order" class="form-signin">
+                            <h2>Final price: 000 $</h2>
+                            <button class="btn btn-default" type="submit">Order</button>
+                        </form>
                     </c:otherwise>
                 </c:choose>
 

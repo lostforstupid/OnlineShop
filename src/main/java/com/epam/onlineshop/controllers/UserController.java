@@ -1,5 +1,6 @@
 package com.epam.onlineshop.controllers;
 
+import com.epam.onlineshop.services.ProductInOrderService;
 import com.epam.onlineshop.services.security.SecurityService;
 import com.epam.onlineshop.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class UserController {
     private final SecurityService securityService;
 
     private final UserValidator userValidator;
+    private final ProductInOrderService productInOrderService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView openRegistrationForm(ModelAndView model) {
@@ -47,6 +49,8 @@ public class UserController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ModelAndView openProfile(ModelAndView model, Principal principal) {
         model.addObject("userJSP", userService.findByUsername(principal.getName()));
+        model.addObject("products", productInOrderService.findAllOrderedByUser(
+                userService.findByUsername(principal.getName())));
         model.setViewName("profile");
         return model;
     }

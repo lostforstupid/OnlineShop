@@ -10,14 +10,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.epam.onlineshop.entities.Status.PREPAID;
+
 @Service
 @RequiredArgsConstructor
 public class ProductInOrderServiceImpl implements ProductInOrderService {
 
     private  final ProductInOrderRepository productInOrderRepository;
     @Override
-    public List<ProductInOrder> findAllByOrderId(User user) {
+    public List<ProductInOrder> findAllNewByUser(User user) {
         return productInOrderRepository.findAllNewOrderByUser(user);
+    }
+
+    @Override
+    public List<ProductInOrder> findAllOrderedByUser(User user) {
+        return productInOrderRepository.findAllOrderedByUser(user);
     }
 
     @Override
@@ -58,6 +65,14 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
         } else{
             System.out.println("Product didn't find!");
             return -1; // or null?
+        }
+    }
+
+    @Override
+    public void makeOrder(User user) {
+        List<ProductInOrder> orders = productInOrderRepository.findAllOrderedByUser(user);
+        for(ProductInOrder product: orders){
+            product.getOrder().setStatus(PREPAID);
         }
     }
 }

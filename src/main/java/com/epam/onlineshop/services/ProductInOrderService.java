@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface ProductInOrderService {
 
-    List<ProductInOrder> findAllByOrderId(User user);
+    List<ProductInOrder> findAllNewByUser(User user);
+
+    List<ProductInOrder> findAllOrderedByUser(User user);
 
     void deleteById(Long id);
 
@@ -16,4 +18,6 @@ public interface ProductInOrderService {
     void decrementCount(Long id);
 
     Integer getCountById(Long id);
+
+    void makeOrder(User user);
 }

@@ -11,7 +11,7 @@ INSERT INTO product (id, name, price, image_url) VALUES
 INSERT INTO order_table (id, status, user_id) VALUES
     (1 , 'NEW', 1),
     (2 , 'NEW', 1),
-    (3 , 'NEW', 2);
+    (3 , 'PREPAID', 2);
 
 INSERT INTO product_in_order (id, quantity, order_id, product_id) VALUES
     (default , 10, 1, 1),

@@ -21,9 +21,16 @@ public class CartController {
 
     @GetMapping(value = "/cart")
     public ModelAndView openCart(ModelAndView model, Principal principal) {
-        model.addObject("products", productInOrderService.findAllByOrderId(
+        model.addObject("products", productInOrderService.findAllNewByUser(
                 userService.findByUsername(principal.getName())));
         model.setViewName("cart");
+        return model;
+    }
+
+    @GetMapping(value = "/cart/order")
+    public ModelAndView deleteProduct(ModelAndView model, Principal principal) {
+        productInOrderService.makeOrder(userService.findByUsername(principal.getName()));
+        model.setViewName("redirect:/cart");
         return model;
     }
 
