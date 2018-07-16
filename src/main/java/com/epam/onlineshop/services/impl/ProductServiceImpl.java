@@ -21,6 +21,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean addNewProduct(Product product) {
-        return false;
+        if (!isProductExist(product.getName())) {
+            productRepository.saveAndFlush(product);
+        }
+
+        return isProductExist(product.getName());
+    }
+
+    @Override
+    public boolean isProductExist(String name) {
+        return productRepository.existsByName(name);
     }
 }
