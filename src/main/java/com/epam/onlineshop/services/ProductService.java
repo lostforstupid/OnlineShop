@@ -17,4 +17,6 @@ public interface ProductService {
     Integer getCountById(Long id);
 
     boolean addNewProduct(Product product);
+
+    boolean isProductExist(String name);
 }
