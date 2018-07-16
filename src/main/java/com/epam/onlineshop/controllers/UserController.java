@@ -55,7 +55,7 @@ public class UserController {
         return model;
     }
 
-    @RequestMapping(value = "/user/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView editProfile(ModelAndView model, Principal principal) {
         model.addObject("userJSP", userService.findByUsername(principal.getName()));
         model.setViewName("edit_profile");

@@ -9,14 +9,14 @@
                 <div class="login-form">
                     <h3>Profile</h3>
 
-                    <form method="GET" action="${contextPath}/user/edit" class="form-signin">
+                    <form method="GET" action="${pageContext.request.contextPath}/edit" class="form-signin">
                         <h2>Username: ${userJSP.username} </h2>
                         <h2>Address: ${userJSP.address} </h2>
                         <button class="btn btn-default" type="submit">Edit</button>
                     </form>
                 </div>
                 <div class="login-form">
-                    <form method="GET" action="${contextPath}/user/edit" class="form-signin">
+                    <form method="GET" action="${pageContext.request.contextPath}/edit" class="form-signin">
                         <h3>Your orders</h3>
                         <c:choose>
                             <%--@elvariable id="products" type="java.util.List"--%>
