@@ -7,4 +7,5 @@ public interface OrderService {
 
     List<Order> getAllOrders();
     boolean addNewOrder(Order order);
+    Order findById(Long id);
 }
