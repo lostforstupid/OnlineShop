@@ -64,4 +64,11 @@ public class CartController {
         model.setViewName("redirect:/cart");
         return model;
     }
+
+    @GetMapping(value = "/cart/{id}/add")
+    public ModelAndView addProductInCart(@PathVariable("id") Long product_id, ModelAndView model, Principal principal) {
+        productInOrderService.addOrderInCart(product_id, userService.findByUsername(principal.getName()));
+        model.setViewName("redirect:/welcome");
+        return model;
+    }
 }

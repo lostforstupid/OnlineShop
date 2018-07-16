@@ -11,6 +11,8 @@ public interface ProductInOrderService {
 
     List<ProductInOrder> findAllOrderedByUser(User user);
 
+    void addOrderInCart(Long product_id, User user);
+
     void deleteById(Long id);
 
     void incrementCount(Long id);

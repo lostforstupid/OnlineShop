@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <div class="container">
     <div class="col-sm-4 col-sm-offset-1">
-        <h2>New User Signup!</h2>
+        <h2>New User Sign up!</h2>
         <form:form method="POST" action="registration" modelAttribute="userJSP" class="form-signin">
             <spring:bind path="username">
                 <div class="form-group ${status.error ? 'has-error' : ''}">

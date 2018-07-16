@@ -9,21 +9,22 @@
             <div class="product-image-wrapper">
                 <div class="single-products parent-product">
                     <div class="productinfo text-center min-size image-fix-size">
-<div class="border-for-image">
-                        <img class="border-for-img" src="${pageContext.request.contextPath}/images/products/${product.imageLink}" alt=""/>
-</div>
+                        <div class="border-for-image">
+                            <img class="border-for-img"
+                                 src="${pageContext.request.contextPath}/images/products/${product.imageLink}" alt=""/>
+                        </div>
                         <h2>$${product.price}</h2>
                         <p>${product.name}</p>
                         <div class="for-cart">
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
-                            to cart</a>
-                         </div>
+                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                                to cart</a>
+                        </div>
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
                             <h2>$${product.price}</h2>
                             <p>${product.name}</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i
+                            <a href="cart/${product.id}/add" class="btn btn-default add-to-cart"><i
                                     class="fa fa-shopping-cart"></i>Add to cart</a>
                         </div>
                     </div>
@@ -33,4 +34,5 @@
 
     </c:forEach>
 
-</div><!--features_items-->
+</div>
+<!--features_items-->

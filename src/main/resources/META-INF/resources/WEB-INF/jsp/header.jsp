@@ -29,14 +29,13 @@
                         <ul class="nav navbar-nav">
                             <c:if test="${pageContext.request.remoteUser != null}">
                                 <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="profile"><i class="fa fa-profile"></i> Profile</a></li>
+                                <li><a href="user/profile"><i class="fa fa-profile"></i> Profile</a></li>
                                 <li><a href="logout"><i class="fa fa-log-out"></i> Logout</a></li><%--
                                 <li><a onclick="document.forms['logoutForm'].submit()" class="fa fa-shopping-cart">Logout</a></li>--%>
                             </c:if>
                             <c:if test="${pageContext.request.remoteUser == null}">
                                 <li><a href="login"><i class="fa fa-lock"></i> Login</a></li>
                             </c:if>
-
                         </ul>
                     </div>
                 </div>

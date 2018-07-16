@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductInOrderRepository extends JpaRepository<ProductInOrder, Long> {
 
@@ -15,4 +16,7 @@ public interface ProductInOrderRepository extends JpaRepository<ProductInOrder, 
 
     @Query("select a from ProductInOrder as a where a.order.user = :user and a.order.status = 'PREPAID' or a.order.status = 'DELIVERED'")
     List<ProductInOrder> findAllOrderedByUser(@Param("user") User user);
+
+    @Query("select a from ProductInOrder as a where a.order.user = :user and a.order.status = 'NEW' and a.product.id = :product_id")
+    Optional<ProductInOrder> findOneOrderInCartByUserAndProductId(@Param("product_id") Long product_id, @Param("user") User user);
 }
