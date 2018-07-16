@@ -72,7 +72,7 @@
                 </c:choose>
                 </tbody>
             </table>
-            <div>
+            <div class="login-form">
                 <form method="GET" action="${contextPath}/cart/payment" class="form-signin">
                     <h4>Final price: 000 $</h4>
                     <c:choose>
@@ -80,10 +80,9 @@
                             <button class="btn btn-default" type="submit" disabled = "disabled">Order</button>
                         </c:when>
                         <c:otherwise>
-                            <button class="btn btn-default" type="submit" >Order</button>
+                            <button class="btn btn-disabled" type="submit" >Order</button>
                         </c:otherwise>
                     </c:choose>
-
                 </form>
             </div>
         </div>
