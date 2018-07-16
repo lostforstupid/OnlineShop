@@ -26,6 +26,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
 
+        if (user.getIsBlocked()) {
+            throw new RuntimeException("blocked");
+        }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(Role.USER.toString()));
         grantedAuthorities.add(new SimpleGrantedAuthority(Role.ADMIN.toString()));

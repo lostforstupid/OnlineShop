@@ -10,7 +10,7 @@
                     <div class="login-form"><!--login form-->
                         <h2>To pay for your order - click on the button and in any convenient way for you</h2>
                         <form method="POST" action="${contextPath}/cart/order" class="form-signin">
-                            <span class="success">${message}</span>
+                            <span class="message-success">${message}</span>
                             <%--@elvariable id="isPaid" type=""--%>
                             <c:choose>
                                 <c:when test="${isPaid == false}">
