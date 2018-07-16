@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,4 +24,10 @@ public class Product {
 
     @Column(name = "price", nullable = false)
     private Integer price;
+
+    @Column(name = "image_url")
+    private String imageLink;
+
+    @OneToMany(mappedBy = "product")
+    private List<ProductInOrder> productInOrderList;
 }

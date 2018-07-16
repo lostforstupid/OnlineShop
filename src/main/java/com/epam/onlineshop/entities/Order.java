@@ -6,12 +6,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "order")
+@Table(name = "order_table")
 public class Order {
 
     @Id
@@ -19,13 +20,17 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userId", nullable = false)
-    private Long userId;
-
-    @Column(name = "dateAndTime", nullable = false)
+    @Column(name = "date_and_time", nullable = false)
     private LocalDateTime dateAndTime;
 
     @Column(name = "status", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "product")
+    private List<ProductInOrder> productsInOrder;
 }

@@ -1,22 +1,40 @@
 package com.epam.onlineshop.controllers;
 
+import com.epam.onlineshop.entities.Product;
+import com.epam.onlineshop.services.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
-import com.epam.onlineshop.entities.User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.util.Map;
 
-@Controller
+@RestController
+@RequiredArgsConstructor
 public class HelloController {
+    private final ProductService productService;
+
+    //TODO Load right page depending on role
 
     @GetMapping({"/","/welcome"})
-    public String main(Map<String, Object> model) {
-        model.put("userJSP", new User());
-        model.put("message", "");
-        return "main";
+    public ModelAndView main() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject(productService.getAllProducts());
+        modelAndView.addObject("product", new Product());
+        modelAndView.setViewName("main");
+        return modelAndView;
     }
-    @GetMapping("/login")
-    public String login(Map<String, Object> model) {
-        return "login";
-    }
+
+/*    @PostMapping("/welcome")
+    public ModelAndView welcome() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject(productService.getAllProducts());
+        modelAndView.addObject("product", new Product());
+        modelAndView.setViewName("main");
+        return modelAndView;
+    }*/
 }
+

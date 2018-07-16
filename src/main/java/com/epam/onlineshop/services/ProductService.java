@@ -6,6 +6,17 @@ import java.util.List;
 
 public interface ProductService {
 
-    boolean addNewProduct(Product product);
     List<Product> getAllProducts();
+
+    void deleteById(Long id);
+
+    void incrementCount(Long id);
+
+    void decrementCount(Long id);
+
+    Integer getCountById(Long id);
+
+    boolean addNewProduct(Product product);
+
+    boolean isProductExist(String name);
 }
