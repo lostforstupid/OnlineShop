@@ -185,7 +185,10 @@ a#scrollUp i{
   text-decoration: none;
 }
 
-
+.cart_img{
+  max-width: 200px;
+  max-height: 200px;
+}
 .shop-menu ul li {
 	display:inline-block;
   padding-left: 15px;

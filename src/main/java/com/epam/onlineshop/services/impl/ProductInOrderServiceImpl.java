@@ -70,9 +70,10 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
 
     @Override
     public void makeOrder(User user) {
-        List<ProductInOrder> orders = productInOrderRepository.findAllOrderedByUser(user);
+        List<ProductInOrder> orders = productInOrderRepository.findAllNewOrderByUser(user);
         for(ProductInOrder product: orders){
             product.getOrder().setStatus(PREPAID);
         }
+        productInOrderRepository.saveAll(orders);
     }
 }
