@@ -12,7 +12,7 @@
                 <%--@elvariable id="userJSP" type=""--%>
                     <form:input type="text" path="username" class="form-control" placeholder="First name"
                                 autofocus="true"/>
-                <form:form method="POST" action="user/edit" modelAttribute="userJSP" class="form-signin">
+                <form:form method="POST" action="${pageContext.request.contextPath}/edit" modelAttribute="userJSP" class="form-signin">
                     <spring:bind path="name">
                         <div class="form-group ${status.error ? 'has-error' : ''}">
                             <form:input type="text" path="name" class="form-control" placeholder="First name"
