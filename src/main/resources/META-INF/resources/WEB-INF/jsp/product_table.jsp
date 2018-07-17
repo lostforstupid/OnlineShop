@@ -6,6 +6,7 @@
 <div class = "container">
     <table class = "table table-condensed">
         <tr>
+            <th>Image</th>
             <th>Name</th>
             <th>Price</th>
             <th>Edit</th>
@@ -13,6 +14,7 @@
         </tr>
         <c:forEach var = "product" items = "${productList}">
                 <tr>
+                    <td><img style = "height: 30px;" src = "${pageContext.request.contextPath}/images/products/${product.imageLink}"></td>
                     <td>"${product.name}"</td>
                     <td>"${product.price}"</td>
                     <editing:form action = "products/${product.id}/edit" method = "get">
