@@ -7,4 +7,5 @@ import java.util.List;
 public interface ProductInOrderService {
 
     List<ProductInOrder> getProductsFromThisOrder(Long id);
+    List<ProductInOrder> saveProductsInOrder(List<ProductInOrder> productsInOrder);
 }

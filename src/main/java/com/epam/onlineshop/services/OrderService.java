@@ -9,4 +9,5 @@ public interface OrderService {
 
     List<Order> getAllOrders();
     Order findById(Long id);
+    Order saveOrder(Order order);
 }

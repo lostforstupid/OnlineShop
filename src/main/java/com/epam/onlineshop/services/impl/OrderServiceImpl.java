@@ -25,4 +25,9 @@ public class OrderServiceImpl implements OrderService {
         Optional<Order> result = orderRepository.findById(id);
         return (result.isPresent()) ? result.get() : null;
     }
+
+    @Override
+    public Order saveOrder(Order order) {
+        return orderRepository.save(order);
+    }
 }

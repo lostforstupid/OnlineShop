@@ -6,6 +6,7 @@
 <%@ taglib prefix="formatDate" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="formatTime" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="edit" uri="http://www.springframework.org/tags/form" %>
 <%--@elvariable id="order" type=""--%>
 
 <div class="container">
@@ -21,13 +22,18 @@
         <c:forEach var = "order" items = "${orderList}">
             <table class = "orders-table">
                 <tr>
-                    <td class = "username">"${order.user.username}"</td>
-                    <td class = "date"><formatDate:formatDate value = "${order.dateAndTime}" pattern = "dd.MM.yyyy"/></td>
-                    <td class = "time"><formatTime:formatDate value = "${order.dateAndTime}" pattern = "hh:mm:ss"/></td>
-                    <td class = "status">"${order.status}"</td>
-                    <td class = "button">
-                        <button class = "btn btn-default" onclick = "show(${order.id})">Show products</button>
-                    </td>
+                    <edit:form action = "/orders/${order.id}/edit" method="get">
+                        <td class = "username">"${order.user.username}"</td>
+                        <td class = "date"><formatDate:formatDate value = "${order.dateAndTime}" pattern = "dd.MM.yyyy"/></td>
+                        <td class = "time"><formatTime:formatDate value = "${order.dateAndTime}" pattern = "hh:mm:ss"/></td>
+                        <td class = "status">"${order.status}"</td>
+                        <td class = "button">
+                            <button class = "btn btn-default" onclick = "show(${order.id})">Show products</button>
+                        </td>
+                        <td class = "button">
+                            <button class = "btn btn-default">Edit</button>
+                        </td>
+                    </edit:form>
                 </tr>
             </table>
 
