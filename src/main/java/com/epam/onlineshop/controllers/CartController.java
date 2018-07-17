@@ -68,9 +68,11 @@ public class CartController {
     }
 
     @GetMapping(value = "/cart/{id}/add")
-    public ModelAndView addProductInCart(@PathVariable("id") Long product_id, ModelAndView model, Principal principal) {
-        productInOrderService.addOrderInCart(product_id, userService.findByUsername(principal.getName()));
+    public ModelAndView addProductInCart(@PathVariable("id") Long productId, ModelAndView model, Principal principal) {
+        String username = principal.getName();
+        User currentUser = userService.findByUsername(username);
+        productInOrderService.addOrderInCart(productId, currentUser);
         model.setViewName("redirect:/welcome");
         return model;
-    }
+}
 }

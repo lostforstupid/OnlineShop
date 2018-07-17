@@ -1,6 +1,7 @@
 package com.epam.onlineshop.services.impl;
 
 import com.epam.onlineshop.entities.Order;
+import com.epam.onlineshop.entities.Product;
 import com.epam.onlineshop.entities.ProductInOrder;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.repository.OrderRepository;
@@ -44,11 +45,13 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
             productInOrder.setQuantity(productInOrder.getQuantity() + 1);
             productInOrderRepository.save(productInOrder);
         } else {
-            productInOrderRepository.save(ProductInOrder.builder().order(orderRepository.save(Order.builder()
+            Product productFromCatalog = productRepository.getOne(product_id);
+            Order orderInCart = orderRepository.save(Order.builder()
                     .status(NEW)
                     .user(user)
-                    .build()))
-                    .product(productRepository.getOne(product_id))
+                    .build());
+            productInOrderRepository.save(ProductInOrder.builder().order(orderInCart)
+                    .product(productFromCatalog)
                     .quantity(1)
                     .build());
         }

@@ -44,10 +44,9 @@
                                 </td>
                                 <td class="cart_quantity">
                                     <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href="handlerClick(${item.quantity})"> + </a>
+                                        <a class="cart_quantity_up" href="/cart/${item.id}/inc"> + </a>
                                         <input class="cart_quantity_input" type="text" name="quantity"
-                                               value=${item.quantity} id="productCountText"
-                                               autocomplete="off" size="2" readonly="readonly">
+                                               value=${item.quantity} size="2" readonly="readonly">
                                         <a href="/cart/${item.id}/decrement" class="cart_quantity_down"> - </a>
                                     </div>
                                 </td>

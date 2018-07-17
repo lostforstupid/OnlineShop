@@ -1,5 +1,6 @@
 package com.epam.onlineshop.controllers;
 
+import com.epam.onlineshop.entities.ProductInOrder;
 import com.epam.onlineshop.services.ProductInOrderService;
 import com.epam.onlineshop.services.security.SecurityService;
 import com.epam.onlineshop.validator.UserValidator;
@@ -17,15 +18,14 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
     private final SecurityService securityService;
-
     private final UserValidator userValidator;
     private final ProductInOrderService productInOrderService;
 
@@ -36,10 +36,10 @@ public class UserController {
         return model;
     }
 
-    @GetMapping(value="/logout")
+    @GetMapping(value = "/logout")
     public ModelAndView openRegistrationForm(ModelAndView model, HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         model.setViewName("redirect:/login?logout");
@@ -48,16 +48,20 @@ public class UserController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ModelAndView openProfile(ModelAndView model, Principal principal) {
-        model.addObject("userJSP", userService.findByUsername(principal.getName()));
-        model.addObject("products", productInOrderService.findAllOrderedByUser(
-                userService.findByUsername(principal.getName())));
+        String username = principal.getName();
+        User currentUser = userService.findByUsername(username);
+        model.addObject("userJSP", currentUser);
+        List<ProductInOrder> allOrdersByUser = productInOrderService.findAllOrderedByUser(currentUser);
+        model.addObject("products", allOrdersByUser);
         model.setViewName("profile");
         return model;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView editProfile(ModelAndView model, Principal principal) {
-        model.addObject("userJSP", userService.findByUsername(principal.getName()));
+        String username = principal.getName();
+        User currentUser = userService.findByUsername(username);
+        model.addObject("userJSP", currentUser);
         model.setViewName("edit_profile");
         return model;
     }
