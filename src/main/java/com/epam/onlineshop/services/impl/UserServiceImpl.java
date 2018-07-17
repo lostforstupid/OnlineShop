@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(User.builder()
                     .role(Role.USER)
                     .username(username)
+                    .firstName("")
                     .isBlocked(false)
                     .password(bCryptPasswordEncoder.encode(user.getPassword()))
                     .address(user.getAddress())
@@ -38,6 +39,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        User updatedUser = userRepository.findByUsername(user.getUsername());
+        updatedUser.setAddress(user.getAddress());
+        updatedUser.setFirstName(user.getFirstName());
+        userRepository.save(updatedUser);
     }
 
     @Override

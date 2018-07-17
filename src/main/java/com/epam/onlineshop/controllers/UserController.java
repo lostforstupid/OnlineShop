@@ -57,12 +57,20 @@ public class UserController {
         return model;
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView editProfile(ModelAndView model, Principal principal) {
+    @GetMapping(value = "/edit")
+    public ModelAndView openEditProfileForm(ModelAndView model, Principal principal) {
         String username = principal.getName();
         User currentUser = userService.findByUsername(username);
         model.addObject("userJSP", currentUser);
         model.setViewName("edit_profile");
+        return model;
+    }
+
+    @PostMapping(value = "/edit")
+    public ModelAndView editProfile(@ModelAttribute("userJSP") User user, ModelAndView model, Principal principal) {
+        user.setUsername(principal.getName());
+        userService.updateUser(user);
+        model.setViewName("redirect:/profile");
         return model;
     }
 

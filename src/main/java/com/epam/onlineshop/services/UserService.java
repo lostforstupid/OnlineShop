@@ -10,4 +10,6 @@ public interface UserService {
     Role getRoleByUsername(String username);
 
     User findByUsername(String username);
+
+    void updateUser(User user);
 }

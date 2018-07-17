@@ -8,9 +8,8 @@
             <div class="col-sm-4 col-sm-offset-1">
                 <div class="login-form">
                     <h3>Profile</h3>
-
                     <form method="GET" action="${pageContext.request.contextPath}/edit" class="form-signin">
-                        <h2>Username: ${userJSP.username} </h2>
+                        <h2>First name: ${userJSP.firstName} </h2>
                         <h2>Address: ${userJSP.address} </h2>
                         <button class="btn btn-default" type="submit">Edit</button>
                     </form>
