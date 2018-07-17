@@ -77,14 +77,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean isProductExist(String name) {
-
-    @Override
     public Product getProductById(Long id) {
         return productRepository.findById(id).get();
     }
 
-    boolean isProductExist(String name) {
+    public boolean isProductExist(String name) {
         return productRepository.existsByName(name);
     }
 

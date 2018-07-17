@@ -49,10 +49,12 @@ public class ProductController {
             //product.setCount(100); //TEMPORARY
             productService.addNewProduct(product);
             catalog.addObject(productService.getAllProducts());
-        }else{
+        } else {
             catalog.addObject(productService.getAllProducts());
         }
         return catalog;
+    }
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/products")
     public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {

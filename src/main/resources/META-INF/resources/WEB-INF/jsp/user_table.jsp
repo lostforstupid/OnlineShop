@@ -1,16 +1,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="blocking" uri="http://www.springframework.org/tags/form" %>
 
-<div class="table-responsive cart_info">
+<div class="container">
     <table class = "table table-condensed">
-        <tr class = "cart_menu">
+        <tr>
             <th>Username</th>
             <th>Role</th>
             <th>Address</th>
             <th>Block</th>
         </tr>
         <c:forEach var = "user" items = "${userList}">
-            <tr class = "cart_product">
+            <tr>
                 <td>"${user.username}"</td>
                 <td>"${user.role}"</td>
                 <td>"${user.address}"</td>
