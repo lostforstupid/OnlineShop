@@ -2,10 +2,7 @@ package com.epam.onlineshop.entities;
 
 import javax.persistence.*;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -39,5 +36,6 @@ public class User {
     private String address;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<Order> orders;
 }

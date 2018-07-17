@@ -6,9 +6,16 @@ import lombok.RequiredArgsConstructor;
 import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.services.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,9 +28,33 @@ public class UserController {
     private final UserValidator userValidator;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public ModelAndView registration(ModelAndView model) {
+    public ModelAndView openRegistrationForm(ModelAndView model) {
         model.addObject("userJSP", new User());
         model.setViewName("registration");
+        return model;
+    }
+
+    @GetMapping(value="/logout")
+    public ModelAndView openRegistrationForm(ModelAndView model, HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        model.setViewName("redirect:/login?logout");
+        return model;
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public ModelAndView openProfile(ModelAndView model, Principal principal) {
+        model.addObject("userJSP", userService.findByUsername(principal.getName()));
+        model.setViewName("profile");
+        return model;
+    }
+
+    @RequestMapping(value = "/user/edit", method = RequestMethod.GET)
+    public ModelAndView editProfile(ModelAndView model, Principal principal) {
+        model.addObject("userJSP", userService.findByUsername(principal.getName()));
+        model.setViewName("edit_profile");
         return model;
     }
 
@@ -33,13 +64,11 @@ public class UserController {
 
         if (bindingResult.hasErrors()) {
             model.setViewName("registration");
-        }else {
+        } else {
             userService.addUser(user);
             securityService.autologin(user.getUsername(), user.getPassword());
             model.setViewName("redirect:/login");
         }
-
-        //model.setViewName("redirect:/login");
         return model;
     }
 

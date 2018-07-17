@@ -3,6 +3,7 @@ package com.epam.onlineshop.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,6 +29,7 @@ public class Product {
     @Column(name = "image_url")
     private String imageLink;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "product")
     private List<ProductInOrder> productInOrderList;
 }
