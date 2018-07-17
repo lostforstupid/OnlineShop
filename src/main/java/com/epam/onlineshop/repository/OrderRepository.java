@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("select newOrder from Order as newOrder " +
             "where newOrder.user = :user and newOrder.status = 'NEW'")
-    Order getOneNewOrderByUser(@Param("user") User user)
+    Order getOneNewOrderByUser(@Param("user") User user);
 
     Optional<Order> findById(Long id);
 }

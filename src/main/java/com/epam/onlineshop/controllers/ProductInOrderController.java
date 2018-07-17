@@ -17,23 +17,9 @@ import java.util.List;
 public class ProductInOrderController {
 
     private final ProductInOrderService productInOrderService;
-    private final ProductInOrderRepository productInOrderRepository;
 
     @PostMapping("/products_in_order/{orderId}/save")
     public boolean saveProductsInOrder(@PathVariable Long orderId, @ModelAttribute("productsInOrder") List<ProductInOrder> productsInOrder) {
         return productInOrderService.saveProductsInOrder(productsInOrder) != null;
-    }
-
-    @GetMapping("/temp") //temporary
-    public void temporary() {
-        List<ProductInOrder> list = productInOrderRepository.findByOrderId(1L);
-        for (ProductInOrder productInOrder : list) {
-            System.out.println(productInOrder.getProduct().getName());
-        }
-
-        List<ProductInOrder> list2 = productInOrderRepository.findByOrderId(2L);
-        for (ProductInOrder productInOrder : list2) {
-            System.out.println(productInOrder.getProduct().getName());
-        }
     }
 }

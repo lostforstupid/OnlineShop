@@ -7,39 +7,41 @@
 <%@ taglib prefix="formatTime" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="edit" uri="http://www.springframework.org/tags/form" %>
-<%--@elvariable id="order" type=""--%>
 
 <div class="container">
+    <h3 class = "navbar-header">Orders</h3>
     <table class = "table table-condensed orders-table">
         <tr>
             <th>User</th>
-            <th>Date</th>
-            <th>Time</th>
             <th>Status</th>
-            <th>Products</th>
+            <th>Edit</th>
         </tr>
     </table>
-        <c:forEach var = "order" items = "${orderList}">
-            <table class = "orders-table">
-                <tr>
-                    <%--<edit:form action = "/orders/${order.id}/edit" method="get"--%>
-                        <td class = "username">"${order.user.username}"</td>
-                        <td class = "date"><formatDate:formatDate value = "${order.dateAndTime}" pattern = "dd.MM.yyyy"/></td>
-                        <td class = "time"><formatTime:formatDate value = "${order.dateAndTime}" pattern = "hh:mm:ss"/></td>
-                        <td class = "status">"${order.status}"</td>
-                        <td class = "button">
-                            <button class = "btn btn-default" onclick = "show(${order.id})">Show products</button>
-                        </td>
-                        <td class = "button">
-                            <button class = "btn btn-default">Edit</button>
-                        </td>
-                    <%--</edit:form>--%>
-                </tr>
-            </table>
+    <div class = "login-form">
+        <c:forEach var = "order" items = "${orders}">
+            <editing:form action = "/orders/${order.id}/edit" method="get">
+                <table class = "table table-condensed orders-table">
+                    <tr>
+                        <%--<edit:form action = "/orders/${order.id}/edit" method="get"--%>
+                            <td class = "username">"${order.user.username}"</td>
+                            <td class = "status">"${order.status}"</td>
+                            <td class = "button">
+                                <button class = "btn btn-default" type = "submit">Edit</button>
+                                <%--<button class = "btn btn-default" onclick = "show(${order.id})">Show products</button>--%>
 
+                            </td>
+                        <%--</edit:form>--%>
+                    </tr>
+                </table>
+            </editing:form>
+        </c:forEach>
+    </div>
+
+
+<%--
             <div id = "div${order.id}" style = "display: none;">
 
-                <table class = "products">
+                <table class = "table table-condensed products">
                     <tr>
                         <th>Product</th>
                         <th>Quantity</th>
@@ -53,6 +55,7 @@
                         </c:forEach>
                 </table>
             </div>
+            --%>
 
-        </c:forEach>
+        <%--</c:forEach>--%>
 </div>

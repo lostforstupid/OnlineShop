@@ -4,11 +4,14 @@ import com.epam.onlineshop.entities.Order;
 import com.epam.onlineshop.entities.Product;
 import com.epam.onlineshop.entities.ProductInOrder;
 import com.epam.onlineshop.entities.User;
+import com.epam.onlineshop.repository.OrderRepository;
 import com.epam.onlineshop.repository.ProductInOrderRepository;
+import com.epam.onlineshop.repository.ProductRepository;
 import com.epam.onlineshop.services.ProductInOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 

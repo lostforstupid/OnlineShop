@@ -14,7 +14,7 @@
             <div class="login-form">
                 <div class="login-form">
                     <h2>Edit product</h2>
-                        <editproduct:form action = "/products/${product.id}/save" method = "post" enctype="multipart/form-data" modelAttribute = "product">
+                        <editproduct:form action = "/products/${product.id}/save" method = "post" enctype="multipart/form-data" modelAttribute = "product" class="form_signin form_register" id="jform" name = "form_register">
                         <input type="file" class="btn btn-default" name="file" id="upload_hidden" style="position: absolute; display: block; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;"
                            onchange="document.getElementById('upload_visible').value = this.value;" >
                         <input type="text" readonly="1" id="upload_visible"

@@ -9,16 +9,12 @@ INSERT INTO product (id, name, price, image_url) VALUES
     (3, 'Fun tea', 38,'girl3.jpg'),
     (4,'Door', 1400, 'gallery1.jpg');
 
-INSERT INTO order_table (id, date_and_time, status, user_id) VALUES
-    (1, '2017-11-15 15:30:14.332', 'NEW', 1),
-    (2, '2017-12-15 17:30:18.332', 'NEW', 2);
+INSERT INTO order_table (id, status, user_id) VALUES
+    (1, 'NEW', 1),
+    (2, 'NEW', 2);
 
 INSERT INTO product_in_order (id, quantity, order_id, product_id) VALUES
-    (1, 6, 2, 4),
-    (2, 10, 1, 3);
-
-INSERT INTO product_in_order (id, quantity, order_id, product_id) VALUES
-    (default , 10, 1, 1),
-    (default , 10, 1, 2),
-    (default , 10, 3, 3),
-    (default , 1, 4, 2);
+    (default , 9, 1, 2),
+    (default , 6, 1, 3),
+    (default , 3, 1, 1),
+    (default , 1, 2, 4);

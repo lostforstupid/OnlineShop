@@ -33,15 +33,6 @@ public class HelloController {
         return modelAndView;
     }
 
-/*    @PostMapping("/welcome")
-    public ModelAndView welcome() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject(productService.getAllProducts());
-        modelAndView.addObject("product", new Product());
-        modelAndView.setViewName("main");
-        return modelAndView;
-    }*/
-
     @GetMapping("/deny_access")
     public ModelAndView denyAccess() {
         return new ModelAndView("access_denied");

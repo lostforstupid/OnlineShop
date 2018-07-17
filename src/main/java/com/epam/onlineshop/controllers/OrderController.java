@@ -1,7 +1,6 @@
 package com.epam.onlineshop.controllers;
 
 import com.epam.onlineshop.entities.Order;
-import com.epam.onlineshop.entities.ProductInOrder;
 import com.epam.onlineshop.services.OrderService;
 import com.epam.onlineshop.services.ProductInOrderService;
 import lombok.RequiredArgsConstructor;
@@ -23,15 +22,7 @@ public class OrderController {
     @GetMapping("/orders")
     public ModelAndView getAllProducts(ModelAndView model) {
         model.setViewName("main_admin_orders");
-        model.addObject(orderService.getAllOrders());
-
-        for (Order order : orderService.getAllOrders()) {
-            System.out.println("id: " + order.getId());
-            for (ProductInOrder productInOrder : order.getProductsInOrder()) {
-                System.out.println(productInOrder.getProduct().getName());
-            }
-        }
-
+        model.addObject("orders", orderService.getAllOrders());
         return model;
     }
 
@@ -49,14 +40,13 @@ public class OrderController {
         model.setViewName("edit_order");
         Order order = orderService.findById(orderId);
         model.addObject("order", order);
-        model.addObject("productsInOrder", productInOrderService.getProductsFromThisOrder(orderId));
         System.out.println(productInOrderService.getProductsFromThisOrder(orderId));
         return model;
     }
 
-    @PostMapping("/orders/save")
-    public ModelAndView saveOrder(ModelAndView model, @ModelAttribute("order") Order order) {
+    @PostMapping("/orders/{id}/save")
+    public ModelAndView saveOrder(@PathVariable Long id, @ModelAttribute("order") Order order) {
         orderService.saveOrder(order);
-        return model;
+        return new ModelAndView("redirect:/orders");
     }
 }

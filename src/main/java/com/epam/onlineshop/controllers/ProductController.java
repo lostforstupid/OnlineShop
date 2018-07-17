@@ -9,7 +9,6 @@ import com.epam.onlineshop.utils.ImageWriter;
 import com.epam.onlineshop.validator.ProductValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.BindingResult;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -72,6 +71,13 @@ public class ProductController {
         //product.setCount(100); //TEMPORARY
         productService.addNewProduct(product);
         model.addObject(productService.getAllProducts());
+        return model;
+    }
+
+    @GetMapping("/products/add")
+    public ModelAndView getProductForm(ModelAndView model) {
+        model.addObject("product", new Product());
+        model.setViewName("add_product");
         return model;
     }
 

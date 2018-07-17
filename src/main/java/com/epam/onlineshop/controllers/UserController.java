@@ -12,10 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.validation.BindingResult;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -23,7 +20,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -115,18 +111,5 @@ public class UserController {
         }
 
         return new ModelAndView("redirect:/users");
-    }
-
-    String getViewNameByRole(Role userRoleEnum) {
-        switch (userRoleEnum) {
-            case USER:
-                return "main";
-            case ADMIN:
-                return "main_admin";
-            case ANONYMOUS:
-                return "main";
-            default:
-                return "main";
-        }
     }
 }

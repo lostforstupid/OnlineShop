@@ -2,7 +2,9 @@
 <%@ taglib prefix="blocking" uri="http://www.springframework.org/tags/form" %>
 
 <div class="container">
-    <table class = "table table-condensed">
+    <div class = "login-form">
+    <h3 class = "navbar-header">Users</h3>
+    <table class = "table table-condensed admin-table">
         <tr>
             <th>Username</th>
             <th>Role</th>
@@ -31,8 +33,10 @@
                         </c:if>
 
                     </blocking:form>
+
                 </td>
             </tr>
         </c:forEach>
     </table>
+        </div>
 </div>

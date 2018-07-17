@@ -38,17 +38,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers(  "/registration", "/images/**").permitAll()
-                    .antMatchers("/admin", "/catalog", "/h2/**").hasRole("ADMIN").anyRequest()
-                    .authenticated()
-                    .antMatchers("/users/**", "/orders/**", "/products/**", "/h2/**").hasRole("ADMIN")
-                    .anyRequest()
+                    .antMatchers("/users/**", "/orders/**", "/products/**", "/catalog", "/h2/**").hasRole("ADMIN").anyRequest()
                     .authenticated()
                     .and()
                 .formLogin()
                     .loginPage("/login")
                     .defaultSuccessUrl("/welcome", true)
-                    .permitAll();
-        http.exceptionHandling().accessDeniedPage("/403");
+                    .permitAll()
+                    .and()
+                .logout()
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/deny_access");
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }

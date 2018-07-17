@@ -1,23 +1,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="users" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="catalog" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="orders" uri="http://www.springframework.org/tags/form" %>
+
 <div class="col-sm-3">
+    <br>
+    <br>
+    <br>
     <div class="left-sidebar">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title"><a href = "<c:url value="/users"/>" >Users</a></h4>
-            </div>
-        </div>
+                    <users:form action = "/users" method="get">
+                        <button class="orange admin-menu-button">Users</button>
+                    </users:form>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title"><a href="<c:url value="/catalog"/>">Products</a></h4>
-            </div>
-        </div>
+                    <catalog:form action = "/catalog" method="get">
+                        <button class="orange admin-menu-button">Products</button>
+                    </catalog:form>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title"><a href="<c:url value="/orders"/>">Orders</a></h4>
-            </div>
-        </div>
+                    <orders:form action = "/orders" method="get">
+                        <button class="orange admin-menu-button">Orders</button>
+                    </orders:form>
     </div>
 </div>

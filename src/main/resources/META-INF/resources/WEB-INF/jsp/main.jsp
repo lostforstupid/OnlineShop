@@ -2,9 +2,6 @@
 
 <jsp:include page="init.jsp"/>
 <jsp:include page="header.jsp"/>
-<c:if test="${role == ADMIN}">
-    <jsp:include page="add_product.jsp"></jsp:include>
-</c:if>
 <section>
     <div class="container">
         <div class="row">
