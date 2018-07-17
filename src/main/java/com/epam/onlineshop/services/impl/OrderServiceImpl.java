@@ -24,12 +24,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional
     @Override
-    public boolean addNewOrder(Order order) {
-        if (orderRepository.existsById(order.getId())) {
-            orderRepository.save(order);
-        }
-
-        return orderRepository.existsById(order.getId());
+    public Order addOrder(Order order) {
+        return orderRepository.save(order);
     }
 
     @Override

@@ -14,7 +14,7 @@ public class ProductInOrderController {
 
     private final ProductInOrderRepository productInOrderRepository;
 
-    @GetMapping("/temp")
+    @GetMapping("/temp") //temporary
     public void temporary() {
         List<ProductInOrder> list = productInOrderRepository.findByOrderId(1L);
         for (ProductInOrder productInOrder : list) {

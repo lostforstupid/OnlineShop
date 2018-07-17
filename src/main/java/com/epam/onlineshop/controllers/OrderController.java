@@ -36,7 +36,7 @@ public class OrderController {
         model.setViewName("show_order");
         Order order = orderService.findById(orderId);
         model.addObject("order", order);
-        model.addObject("productsInOrder", productInOrderService.getProductsFromThisOrder(order.getId()));
+        model.addObject("productsInOrder", productInOrderService.getProductsFromThisOrder(orderId));
         return model;
     }
 

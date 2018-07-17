@@ -22,6 +22,7 @@ import java.util.Date;
 public class ProductController {
 
     private final ProductService productService;
+
     private final ProductValidator productValidator;
 
     private final UserService userService;
