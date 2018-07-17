@@ -2,8 +2,6 @@ INSERT INTO customer (id, role, username, password, is_blocked, address) VALUES
     (1, 'ADMIN', 'admin', '$2a$10$OUwX3BY0RWAA71PjsLHvwu6CwnqKsqQMVBV/FNywy1a0xMvkg0NAS', 'false', 'Address'),
     (2, 'USER', 'user', '$2a$10$OUwX3BY0RWAA71PjsLHvwu6CwnqKsqQMVBV/FNywy1a0xMvkg0NAS', 'false', 'Address');
 
-INSERT INTO user_roles (id, user_id, role) VALUES (1, 1, 'ROLE_ADMIN');
-INSERT INTO user_roles (id, user_id, role) VALUES (2, 2, 'ROLE_USER');
 INSERT INTO product (id, name, price, image_url) VALUES
     (0, 'Noses (20 per pack)', 7500, 'girl1.jpg'),
     (1, 'Browser', 400,'girl2.jpg'),
