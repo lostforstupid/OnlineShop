@@ -7,8 +7,6 @@
 
 <div class="container">
     <div class="col-sm-4 col-sm-offset-1">
-        <h2>New User Sign up!</h2>
-        <form:form method="POST" action="registration" modelAttribute="userJSP" class="form-signin">
         <h2>New User Signup!</h2>
 
 

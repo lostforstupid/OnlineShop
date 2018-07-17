@@ -1,7 +1,13 @@
 package com.epam.onlineshop.repository;
 
 import com.epam.onlineshop.entities.Order;
+import com.epam.onlineshop.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
+    @Query("select newOrder from Order as newOrder " +
+            "where newOrder.user = :user and newOrder.status = 'NEW'")
+    Order getOneNewOrderByUser(@Param("user") User user);
 }

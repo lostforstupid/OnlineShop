@@ -46,14 +46,17 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
             productInOrderRepository.save(productInOrder);
         } else {
             Product productFromCatalog = productRepository.getOne(product_id);
-            Order orderInCart = orderRepository.save(Order.builder()
-                    .status(NEW)
-                    .user(user)
-                    .build());
+            Order orderInCart = orderRepository.getOneNewOrderByUser(user);
+            if (orderInCart == null){
+                orderInCart = orderRepository.save(Order.builder()
+                                                        .status(NEW)
+                                                        .user(user)
+                                                        .build());
+            }
             productInOrderRepository.save(ProductInOrder.builder().order(orderInCart)
-                    .product(productFromCatalog)
-                    .quantity(1)
-                    .build());
+                                                        .product(productFromCatalog)
+                                                        .quantity(1)
+                                                        .build());
         }
     }
 
