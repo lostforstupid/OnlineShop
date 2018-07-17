@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="/welcome"><img src="${pageContext.request.contextPath}/images/content/logo.png" /></a>
+                        <a href="/welcome"><img src="${pageContext.request.contextPath}/images/content/logo.png"/></a>
                     </div>
                     <div class="btn-group pull-right">
                         <div class="btn-group">
@@ -23,15 +23,11 @@
                 </div>
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
-                        <%--<form id="logoutForm" method="GET" action="logout">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        </form>--%>
                         <ul class="nav navbar-nav">
                             <c:if test="${pageContext.request.remoteUser != null}">
                                 <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                 <li><a href="profile"><i class="fa fa-profile"></i> Profile</a></li>
-                                <li><a href="logout"><i class="fa fa-log-out"></i> Logout</a></li><%--
-                                <li><a onclick="document.forms['logoutForm'].submit()" class="fa fa-shopping-cart">Logout</a></li>--%>
+                                <li><a href="logout"><i class="fa fa-log-out"></i> Logout</a></li>
                             </c:if>
                             <c:if test="${pageContext.request.remoteUser == null}">
                                 <li><a href="login"><i class="fa fa-lock"></i> Login</a></li>
@@ -49,7 +45,8 @@
             <div class="row">
                 <div class="col-sm-9">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -61,4 +58,5 @@
             </div>
         </div>
     </div><!--/header-bottom-->
-</header><!--/header-->
+</header>
+<!--/header-->

@@ -45,7 +45,7 @@ public class CartController {
 
     @RequestMapping(value = "/cart/{id}/decrement", method = RequestMethod.GET)
     public ModelAndView decrementCount(@PathVariable("id") Long id, ModelAndView model) {
-        if (productInOrderService.getCountById(id) > 1) {
+        if (productInOrderService.getQuantityById(id) > 1) {
             productInOrderService.decrementCount(id);
         } else {
             productInOrderService.deleteById(id);

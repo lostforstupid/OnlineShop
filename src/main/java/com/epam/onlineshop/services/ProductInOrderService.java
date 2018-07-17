@@ -15,5 +15,5 @@ public interface ProductInOrderService {
 
     void decrementCount(Long id);
 
-    Integer getCountById(Long id);
+    Integer getQuantityById(Long id);
 }
