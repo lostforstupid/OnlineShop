@@ -23,15 +23,11 @@
                 </div>
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
-                        <%--<form id="logoutForm" method="GET" action="logout">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        </form>--%>
                         <ul class="nav navbar-nav">
                             <c:if test="${pageContext.request.remoteUser != null}">
-                                <li><a href="${pageContext.request.contextPath}/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="${pageContext.request.contextPath}/profile"><i class="fa fa-profile"></i> Profile</a></li>
-                                <li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-log-out"></i> Logout</a></li><%--
-                                <li><a onclick="document.forms['logoutForm'].submit()" class="fa fa-shopping-cart">Logout</a></li>--%>
+                                <li><a href="cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                <li><a href="profile"><i class="fa fa-profile"></i> Profile</a></li>
+                                <li><a href="logout"><i class="fa fa-log-out"></i> Logout</a></li>
                             </c:if>
                             <c:if test="${pageContext.request.remoteUser == null}">
                                 <li><a href="login"><i class="fa fa-lock"></i> Login</a></li>

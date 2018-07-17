@@ -41,5 +41,6 @@ public class User {
     private String address;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<Order> orders;
 }

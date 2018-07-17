@@ -66,8 +66,8 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
             ProductInOrder product = optionalProduct.get();
             product.setQuantity(product.getQuantity() + 1);
             productInOrderRepository.save(product);
-        } else {
-            System.out.println("Product didn't find!");
+        } else{
+            System.out.println("Product didn't find!"); // Waiting for log4j
         }
 
     }
@@ -79,19 +79,18 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
             ProductInOrder product = optionalProduct.get();
             product.setQuantity(product.getQuantity() - 1);
             productInOrderRepository.save(product);
-        } else {
-            System.out.println("Product didn't find!");
+        } else{
+            System.out.println("Product didn't find!"); // Waiting for log4j
         }
     }
 
     @Override
-    public Integer getCountById(Long id) {
+    public Integer getQuantityById(Long id) {
         Optional<ProductInOrder> optionalProduct = productInOrderRepository.findById(id);
         if (optionalProduct.isPresent()) {
             return optionalProduct.get().getQuantity();
-        } else {
-            System.out.println("Product didn't find!");
-            return -1; // or null?
+        } else{
+            return 0;
         }
     }
 

@@ -16,9 +16,16 @@
                         <h2>$${product.price}</h2>
                         <p>${product.name}</p>
                         <div class="for-cart">
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
-                                to cart</a>
-                        </div>
+<%--=========
+                <div class="single-products">
+                    <div class="productinfo text-center">
+                        <img src="${pageContext.request.contextPath}/images/products/${item.imageLink}" alt=""/>
+                        <h2>$${item.price}</h2>
+                        <p>${item.name}</p>
+>>>>>>>>> Temporary merge branch 2--%>
+                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                            to cart</a>
+                         </div>
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
