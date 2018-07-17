@@ -14,11 +14,6 @@ import java.util.List;
 @Table(name = "customer")
 public class User {
 
-    @Override
-    public String toString() {
-        return "";
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
