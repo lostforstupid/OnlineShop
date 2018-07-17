@@ -3,6 +3,7 @@ package com.epam.onlineshop.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,8 +13,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Table(name = "order_table")
-public class Order1 {
+public class Order {
 
     @Id
     @Column(name = "id", nullable = false, unique = true)
@@ -21,16 +23,18 @@ public class Order1 {
     private Long id;
 
 /*    @Column(name = "date_and_time", nullable = false)
-    private LocalDateTime dateAndTime;*/
+    private LocalDateTime dateAndTime;*/ // We needn't this yet
 
     @Column(name = "status", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Status status;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "product")
     private List<ProductInOrder> productsInOrder;
 }

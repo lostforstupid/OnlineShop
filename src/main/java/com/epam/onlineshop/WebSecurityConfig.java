@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers(  "/registration", "/images/**").permitAll()
-                    .antMatchers("/admin", "/h2_console/**").hasRole("ADMIN").anyRequest()
+                    .antMatchers("/admin", "/catalog", "/h2/**").hasRole("ADMIN").anyRequest()
                     .authenticated()
                     .and()
                 .formLogin()
@@ -47,9 +47,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().accessDeniedPage("/403");
         http.csrf().disable();
         http.headers().frameOptions().disable();
-                /*    .and()
-                .logout()
-                    .permitAll();*/
     }
 
     @Autowired

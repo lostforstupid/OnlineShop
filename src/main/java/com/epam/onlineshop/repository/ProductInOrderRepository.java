@@ -10,6 +10,9 @@ import java.util.List;
 
 public interface ProductInOrderRepository extends JpaRepository<ProductInOrder, Long> {
 
- @Query("select a from ProductInOrder as a where a.order.user = :user and a.order.status = 'NEW'")
+ @Query("select orderInCart " +
+         "from ProductInOrder as orderInCart " +
+         "where orderInCart.order.user = :user " +
+         "and orderInCart.order.status = 'NEW'")
     List<ProductInOrder> findAllNewOrderByUser(@Param("user") User user);
 }

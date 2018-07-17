@@ -10,16 +10,18 @@
             <div class="login-form"><!--/form for adding a product-->
                 <h2>Add product</h2>
                 <!--<form action="catalog">-->
-                    <addproduct:form action = "catalog" method = "post" enctype="multipart/form-data" modelAttribute = "product">
+                    <addproduct:form action = "catalog" method = "post" enctype="multipart/form-data" modelAttribute = "product" class="form_signin form_register" id="jform" name = "form_register">
                         <input type="file" class="btn btn-default" name="file" id="upload_hidden" style="position: absolute; display: block; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;"
                                onchange="document.getElementById('upload_visible').value = this.value;" >
                         <input type="text" readonly="1" id="upload_visible"
                                onclick="document.getElementById('upload_hidden').click();" placeholder="Click here to upload image" />
                     <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <addproduct:input type = "text" path = "name" placeholder="Product name"/>
+                        <addproduct:input type = "text" path = "name" name="product_name" id="product_name" minLength="2" maxlength="32" class="form-control product_form_margin" placeholder="Product name" required="true" oninput="validate()"/>
+                        <span id="productNameInfo" class="form_hint" style="background: #46b8da">Enter product name</span>
                         <form:errors path="name"/>
                         <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <addproduct:input class = "product-price" path = "price" placeholder="Price"/>
+                        <addproduct:input type="number" class = "product-price product_form_margin" path = "price" name="product_price" id="product_price" min="1" max="9999999" placeholder="Price" required="true" oninput="validate()"/>
+                            <span id="productPriceInfo" class="form_hint" style="background: #46b8da">Enter product price</span>
                             <form:errors path="price"/>
                         <button type="submit" class="btn btn-default">Add product</button>
                     </addproduct:form>
@@ -32,3 +34,66 @@
 <br>
 <br>
 <br>
+
+        <script>
+var jVal;
+            function validate(){
+                jVal = {
+                    'productName' : function() {
+                        $('body').append('');
+                        var productNameInfo = $('#productNameInfo');
+                        var ele = $('#product_name');
+                        if((ele.val().length < 2)||(ele.val().length > 32)) {
+                            jVal.errorProductName = true;
+                            productNameInfo.removeClass('hint_green').addClass('hint_red').html('must be 2 - 32 characters').show();
+                        } else {
+                            jVal.errorProductName = false;
+                            productNameInfo.removeClass('hint_red').addClass('hint_green').html('correct').show();
+                        }
+                    },
+                    'productPrice' : function() {
+                        $('body').append('<div id="productPriceInfo" class="info"></div>');
+                        var productPriceInfo = $('#productPriceInfo');
+                        var ele = $('#product_price');
+                        if(!((ele.val().length <= 7)&&(ele.val().length > 0)&&(parseInt(ele.val())>=1))) {
+                            jVal.errorPrice = true;
+                            productPriceInfo.removeClass('hint_green').addClass('hint_red').html('must be 1 - 7 positive digits').show();
+                        } else {
+                            jVal.errorPrice = false;
+                            productPriceInfo.removeClass('hint_red').addClass('hint_green').html('correct').show();
+                        }
+                    },
+                    'sendIt' : function (){
+                        if((!jVal.errorProductName)&&(!jVal.errorPrice)) {
+                            $('#jform').submit();
+                        }
+                    }
+                };
+// ====================================================== //
+                $('#send').click(function (){
+                    var obj = $.browser.webkit ? $('body') : $('html');
+                    obj.animate({ scrollTop: $('#jform').offset().top }, 750, function (){
+                        jVal.errorProductName = true;
+                        jVal.errorPrice = true;
+                        jVal.productName();
+                        jVal.productPrice();
+                        jVal.sendIt();
+                    });
+                    return false;
+                });
+
+
+                $('#product_name').change(jVal.productName);
+                $('#product_price').change(jVal.productPrice);
+            };
+
+            document.getElementById("product_name").addEventListener('keyup', validateName);
+            document.getElementById("product_price").addEventListener('keyup', validatePrice);
+            function validateName() {
+                jVal.productName();
+            }
+            function validatePrice() {
+                jVal.productPrice();
+            }
+
+        </script>
