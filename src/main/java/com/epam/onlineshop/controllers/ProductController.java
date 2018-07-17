@@ -26,7 +26,7 @@ public class ProductController {
 
     private final UserService userService;
 
-    @GetMapping("/products")
+    @GetMapping("/catalog")
     public ModelAndView getAllProducts(ModelAndView model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.findByUsername(username);
@@ -55,7 +55,6 @@ public class ProductController {
         return catalog;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/products")
     public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {
         ModelAndView model = new ModelAndView();
@@ -70,26 +69,23 @@ public class ProductController {
         return model;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/admin/products/{id}/edit")
+    @GetMapping("/products/{id}/edit")
     public ModelAndView editProduct(@PathVariable Long id,  ModelAndView model) {
         model.setViewName("edit_product");
         model.addObject(productService.getProductById(id));
         return model;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping("/admin/products/{id}/save")
+    @PostMapping("/products/{id}/save")
     public ModelAndView saveProduct(@PathVariable Long id, @ModelAttribute("product") Product product) {
         productService.saveProduct(product);
-        return new ModelAndView("redirect:/admin/products");
+        return new ModelAndView("redirect:/catalog");
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping("/admin/products/{id}/delete")
+    @PostMapping("/products/{id}/delete")
     public ModelAndView deleteProduct(@PathVariable Long id) {
         productService.deleteProductById(id);
-        return new ModelAndView("redirect:/admin/products");
+        return new ModelAndView("redirect:/catalog");
     }
 
     private String getViewName(Role role) {

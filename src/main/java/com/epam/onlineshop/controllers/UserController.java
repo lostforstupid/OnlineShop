@@ -60,7 +60,6 @@ public class UserController {
         return model;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/users")
     public ModelAndView getAllUsers(@ModelAttribute("user") User user, ModelAndView model) {
         model.setViewName("main_admin_users");
@@ -69,7 +68,6 @@ public class UserController {
         return model;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/users/{id}/block")
     public ModelAndView changeBlockedStatus(@PathVariable Long id) {
         User user = userService.findById(id);

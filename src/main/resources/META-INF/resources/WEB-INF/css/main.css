@@ -2551,4 +2551,29 @@ h2.title {
   color: #FE980F;
 }
 
+/*orders table -----*/
+
+.orders-table tr{
+  width: 100%;
+}
+
+.orders-table td {
+  width: 20%;
+}
+
+.products-table tr {
+  width: 100%;
+}
+
+.products-table .name {
+  width: 60%;
+}
+
+.products-table .quantity {
+  width: 40%;
+}
+
+
+
+
 

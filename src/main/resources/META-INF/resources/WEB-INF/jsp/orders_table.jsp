@@ -5,10 +5,11 @@
 <%@ taglib prefix="show" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="formatDate" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="formatTime" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--@elvariable id="order" type=""--%>
 
 <div class="container">
-    <table class = "table table-condensed">
+    <table class = "table table-condensed orders-table">
         <tr>
             <th>User</th>
             <th>Date</th>
@@ -18,36 +19,33 @@
         </tr>
     </table>
         <c:forEach var = "order" items = "${orderList}">
-            <table>
+            <table class = "orders-table">
                 <tr>
-                    <td>"${order.user.username}"</td>
-                    <td><formatDate:formatDate value = "${order.dateAndTime}" pattern = "dd.MM.yyyy"/></td>
-                    <td><formatTime:formatDate value = "${order.dateAndTime}" pattern = "hh:mm:ss"/></td>
-                    <td>"${order.status}"</td>
-                    <td>
-                        <%--<show:form action = "orders/${order.id}" method = "get"/>--%>
-                            <button class = "btn btn-default" onclick = "show(${order.id})">Show products</button>
-                        <%--</show:form>--%>
+                    <td class = "username">"${order.user.username}"</td>
+                    <td class = "date"><formatDate:formatDate value = "${order.dateAndTime}" pattern = "dd.MM.yyyy"/></td>
+                    <td class = "time"><formatTime:formatDate value = "${order.dateAndTime}" pattern = "hh:mm:ss"/></td>
+                    <td class = "status">"${order.status}"</td>
+                    <td class = "button">
+                        <button class = "btn btn-default" onclick = "show(${order.id})">Show products</button>
                     </td>
                 </tr>
             </table>
 
             <div id = "div${order.id}" style = "display: none;">
-                <table>
+
+                <table class = "products">
                     <tr>
                         <th>Product</th>
                         <th>Quantity</th>
+                        <th></th>
                     </tr>
-                        <%--<c:forEach var = "productInOrder" items = "${productsInOrder}">--%>
+                        <c:forEach var = "productInOrder" items = "${order.productsInOrder}">
                         <tr>
-                            <td><%--${productInOrder.product.name}--%> Product8</td>
-                            <td><%--${productInOrder.quantity}--%> 5</td>
+                            <td class = "name">"${productInOrder.product.name}"</td>
+                            <td class = "quantity">"${productInOrder.quantity}"</td>
+                            <td><form:form action="/temp" method="get"><button type="submit">Temp</button></form:form></td> <!--temporary-->
                         </tr>
-                        <tr>
-                            <td><%--${productInOrder.product.name}--%> Product23</td>
-                            <td><%--${productInOrder.quantity}--%> 40</td>
-                        </tr>
-                        <%--</c:forEach>--%>
+                        </c:forEach>
                 </table>
             </div>
 

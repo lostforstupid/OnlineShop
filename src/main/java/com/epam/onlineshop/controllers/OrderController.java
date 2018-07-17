@@ -24,7 +24,6 @@ public class OrderController {
 
     private final ProductInOrderService productInOrderService;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/orders")
     public ModelAndView getAllProducts(ModelAndView model) {
         model.setViewName("main_admin_orders");
@@ -32,7 +31,6 @@ public class OrderController {
         return model;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/orders/{id}")
     public ModelAndView showOrder(ModelAndView model, @PathVariable("id") Long orderId) {
         model.setViewName("show_order");
