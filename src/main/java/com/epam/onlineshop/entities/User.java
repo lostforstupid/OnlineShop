@@ -5,6 +5,7 @@ import javax.persistence.*;
 import lombok.*;
 
 import java.util.Collection;
+import lombok.*;
 
 import java.util.List;
 
@@ -39,5 +40,6 @@ public class User {
     private String address;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<Order> orders;
 }

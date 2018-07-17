@@ -1,5 +1,10 @@
 package com.epam.onlineshop.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,6 +15,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "product")
 public class Product {
 
@@ -27,6 +33,7 @@ public class Product {
     @Column(name = "image_url")
     private String imageLink;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "product")
     private List<ProductInOrder> productInOrderList;
 }

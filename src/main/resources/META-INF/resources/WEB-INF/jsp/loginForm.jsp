@@ -9,16 +9,17 @@
                 <h2>Login to your account</h2>
                 <form method="POST" action="${contextPath}/login" class="form-signin">
                     <div class="form-group ${error != null ? 'has-error' : ''}">
-                        <span>${message}</span>
-                        <input name="username" type="text" class="form-control" placeholder="Username"
-                               autofocus="true"/>
+
+                        <span class="message-success">${message}</span>
+                        <c:if test="${SPRING_SECURITY_LAST_EXCEPTION.message == 'blocked'}">
+                            <span class="message-error">Sorry, but you're blocked by admins</span>
+                        </c:if>
+                        <input name="username" type="text" class="form-control" placeholder="Username"/>
                         <input name="password" type="password" class="form-control" placeholder="Password"/>
-                        <span>${error}</span>
+                        <c:if test="${SPRING_SECURITY_LAST_EXCEPTION.message != 'blocked'}">
+                            <span class="message-error">${error}</span>
+                        </c:if>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <span>
-                        <input type="checkbox" class="checkbox">
-						Keep me signed in
-                        </span>
                         <button class="btn btn-default" type="submit">Log In</button>
                         <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
                     </div>

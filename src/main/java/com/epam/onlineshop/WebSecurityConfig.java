@@ -18,7 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
@@ -39,6 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers(  "/registration", "/images/**").permitAll()
+                    .antMatchers("/admin", "/catalog", "/h2/**").hasRole("ADMIN").anyRequest()
+                    .authenticated()
                     .antMatchers("/users/**", "/orders/**", "/products/**", "/h2/**").hasRole("ADMIN")
                     .anyRequest()
                     .authenticated()
@@ -46,12 +47,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                     .loginPage("/login")
                     .defaultSuccessUrl("/welcome", true)
-                    .permitAll()
-                    .and()
-                .logout()
-                    .permitAll()
-                .and()
-                .exceptionHandling().accessDeniedPage("/deny_access");
+                    .permitAll();
+        http.exceptionHandling().accessDeniedPage("/403");
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
     @Autowired
