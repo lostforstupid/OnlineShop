@@ -879,6 +879,51 @@ h2.title {
   margin-right: auto;
 }
 
+.form_register input:focus:invalid, .form_register textarea:focus:invalid { /* when a field is considered invalid by the browser */
+  background: #fff url(/images/content/invalid.png) no-repeat 98% center;
+  box-shadow: 0 0 5px #d45252;
+  border-color: #b03535
+}
+
+.form_register input:required:valid, .form_register textarea:required:valid { /* when a field is considered valid by the browser */
+  background: #fff url(/images/content/valid.png) no-repeat 98% center;
+  box-shadow: 0 0 5px #5cd053;
+  border-color: #28921f;
+}
+
+.form_margin{
+  margin-bottom: 32px;
+}
+.product_form_margin{
+  margin-bottom: 38px!important;
+}
+.hint_red{
+  background: #d45252!important;
+}
+.hint_green{
+  background: #28921f!important;
+}
+.form_hint {
+  background: #d45252;
+  border-radius: 3px 3px 3px 3px;
+  color: white;
+  margin-top: -32px;
+  padding: 1px 6px;
+  z-index: 999; /* hints stay above all other elements */
+  position: absolute; /* allows proper formatting if hint is two lines */
+  /*display: none;*/
+}
+.form_hint::before {
+ /* треугольник, указующий влево, в  escaped unicode */
+  color:#d45252;
+  position: absolute;
+  top:1px;
+}
+
+.form_register input:focus + .form_hint {display: inline;}
+.form_register input:required:valid + .form_hint {background: #28921f;} /* change form hint color when valid */
+.form_register input:required:valid + .form_hint::before {color:#28921f;} /* change form hint arrow color when valid */
+
 .parent-product {
   display: flex;
   flex-direction: column;
@@ -2470,6 +2515,8 @@ h2.title {
 .form-control::-moz-placeholder {
   color: #8D8D8D;
 }
+
+
 
 #contact-page .form-control {
   background-color: #fff;
