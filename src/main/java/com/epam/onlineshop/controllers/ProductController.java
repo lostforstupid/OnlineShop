@@ -31,7 +31,7 @@ public class ProductController {
     }
 
     @PostMapping("/catalog")
-    public ModelAndView addProduct(@ModelAttribute("product") Product product, BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
+    public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file, BindingResult bindingResult) {
         ModelAndView catalog = new ModelAndView();
         productValidator.validate(product, bindingResult);
 
@@ -39,8 +39,13 @@ public class ProductController {
         if (!bindingResult.hasErrors()) {
             long currentTime = new Date().getTime();
             String name = String.valueOf(currentTime);
-            catalog = ImageWriter.writeImage(catalog, file, name);
-            product.setImageLink(name + ".jpg");
+            if(file.isEmpty()){
+                product.setImageLink("default.jpg");
+            }else {
+                catalog = ImageWriter.writeImage(catalog, file, name);
+                product.setImageLink(name + ".jpg");
+            }
+            //product.setCount(100); //TEMPORARY
             productService.addNewProduct(product);
             catalog.addObject(productService.getAllProducts());
         }else{
