@@ -1,6 +1,7 @@
 package com.epam.onlineshop.controllers;
 
 import com.epam.onlineshop.entities.Order;
+import com.epam.onlineshop.entities.ProductInOrder;
 import com.epam.onlineshop.services.OrderService;
 import com.epam.onlineshop.services.ProductInOrderService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,14 @@ public class OrderController {
     public ModelAndView getAllProducts(ModelAndView model) {
         model.setViewName("main_admin_orders");
         model.addObject(orderService.getAllOrders());
+
+        for (Order order : orderService.getAllOrders()) {
+            System.out.println("id: " + order.getId());
+            for (ProductInOrder productInOrder : order.getProductsInOrder()) {
+                System.out.println(productInOrder.getProduct().getName());
+            }
+        }
+
         return model;
     }
 

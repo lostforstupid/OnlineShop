@@ -22,7 +22,7 @@
         <c:forEach var = "order" items = "${orderList}">
             <table class = "orders-table">
                 <tr>
-                    <edit:form action = "/orders/${order.id}/edit" method="get">
+                    <%--<edit:form action = "/orders/${order.id}/edit" method="get"--%>
                         <td class = "username">"${order.user.username}"</td>
                         <td class = "date"><formatDate:formatDate value = "${order.dateAndTime}" pattern = "dd.MM.yyyy"/></td>
                         <td class = "time"><formatTime:formatDate value = "${order.dateAndTime}" pattern = "hh:mm:ss"/></td>
@@ -33,7 +33,7 @@
                         <td class = "button">
                             <button class = "btn btn-default">Edit</button>
                         </td>
-                    </edit:form>
+                    <%--</edit:form>--%>
                 </tr>
             </table>
 
@@ -46,11 +46,10 @@
                         <th></th>
                     </tr>
                         <c:forEach var = "productInOrder" items = "${order.productsInOrder}">
-                        <tr>
-                            <td class = "name">"${productInOrder.product.name}"</td>
-                            <td class = "quantity">"${productInOrder.quantity}"</td>
-                            <td><form:form action="/temp" method="get"><button type="submit">Temp</button></form:form></td> <!--temporary-->
-                        </tr>
+                            <tr>
+                                <td class = "name">${productInOrder.product.name}</td>
+                                <td class = "quantity">${productInOrder.quantity}</td>
+                            </tr>
                         </c:forEach>
                 </table>
             </div>
