@@ -4,6 +4,7 @@ import com.epam.onlineshop.entities.Product;
 import com.epam.onlineshop.repository.ProductRepository;
 import com.epam.onlineshop.services.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+
+    private final static Logger logger = Logger.getLogger(ProductServiceImpl.class);
 
     @Override
     public List<Product> getAllProducts() {
@@ -25,6 +28,7 @@ public class ProductServiceImpl implements ProductService {
             productRepository.saveAndFlush(product);
         }
 
+        logger.info("Product " + product.getName() + " was added in DB.");
         return isProductExist(product.getName());
     }
 

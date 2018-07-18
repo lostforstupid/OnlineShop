@@ -1,3 +1,4 @@
+<%--@elvariable id="TotalPrice" type=""--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section id="cart_items">
     <div class="container">
@@ -33,7 +34,9 @@
                         <c:forEach items="${products}" var="item">
                             <tr>
                                 <td class="cart_product">
-                                    <a href=""><img class = "cart_img" src="${pageContext.request.contextPath}/images/products/${item.product.imageLink}" alt=""></a>
+                                    <a href=""><img class="cart_img"
+                                                    src="${pageContext.request.contextPath}/images/products/${item.product.imageLink}"
+                                                    alt=""></a>
                                 </td>
                                 <td class="cart_description">
                                     <h4><a href="">${item.product.name}</a></h4>
@@ -51,7 +54,7 @@
                                     </div>
                                 </td>
                                 <td class="cart_total">
-                                    <p class="cart_total_price">$42</p>
+                                    <p class="cart_total_price">$</p>
                                 </td>
                                 <td class="cart_delete">
                                     <a class="cart_quantity_delete" href="/cart/${item.id}/delete"><i
@@ -65,13 +68,13 @@
             </table>
             <div class="login-form">
                 <form method="GET" action="${contextPath}/cart/payment" class="form-signin">
-                    <h4>Final price: 000 $</h4>
+                    <h4>Total price: <p id="p1"></p></h4>
                     <c:choose>
                         <c:when test="${products.size() <= 0}">
-                            <button class="btn btn-default" type="submit" disabled = "disabled">Order</button>
+                            <button class="btn btn-default" type="submit" disabled="disabled">Order</button>
                         </c:when>
                         <c:otherwise>
-                            <button class="btn btn-disabled" type="submit" >Order</button>
+                            <button class="btn btn-disabled" type="submit">Order</button>
                         </c:otherwise>
                     </c:choose>
                 </form>
@@ -79,4 +82,3 @@
         </div>
     </div>
 </section>
-<!--/#cart_items-->

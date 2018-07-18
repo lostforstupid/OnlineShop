@@ -9,7 +9,7 @@
                 <div class="col-sm-4 col-sm-offset-1">
                     <div class="login-form"><!--login form-->
                         <h2>To pay for your order - click on the button and in any convenient way for you</h2>
-                        <form method="POST" action="${pageContext.request.contextPath}/cart/order" class="form-signin">
+                        <form method="POST" action="${pageContext.request.contextPath}/cart/order" class="form-signin" onsubmit="checkAlert()">
                             <span class="message-success">${message}</span>
                             <%--@elvariable id="isPaid" type=""--%>
                             <c:choose>
@@ -17,7 +17,7 @@
                                     <button class="btn btn-default" type="submit">PAY</button>
                                 </c:when>
                                 <c:otherwise>
-                                    <button class="btn btn-disabled" type="submit" disabled="disabled">PAY</button>
+                                    <button class="btn btn-disabled" type="submit" disabled="disabled" >PAY</button>
                                 </c:otherwise>
                             </c:choose>
                             <h4 class="text-left"><a href="${pageContext.request.contextPath}/cart">Back to the cart</a></h4>
@@ -30,3 +30,9 @@
 </section>
 </body>
 </html>
+
+<script Language="JavaScript">
+    function checkAlert(){
+        alert("Are you sure? If yes click OK.");
+    }
+</script>

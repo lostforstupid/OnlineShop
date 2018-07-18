@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.services.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -28,6 +29,7 @@ public class UserController {
     private final SecurityService securityService;
     private final UserValidator userValidator;
     private final ProductInOrderService productInOrderService;
+    private final static Logger logger = Logger.getLogger(UserController.class);
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView openRegistrationForm(ModelAndView model) {
@@ -37,12 +39,14 @@ public class UserController {
     }
 
     @GetMapping(value = "/logout")
-    public ModelAndView openRegistrationForm(ModelAndView model, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView openRegistrationForm(ModelAndView model, HttpServletRequest request,
+                                             HttpServletResponse response, Principal principal) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         model.setViewName("redirect:/login?logout");
+        logger.info("User " + principal.getName() + "log out");
         return model;
     }
 
@@ -77,7 +81,6 @@ public class UserController {
     @PostMapping(value = "/registration")
     public ModelAndView addUser(@ModelAttribute("userJSP") User user, BindingResult bindingResult, ModelAndView model) {
         userValidator.validate(user, bindingResult);
-
         if (bindingResult.hasErrors()) {
             model.setViewName("registration");
         } else {

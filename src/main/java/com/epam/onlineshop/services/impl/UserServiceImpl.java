@@ -9,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.apache.log4j.Logger;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -17,6 +19,7 @@ public class UserServiceImpl implements UserService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    private final static Logger logger = Logger.getLogger(UserServiceImpl.class);
     @Transactional
     @Override
     public boolean addUser(User user) {
@@ -32,6 +35,7 @@ public class UserServiceImpl implements UserService {
                     .password(bCryptPasswordEncoder.encode(user.getPassword()))
                     .address(user.getAddress())
                     .build());
+            logger.info("User" + username + "was added!");
             return true;
         }
     }
@@ -47,6 +51,7 @@ public class UserServiceImpl implements UserService {
         updatedUser.setAddress(user.getAddress());
         updatedUser.setFirstName(user.getFirstName());
         userRepository.save(updatedUser);
+        logger.info("User" + user.getUsername() + "was updated!");
     }
 
     @Override
