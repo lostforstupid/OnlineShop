@@ -115,7 +115,7 @@
                 $('body').append('<div id="phoneNumberInfo" class="info"></div>');
                 var aboutInfo = $('#phoneNumberInfo');
                 var ele = $('#phoneNumber');
-                var regex = /^[\\+]?[0-9][-\\s]?[(]?[0-9]{3}[)]?[-\\s]?[0-9]{3}[-\\s]?[0-9]{2}[-\\s]?[0-9]{2,6}$/;
+                var regex = /^[\+]?[0-9][-\s]?[(]?[0-9]{3}[)]?[-\s]?[0-9]{3}[-\s]?[0-9]{2}[-\s]?[0-9]{2,6}$/;
                 if(!regex.test(ele.val())) {
                     jVal.errorPhoneNumber = true;
                     aboutInfo.removeClass('hint_green').addClass('hint_red').html('\'Example format: +7-999-000-00-00\'').show();
@@ -128,7 +128,7 @@
                 $('body').append('<div id="passwordInfo" class="info"></div>');
                 var aboutInfo = $('#passwordInfo');
                 var ele = $('#password');
-                var regex = /\d{8,32}/;
+                var regex = /[\d\D]{8,32}/;
                 if(!regex.test(ele.val())) {
                     jVal.errorPassword = true;
                     aboutInfo.removeClass('hint_green').addClass('hint_red').html('must be 8 - 32 characters').show();

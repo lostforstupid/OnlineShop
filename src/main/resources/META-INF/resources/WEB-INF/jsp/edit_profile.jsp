@@ -13,8 +13,22 @@
                 <spring:bind path="firstName">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
                         <form:input type="text" path="firstName" name="firstName" id="firstName" minLength="1" maxlength="32" class="form-control form_margin" placeholder="First name"
-                                    autofocus="true" required="true" oninput="validate()"/> <span id="firstNameInfo" class="form_hint" style="background: #46b8da" >Enter username</span>
+                                    autofocus="true" required="true" oninput="validate()"/> <span id="firstNameInfo" class="form_hint" style="background: #46b8da" >Enter first name</span>
                         <form:errors path="firstName"/>
+                    </div>
+                </spring:bind>
+                <spring:bind path="secondName">
+                    <div class="form-group ${status.error ? 'has-error' : ''}">
+                        <form:input type="text" path="secondName" name="secondName" id="secondName" minLength="1" maxlength="32" class="form-control form_margin" placeholder="Second name"
+                                    autofocus="true" required="true" oninput="validate()"/> <span id="secondNameInfo" class="form_hint" style="background: #46b8da" >Enter second name</span>
+                        <form:errors path="secondName"/>
+                    </div>
+                </spring:bind>
+                <spring:bind path="phoneNumber">
+                    <div class="form-group ${status.error ? 'has-error' : ''}">
+                        <form:input type="text" path="phoneNumber" name="phoneNumber" id="phoneNumber" minLength="8" maxlength="32" class="form-control form_margin" placeholder="Phone number"
+                                    autofocus="true" required="true" oninput="validate()"/> <span id="phoneNumberInfo" class="form_hint" style="background: #46b8da" >Enter phone number</span>
+                        <form:errors path="phoneNumber"/>
                     </div>
                 </spring:bind>
                 <spring:bind path="address">
@@ -37,22 +51,11 @@
         </div><!--/sign up form-->
     </div>
 
+
     <script>
         var jVal;
         function validate(){
             jVal = {
-                'address' : function() {
-                    $('body').append('<div id="addressInfo" class="info"></div>');
-                    var aboutInfo = $('#addressInfo');
-                    var ele = $('#address');
-                    if(ele.val().length < 10) {
-                        jVal.errorAddress = true;
-                        aboutInfo.removeClass('hint_green').addClass('hint_red').html('at least 10 characters').show();
-                    } else {
-                        jVal.errorAddress = false;
-                        aboutInfo.removeClass('hint_red').addClass('hint_green').html('Address correct').show();
-                    }
-                },
                 'firstName' : function() {
                     $('body').append('<div id="firstNameInfo" class="info"></div>');
                     var aboutInfo = $('#firstNameInfo');
@@ -65,8 +68,46 @@
                         aboutInfo.removeClass('hint_red').addClass('hint_green').html('First name correct').show();
                     }
                 },
+                'secondName' : function() {
+                    $('body').append('<div id="firstNameInfo" class="info"></div>');
+                    var aboutInfo = $('#secondNameInfo');
+                    var ele = $('#secondName');
+                    if(ele.val().length < 1) {
+                        jVal.errorSecondName = true;
+                        aboutInfo.removeClass('hint_green').addClass('hint_red').html('at least 1 characters').show();
+                    } else {
+                        jVal.errorSecondName = false;
+                        aboutInfo.removeClass('hint_red').addClass('hint_green').html('Second name correct').show();
+                    }
+                },
+                'address' : function() {
+                    $('body').append('<div id="addressInfo" class="info"></div>');
+                    var aboutInfo = $('#addressInfo');
+                    var ele = $('#address');
+                    if(ele.val().length < 10) {
+                        jVal.errorAddress = true;
+                        aboutInfo.removeClass('hint_green').addClass('hint_red').html('at least 10 characters').show();
+                    } else {
+                        jVal.errorAddress = false;
+                        aboutInfo.removeClass('hint_red').addClass('hint_green').html('Address correct').show();
+                    }
+                },
+                'phoneNumber' : function() {
+                    $('body').append('<div id="phoneNumberInfo" class="info"></div>');
+                    var aboutInfo = $('#phoneNumberInfo');
+                    var ele = $('#phoneNumber');
+                    var regex = /^[\+]?[0-9][-\s]?[(]?[0-9]{3}[)]?[-\s]?[0-9]{3}[-\s]?[0-9]{2}[-\s]?[0-9]{2,6}$/;
+                    if(!regex.test(ele.val())) {
+                        jVal.errorPhoneNumber = true;
+                        aboutInfo.removeClass('hint_green').addClass('hint_red').html('\'Example format: +7-999-000-00-00\'').show();
+                    } else {
+                        jVal.errorPhoneNumber = false;
+                        aboutInfo.removeClass('hint_red').addClass('hint_green').html('Phone number correct').show();
+                    }
+                },
                 'sendIt' : function (){
-                    if((!jVal.errorFirstName)&&(!jVal.errorAddress)) {
+                    if((!jVal.errorAddress)&&(!jVal.errorSecondName)&&
+                        (!jVal.errorFirstName)&&(!jVal.errorPhoneNumber)&&(!jVal.errorSecondName)) {
                         $('#jform').submit();
                     }
                 }
@@ -76,27 +117,39 @@
                 var obj = $.browser.webkit ? $('body') : $('html');
                 obj.animate({ scrollTop: $('#jform').offset().top }, 750, function (){
                     jVal.errorAddress = true;
-                    jVal.address();
                     jVal.errorFirstName = true;
+                    jVal.errorSecondName = true;
+                    jVal.errorPhoneNumber = true;
+                    jVal.address();
                     jVal.firstName()
+                    jVal.secondName();
+                    jVal.phoneNumber();
                     jVal.sendIt();
                 });
                 return false;
             });
             $('#address').change(jVal.address);
             $('#firstName').change(jVal.firstName);
+            $('#secondName').change(jVal.secondName);
+            $('#phoneNumber').change(jVal.phoneNumber);
         };
 
         document.getElementById("address").addEventListener('keyup', validateAddress);
+        document.getElementById("firstName").addEventListener('keyup', validateFirstName);
+        document.getElementById("secondName").addEventListener('keyup', validateSecondName);
+        document.getElementById("phoneNumber").addEventListener('keyup', validatePhoneNumber);
+
         function validateAddress() {
             jVal.address();
         }
-
-        document.getElementById("firstName").addEventListener('keyup', validateAddress);
-        function validateAddress() {
+        function validateFirstName() {
             jVal.firstName();
+        }
+        function validateSecondName() {
+            jVal.secondName();
+        }
+        function validatePhoneNumber() {
+            jVal.phoneNumber();
         }
     </script>
 </section>
-</body>
-</html>
