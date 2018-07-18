@@ -39,34 +39,25 @@ public class ProductInOrderServiceTest {
     @Autowired
     private OrderRepository orderRepository;
 
+    private static String usernameAlex = "usernameAlex";
+    private static String passwordAlex = "123";
+    private static String firstnameAlex = "Alex";
+    private static String secondnameAlex = "Petrov";
+    private static String phonenumberAlex = "+ 7 999 021 06 14";
+    private static String addressAlex = "aaa";
+
+    private static String productImgLink = "";
+    private static String productName = "Qwerty";
+    private static Integer productPrice = 10;
+
+    private static Integer productInOrderQuantity = 1;
+
     @Test
-    public void test1() {
-        User user = userRepository.save(User.builder()
-                .username("alex")
-                .address("aaa")
-                .firstName("qwertyu")
-                .password("123")
-                .isBlocked(false)
-                .role(Role.USER)
-                .build());
-
-        Product productFromCatalog = productRepository.save(Product.builder()
-                .imageLink("")
-                .name("qwerty")
-                .price(10)
-                .build());
-
-        Order orderInCart = orderRepository.save(Order.builder()
-                .status(NEW)
-                .user(user)
-                .build());
-
-        ProductInOrder expectation = ProductInOrder.builder()
-                .id(5L)
-                .order(orderInCart)
-                .product(productFromCatalog)
-                .quantity(1)
-                .build();
+    public void shouldReturnAddedProductInOrderInCart() {
+        User user = userRepository.save(createUser());
+        Product productFromCatalog = productRepository.save(createProduct());
+        Order orderInCart = orderRepository.save(createOrder(user));
+        ProductInOrder expectation = createProductInOrder(productFromCatalog, orderInCart);
 
         ProductInOrder result = productInOrderService.addOrderInCart(productFromCatalog.getId(), user);
 
@@ -74,5 +65,42 @@ public class ProductInOrderServiceTest {
 
         assertNotNull(actual);
         assertEquals(expectation, actual.get());
+    }
+
+    private static ProductInOrder createProductInOrder(Product productFromCatalog, Order orderInCart) {
+        return ProductInOrder.builder()
+                .id(5L)
+                .order(orderInCart)
+                .product(productFromCatalog)
+                .quantity(productInOrderQuantity)
+                .build();
+    }
+
+    private static Order createOrder(User user) {
+        return Order.builder()
+                .status(NEW)
+                .user(user)
+                .build();
+    }
+
+    private static Product createProduct() {
+        return Product.builder()
+                .imageLink(productImgLink)
+                .name(productName)
+                .price(productPrice)
+                .build();
+    }
+
+    private static User createUser() {
+        return User.builder()
+                .username(usernameAlex)
+                .password(passwordAlex)
+                .role(Role.USER)
+                .firstName(firstnameAlex)
+                .secondName(secondnameAlex)
+                .phoneNumber(phonenumberAlex)
+                .address(addressAlex)
+                .isBlocked(false)
+                .build();
     }
 }
