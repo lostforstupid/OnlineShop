@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(User.builder()
                     .role(Role.USER)
                     .username(username)
-                    .firstName("")
+                    .firstName(user.getFirstName())
                     .isBlocked(false)
                     .password(bCryptPasswordEncoder.encode(user.getPassword()))
                     .address(user.getAddress())

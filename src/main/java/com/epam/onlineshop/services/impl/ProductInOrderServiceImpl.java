@@ -40,12 +40,12 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
 
     @Transactional
     @Override
-    public void addOrderInCart(Long product_id, User user) {
+    public ProductInOrder addOrderInCart(Long product_id, User user) {
         Optional<ProductInOrder> optionalProductInOrder = productInOrderRepository.findOneOrderInCartByUserAndProductId(product_id, user);
         if (optionalProductInOrder.isPresent()) {
             ProductInOrder productInOrder = optionalProductInOrder.get();
             productInOrder.setQuantity(productInOrder.getQuantity() + 1);
-            productInOrderRepository.save(productInOrder);
+            return productInOrderRepository.save(productInOrder);
         } else {
             Product productFromCatalog = productRepository.getOne(product_id);
             Order orderInCart = orderRepository.getOneNewOrderByUser(user);
@@ -55,11 +55,11 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
                                                         .user(user)
                                                         .build());
             }
-            productInOrderRepository.save(ProductInOrder.builder().order(orderInCart)
+            logger.info("Product " +productFromCatalog.getName() + " was added in cart by username(" + user.getUsername() + ")");
+            return productInOrderRepository.save(ProductInOrder.builder().order(orderInCart)
                                                         .product(productFromCatalog)
                                                         .quantity(1)
                                                         .build());
-            logger.info("Product " +productFromCatalog.getName() + " was added in cart by username(" + user.getUsername() + ")");
         }
     }
 

@@ -22,4 +22,6 @@ public interface ProductInOrderRepository extends JpaRepository<ProductInOrder, 
 
     @Query("select a from ProductInOrder as a where a.order.user = :user and a.order.status = 'NEW' and a.product.id = :product_id")
     Optional<ProductInOrder> findOneOrderInCartByUserAndProductId(@Param("product_id") Long product_id, @Param("user") User user);
+
+    Optional<ProductInOrder> findById(@Param("id") Long id);
 }

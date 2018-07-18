@@ -1,5 +1,6 @@
 package com.epam.onlineshop;
 
+import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.repository.UserRepository;
 import com.epam.onlineshop.services.UserService;
@@ -8,11 +9,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserRepositoryTest {
+public class UserServiceTest {
 
     @Autowired
     private UserService userService;
@@ -20,24 +21,25 @@ public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-
     @Test
     public void test1() {
-        User alex = User.builder()
+        User expectation = User.builder().id(4L)
                 .username("alex")
                 .address("aaa")
                 .firstName("qwertyu")
                 .password("123")
                 .isBlocked(false)
+                .role(Role.USER)
                 .build();
 
-        userService.addUser(alex);
-        User found = userRepository.findByUsername("alex");
+        userService.addUser(expectation);
+        User actual = userRepository.findByUsername("alex");
 
-        boolean nameIsEqual = found.getFirstName()
-                .equals(alex.getFirstName());
-        boolean addressIsEqual = found.getAddress().equals(alex.getAddress());
-        assertThat(nameIsEqual&&addressIsEqual);
+        assertEquals(expectation.getUsername(), actual.getUsername());
+        assertEquals(expectation.getAddress(), actual.getAddress());
+        assertEquals(expectation.getFirstName(), actual.getFirstName());
+        assertEquals(expectation.getRole(), actual.getRole());
+        assertEquals(expectation.getId(), actual.getId());
+        assertEquals(expectation.getIsBlocked(), actual.getIsBlocked());
     }
-
 }
