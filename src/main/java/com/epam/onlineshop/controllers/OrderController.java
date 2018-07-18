@@ -41,7 +41,8 @@ public class OrderController {
     @GetMapping("/orders/{id}/edit")
     public ModelAndView editOrder(ModelAndView model, @PathVariable("id") Long orderId) {
         model.setViewName("edit_order");
-        model.addObject(orderService.findById(orderId));
+        model.addObject("order", orderService.findById(orderId));
+        model.addObject("productsInOrder", productInOrderService.getProductsFromThisOrder(orderId));
         return model;
     }
 

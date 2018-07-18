@@ -34,9 +34,6 @@
         </div>
     </div>
 </div>
-<br>
-<br>
-<br>
 
         <script>
 var jVal;

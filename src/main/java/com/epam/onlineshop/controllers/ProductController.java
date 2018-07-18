@@ -68,28 +68,31 @@ public class ProductController {
     @GetMapping("/products/{id}/edit")
     public ModelAndView editProduct(@PathVariable Long id,  ModelAndView model) {
         model.setViewName("edit_product");
-        model.addObject(productService.getProductById(id));
+        model.addObject("product", productService.getProductById(id));
         return model;
     }
 
     @PostMapping("/products/{id}/save")
-    public ModelAndView saveProduct(ModelAndView model, @PathVariable Long id, BindingResult bindingResult, @ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {
+    public ModelAndView saveProduct(ModelAndView model, @PathVariable Long id, @ModelAttribute("product") Product product, BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
+        model = new ModelAndView();
         productValidator.validate(product, bindingResult);
 
-        if (!bindingResult.hasErrors()) {
+        model.setViewName(getViewName(Role.ADMIN));
+        //if (!bindingResult.hasErrors()) {
             long currentTime = new Date().getTime();
             String name = String.valueOf(currentTime);
 
-            if (file.isEmpty()) {
+            if(file.isEmpty()){
                 product.setImageLink("default.jpg");
-            } else {
+            }else {
                 model = ImageWriter.writeImage(model, file, name);
                 product.setImageLink(name + ".jpg");
             }
-
             productService.saveProduct(product);
-        }
-        return new ModelAndView("redirect:/catalog");
+        //}
+
+        model.addObject(productService.getAllProducts());
+        return model;
     }
 
     @PostMapping("/products/{id}/delete")

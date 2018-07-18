@@ -8,33 +8,34 @@
 <jsp:include page="init.jsp"></jsp:include>
 <jsp:include page="header.jsp"></jsp:include>
 
+<%--@elvariable id="product" type=""--%>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-4 col-sm-offset-1">
             <div class="login-form">
                 <div class="login-form">
                     <h2>Edit product</h2>
-                        <editproduct:form action = "/products" method = "post" enctype="multipart/form-data" modelAttribute = "product" class="form_signin form_register" id="jform" name = "form_register">
-                        <input type="file" class="btn btn-default" name="file" id="upload_hidden" style="position: absolute; display: block; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;"
+                    <addproduct:form action = "${pageContext.request.contextPath}/products/${product.id}/save" method = "post" enctype="multipart/form-data" modelAttribute = "product" class="form_signin form_register" id="jform" name = "form_register">
+                    <input type="file" class="btn btn-default" name="file" id="upload_hidden" style="position: absolute; display: block; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;"
                            onchange="document.getElementById('upload_visible').value = this.value;" >
-                        <input type="text" readonly="1" id="upload_visible"
-                           onclick="document.getElementById('upload_hidden').click();" placeholder="Click here to upload image" value = "${product.imageLink}"/>
+                    <input type="text" readonly="1" id="upload_visible"
+                           onclick="document.getElementById('upload_hidden').click();"  value = "${product.imageLink}" />
+                    <div class="form-group ${status.error ? 'has-error' : ''}">
+                        <addproduct:input type = "text" path = "name" name="product_name" id="product_name" minLength="2" maxlength="32" class="form-control product_form_margin" value = "${product.name}" required="true" oninput="validate()"/>
+                        <span id="productNameInfo" class="form_hint" style="background: #46b8da">Enter product name</span>
+                        <form:errors path="name"/>
                         <div class="form-group ${status.error ? 'has-error' : ''}">
-                            <editproduct:input type = "text" path = "name" placeholder="Product name" value = "${product.name}"/>
-                                <form:errors path="name"/>
-                                    <div class="form-group ${status.error ? 'has-error' : ''}">
-                                <editproduct:input class = "product-price" path = "price" placeholder="Price" value = "${product.price}"/>
+                            <addproduct:input type="number" class = "product-price product_form_margin" path = "price" name="product_price" id="product_price" min="1" max="9999999"  value = "${product.price}" required="true" oninput="validate()"/>
+                            <span id="productPriceInfo" class="form_hint" style="background: #46b8da">Enter product price</span>
                             <form:errors path="price"/>
                             <button type="submit" class="btn btn-default">Save product</button>
-                        </editproduct:form>
+                            </addproduct:form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<br>
-<br>
-<br>
 
         <script>
             var jVal;

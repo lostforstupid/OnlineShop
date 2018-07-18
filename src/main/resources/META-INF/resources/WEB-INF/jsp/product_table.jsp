@@ -23,7 +23,7 @@
                     <td><img style = "height: 40px;" src = "${pageContext.request.contextPath}/images/products/${product.imageLink}"></td>
                     <td>"${product.name}"</td>
                     <td>"${product.price}"</td>
-                        <editing:form action = "products/${product.id}/edit" method = "get">
+                        <editing:form action = "${pageContext.request.contextPath}/products/${product.id}/edit" method = "get">
                             <td><button type="submit" class="btn btn-default">Edit</button></td>
                         </editing:form>
                 </tr>
