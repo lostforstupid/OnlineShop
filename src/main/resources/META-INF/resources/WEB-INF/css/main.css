@@ -177,6 +177,9 @@ a#scrollUp i{
   background: rgba(0, 0, 0, 0);
   box-shadow: none;
 }
+.btn-hover:hover{
+    background: #ccc!important;
+}
 
 .message-error{
   color: red;
@@ -866,6 +869,70 @@ h2.title {
 	border:1px solid #F7F7F5;
 	overflow: hidden;
 	margin-bottom:30px;
+}
+
+.table-profile{
+  margin-left: 30px;
+}
+
+.tr-allorders-table{
+  background: #FE980F;
+  font-size: 16px;
+  color: #fff;
+}
+.table-image{
+  max-height: 100px;
+  max-width: 100px;
+}
+.orders-table{
+  padding-left: 75px;
+  vertical-align: top;
+
+}
+.min-width-for-table{
+    width: 95%;
+}
+.order-table-border{
+  border: #5e5e5e;
+}
+
+.td-with-orders{
+  padding: 20px;
+}
+.td-in-orders{
+  padding: 10px 30px;
+  min-width: 200px;
+}
+.td-for-orders{
+    padding: 5px 30px;
+    width:33%;
+
+}
+.heavy-weight{
+    font-weight: bold;
+}
+.table-width{
+    width: 100%;
+}
+.table-center{
+  vertical-align: top;
+  text-align: center;
+}
+.products-in-order-center{
+    text-align: center;
+}
+.table-center-left{
+    vertical-align: top;
+    text-align: left;
+}
+
+.profile-orders-table{
+  padding-left: 10px;
+  vertical-align: top;
+}
+.profile-table{
+  vertical-align: top;
+    width: 200px;
 }
 
 .single-products {
