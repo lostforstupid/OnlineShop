@@ -12,7 +12,7 @@
             <form:form method="POST" action="edit" modelAttribute="userJSP" class="form-signin form_register" id="jform" name = "form_register">
                 <spring:bind path="firstName">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="text" path="firstName" name="firstName" id="firstName" minLength="1" maxlength="32" class="form-control form_margin" placeholder="Username"
+                        <form:input type="text" path="firstName" name="firstName" id="firstName" minLength="1" maxlength="32" class="form-control form_margin" placeholder="First name"
                                     autofocus="true" required="true" oninput="validate()"/> <span id="firstNameInfo" class="form_hint" style="background: #46b8da" >Enter username</span>
                         <form:errors path="firstName"/>
                     </div>

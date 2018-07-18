@@ -6,15 +6,19 @@
 <div class="container">
     <div class="col-sm-4 col-sm-offset-1">
         <h2>New User Signup!</h2>
-
-
-
         <form:form method="POST" action="registration" modelAttribute="userJSP" class="form-signin form_register" id="jform" name = "form_register">
             <spring:bind path="username">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="username" name="username" id="username" minLength="6" maxlength="32" class="form-control form_margin" placeholder="Username"
                                 autofocus="true" required="true" oninput="validate()"/> <span id="nameInfo" class="form_hint" style="background: #46b8da" >Enter username</span>
                     <form:errors path="username"/>
+                </div>
+            </spring:bind>
+            <spring:bind path="firstName">
+                <div class="form-group ${status.error ? 'has-error' : ''}">
+                    <form:input type="text" path="firstName" name="firstName" id="firstName" minLength="1" maxlength="32" class="form-control form_margin" placeholder="First name"
+                                autofocus="true" required="true" oninput="validate()"/> <span id="firstNameInfo" class="form_hint" style="background: #46b8da" >Enter username</span>
+                    <form:errors path="firstName"/>
                 </div>
             </spring:bind>
             <spring:bind path="address">
@@ -57,6 +61,18 @@
                     nameInfo.removeClass('hint_red').addClass('hint_green').html('Username correct').show();
                 }
             },
+            'firstName' : function() {
+                $('body').append('<div id="firstNameInfo" class="info"></div>');
+                var aboutInfo = $('#firstNameInfo');
+                var ele = $('#firstName');
+                if(ele.val().length < 1) {
+                    jVal.errorFirstName = true;
+                    aboutInfo.removeClass('hint_green').addClass('hint_red').html('at least 1 characters').show();
+                } else {
+                    jVal.errorFirstName = false;
+                    aboutInfo.removeClass('hint_red').addClass('hint_green').html('First name correct').show();
+                }
+            },
             'address' : function() {
                 $('body').append('<div id="addressInfo" class="info"></div>');
                 var aboutInfo = $('#addressInfo');
@@ -97,6 +113,8 @@
                 jVal.userName();
                 jVal.address();
                 jVal.password();
+                jVal.errorFirstName = true;
+                jVal.firstName()
                 jVal.sendIt();
             });
             return false;
@@ -104,6 +122,7 @@
         $('#username').change(jVal.userName);
         $('#address').change(jVal.address);
         $('#password').change(jVal.password);
+        $('#firstName').change(jVal.firstName);
     };
 
     document.getElementById("username").addEventListener('keyup', validateName);
@@ -117,5 +136,9 @@
     }
     function validatePassword() {
         jVal.password();
+    }
+    document.getElementById("firstName").addEventListener('keyup', validateAddress);
+    function validateAddress() {
+        jVal.firstName();
     }
 </script>
