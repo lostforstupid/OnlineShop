@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/deny_access");
+                .exceptionHandling().accessDeniedPage("/deny-access");
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }

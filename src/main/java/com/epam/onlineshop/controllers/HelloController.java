@@ -33,7 +33,7 @@ public class HelloController {
         return modelAndView;
     }
 
-    @GetMapping("/deny_access")
+    @GetMapping("/deny-access")
     public ModelAndView denyAccess() {
         return new ModelAndView("access_denied");
     }
