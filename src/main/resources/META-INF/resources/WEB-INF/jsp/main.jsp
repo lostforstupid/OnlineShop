@@ -2,8 +2,6 @@
 
 <jsp:include page="init.jsp"/>
 <jsp:include page="header.jsp"/>
-<c:if test="${role == ADMIN}">
-</c:if>
 <section>
     <div class="container">
         <div class="row">

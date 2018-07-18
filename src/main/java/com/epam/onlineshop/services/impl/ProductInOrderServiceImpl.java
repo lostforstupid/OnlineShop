@@ -11,8 +11,8 @@ import com.epam.onlineshop.services.ProductInOrderService;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -116,5 +116,19 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
         productInOrderRepository.saveAll(orders);
         logger.info("Made order in status PREPAID " +
                 "for user " + user.getUsername() + "");
+    }
+
+    @Override
+    public List<ProductInOrder> getProductsFromThisOrder(Long id) {
+        return productInOrderRepository.findByOrderId(id);
+    }
+
+    @Override
+    public List<ProductInOrder> saveProductsInOrder(List<ProductInOrder> productsInOrder) {
+        for (ProductInOrder productInOrder : productsInOrder) {
+            productInOrderRepository.save(productInOrder);
+        }
+
+        return productsInOrder;
     }
 }

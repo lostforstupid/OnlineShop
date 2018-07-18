@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public boolean addNewProduct(Product product) {
         if (!isProductExist(product.getName())) {
-            productRepository.saveAndFlush(product);
+            productRepository.save(product);
         }
 
         logger.info("Product " + product.getName() + " was added in DB.");
@@ -33,7 +35,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).get();
+    }
+
     public boolean isProductExist(String name) {
         return productRepository.existsByName(name);
+    }
+
+    @Override
+    public boolean saveProduct(Product product) {
+        productRepository.save(product);
+        return isProductExist(product.getName());
+    }
+
+    @Override
+    public boolean deleteProductById(Long id) {
+        Product product = getProductById(id);
+        productRepository.delete(product);
+        return (!isProductExist(product.getName()));
     }
 }

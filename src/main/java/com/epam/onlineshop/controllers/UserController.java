@@ -16,10 +16,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -104,16 +105,22 @@ public class UserController {
         return model;
     }
 
-    String getViewNameByRole(Role userRole) {
-        switch (userRole) {
-            case USER:
-                return "main";
-            case ADMIN:
-                return "admin";
-            case ANONYMOUS:
-                return "main";
-            default:
-                return "main";
+    @GetMapping("/users")
+    public ModelAndView getAllUsers(@ModelAttribute("user") User user, ModelAndView model) {
+        model.setViewName("main_admin_users");
+        model.addObject("user", new User());
+        model.addObject(userService.getAllUsers());
+        return model;
+    }
+
+    @PostMapping("/users/{id}/block")
+    public ModelAndView changeBlockedStatus(@PathVariable Long id) {
+        User user = userService.findById(id);
+
+        if ((user != null) && (user.getRole() != Role.ADMIN)) {
+            userService.changeBlockedStatus(user);
         }
+
+        return new ModelAndView("redirect:/users");
     }
 }
