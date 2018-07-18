@@ -45,9 +45,13 @@ public class OrderController {
 
     @PostMapping("/orders/{id}/save")
     public ModelAndView saveOrder(@PathVariable Long id, @ModelAttribute("order") Order order) {
+        orderService.setStatusById(order, id);
+        //orderService.saveOrder(order);
+        /*
         Order orderInDb = orderService.findById(id);
         orderInDb.setStatus(order.getStatus());
         orderService.saveOrder(orderInDb);
+        */
         return new ModelAndView("redirect:/orders");
     }
 }

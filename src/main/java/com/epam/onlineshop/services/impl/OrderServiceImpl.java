@@ -30,4 +30,9 @@ public class OrderServiceImpl implements OrderService {
     public Order saveOrder(Order order) {
         return orderRepository.save(order);
     }
+
+    @Override
+    public Integer setStatusById(Order order, Long id) {
+        return orderRepository.setStatusById(order.getStatus(), id);
+    }
 }
