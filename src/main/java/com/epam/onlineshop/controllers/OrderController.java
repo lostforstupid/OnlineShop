@@ -3,7 +3,6 @@ package com.epam.onlineshop.controllers;
 import com.epam.onlineshop.entities.Order;
 import com.epam.onlineshop.services.OrderService;
 import com.epam.onlineshop.services.ProductInOrderService;
-import com.epam.onlineshop.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +18,6 @@ public class OrderController {
     private final OrderService orderService;
 
     private final ProductInOrderService productInOrderService;
-
-    private final UserService userService;
 
     @GetMapping("/orders")
     public ModelAndView getAllProducts(ModelAndView model) {
