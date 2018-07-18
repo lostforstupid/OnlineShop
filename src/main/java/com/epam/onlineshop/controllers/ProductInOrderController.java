@@ -18,7 +18,7 @@ public class ProductInOrderController {
 
     private final ProductInOrderService productInOrderService;
 
-    @PostMapping("/products_in_order/{orderId}/save")
+    @PostMapping("/products-in-order/{orderId}/save")
     public boolean saveProductsInOrder(@PathVariable Long orderId, @ModelAttribute("productsInOrder") List<ProductInOrder> productsInOrder) {
         return productInOrderService.saveProductsInOrder(productsInOrder) != null;
     }
