@@ -3,8 +3,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-
-
 <div class="container">
     <div class="col-sm-4 col-sm-offset-1">
         <h2>New User Signup!</h2>

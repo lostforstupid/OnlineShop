@@ -5,10 +5,7 @@ import com.epam.onlineshop.services.ProductInOrderService;
 import com.epam.onlineshop.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -26,6 +23,22 @@ public class CartController {
         User currentUser = userService.findByUsername(username);
         model.addObject("products", productInOrderService.findAllNewOrderByUser(currentUser));
         model.setViewName("cart");
+        return model;
+    }
+
+    @GetMapping(value = "/cart/payment")
+    public ModelAndView openPayment(ModelAndView model, Principal principal) {
+        model.addObject("isPaid", false);
+        model.setViewName("payment0");
+        return model;
+    }
+
+    @PostMapping(value = "/cart/order")
+    public ModelAndView payOrder(ModelAndView model, Principal principal) {
+        productInOrderService.makeOrder(userService.findByUsername(principal.getName()));
+        model.addObject("message", "You have been paid successfully.");
+        model.addObject("isPaid", true);
+        model.setViewName("payment0");
         return model;
     }
 
@@ -53,4 +66,13 @@ public class CartController {
         model.setViewName("redirect:/cart");
         return model;
     }
+
+    @GetMapping(value = "/cart/{id}/add")
+    public ModelAndView addProductInCart(@PathVariable("id") Long productId, ModelAndView model, Principal principal) {
+        String username = principal.getName();
+        User currentUser = userService.findByUsername(username);
+        productInOrderService.addOrderInCart(productId, currentUser);
+        model.setViewName("redirect:/welcome");
+        return model;
+}
 }
