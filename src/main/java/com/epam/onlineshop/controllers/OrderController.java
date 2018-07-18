@@ -3,6 +3,7 @@ package com.epam.onlineshop.controllers;
 import com.epam.onlineshop.entities.Order;
 import com.epam.onlineshop.services.OrderService;
 import com.epam.onlineshop.services.ProductInOrderService;
+import com.epam.onlineshop.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,8 @@ public class OrderController {
     private final OrderService orderService;
 
     private final ProductInOrderService productInOrderService;
+
+    private final UserService userService;
 
     @GetMapping("/orders")
     public ModelAndView getAllProducts(ModelAndView model) {
@@ -38,15 +41,15 @@ public class OrderController {
     @GetMapping("/orders/{id}/edit")
     public ModelAndView editOrder(ModelAndView model, @PathVariable("id") Long orderId) {
         model.setViewName("edit_order");
-        Order order = orderService.findById(orderId);
-        model.addObject("order", order);
-        System.out.println(productInOrderService.getProductsFromThisOrder(orderId));
+        model.addObject(orderService.findById(orderId));
         return model;
     }
 
     @PostMapping("/orders/{id}/save")
     public ModelAndView saveOrder(@PathVariable Long id, @ModelAttribute("order") Order order) {
-        orderService.saveOrder(order);
+        Order orderInDb = orderService.findById(id);
+        orderInDb.setStatus(order.getStatus());
+        orderService.saveOrder(orderInDb);
         return new ModelAndView("redirect:/orders");
     }
 }

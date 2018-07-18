@@ -35,7 +35,7 @@ public class ProductController {
         return model;
     }
 
-    @PostMapping("/catalog")
+    @PostMapping("/products")
     public ModelAndView addProduct(@ModelAttribute("product") Product product, BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
         ModelAndView catalog = new ModelAndView();
         productValidator.validate(product, bindingResult);
@@ -51,27 +51,11 @@ public class ProductController {
                 catalog = ImageWriter.writeImage(catalog, file, name);
                 product.setImageLink(name + ".jpg");
             }
-            //product.setCount(100); //TEMPORARY
             productService.addNewProduct(product);
-            catalog.addObject(productService.getAllProducts());
-        } else {
-            catalog.addObject(productService.getAllProducts());
         }
-        return catalog;
-    }
 
-    @PostMapping("/products")
-    public ModelAndView addProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("main_admin_products");
-        long currentTime = new Date().getTime();
-        String name = String.valueOf(currentTime);
-        model = ImageWriter.writeImage(model, file, name);
-        product.setImageLink(name + ".jpg");
-        //product.setCount(100); //TEMPORARY
-        productService.addNewProduct(product);
-        model.addObject(productService.getAllProducts());
-        return model;
+        catalog.addObject(productService.getAllProducts());
+        return catalog;
     }
 
     @GetMapping("/products/add")
@@ -89,8 +73,22 @@ public class ProductController {
     }
 
     @PostMapping("/products/{id}/save")
-    public ModelAndView saveProduct(@PathVariable Long id, @ModelAttribute("product") Product product) {
-        productService.saveProduct(product);
+    public ModelAndView saveProduct(ModelAndView model, @PathVariable Long id, BindingResult bindingResult, @ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {
+        productValidator.validate(product, bindingResult);
+
+        if (!bindingResult.hasErrors()) {
+            long currentTime = new Date().getTime();
+            String name = String.valueOf(currentTime);
+
+            if (file.isEmpty()) {
+                product.setImageLink("default.jpg");
+            } else {
+                model = ImageWriter.writeImage(model, file, name);
+                product.setImageLink(name + ".jpg");
+            }
+
+            productService.saveProduct(product);
+        }
         return new ModelAndView("redirect:/catalog");
     }
 
