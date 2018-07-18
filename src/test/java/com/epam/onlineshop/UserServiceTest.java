@@ -25,11 +25,13 @@ public class UserServiceTest {
     public void test1() {
         User expectation = User.builder().id(4L)
                 .username("alex")
-                .address("aaa")
-                .firstName("qwertyu")
                 .password("123")
-                .isBlocked(false)
                 .role(Role.USER)
+                .firstName("qwertyu")
+                .secondName("asdfg")
+                .phoneNumber("+ 7 999 021 06 14")
+                .address("aaa")
+                .isBlocked(false)
                 .build();
 
         userService.addUser(expectation);

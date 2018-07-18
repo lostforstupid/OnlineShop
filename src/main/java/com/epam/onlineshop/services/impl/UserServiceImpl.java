@@ -38,6 +38,8 @@ public class UserServiceImpl implements UserService {
                     .isBlocked(false)
                     .password(bCryptPasswordEncoder.encode(user.getPassword()))
                     .address(user.getAddress())
+                    .secondName(user.getSecondName())
+                    .phoneNumber(user.getPhoneNumber())
                     .build());
             logger.info("User" + username + "was added!");
             return true;

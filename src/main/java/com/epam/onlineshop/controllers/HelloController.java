@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.epam.onlineshop.entities.Product;
 import com.epam.onlineshop.services.ProductService;
-import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 
 import org.springframework.web.bind.annotation.GetMapping;

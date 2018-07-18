@@ -2,7 +2,6 @@ package com.epam.onlineshop.controllers;
 
 import com.epam.onlineshop.entities.ProductInOrder;
 import com.epam.onlineshop.services.ProductInOrderService;
-import com.epam.onlineshop.services.security.SecurityService;
 import com.epam.onlineshop.validator.UserValidator;
 import lombok.RequiredArgsConstructor;
 import com.epam.onlineshop.entities.Role;
@@ -27,7 +26,6 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
-    private final SecurityService securityService;
     private final UserValidator userValidator;
     private final ProductInOrderService productInOrderService;
     private final static Logger logger = Logger.getLogger(UserController.class);
@@ -86,7 +84,6 @@ public class UserController {
             model.setViewName("registration");
         } else {
             userService.addUser(user);
-            securityService.autologin(user.getUsername(), user.getPassword());
             model.setViewName("redirect:/login");
         }
         return model;
