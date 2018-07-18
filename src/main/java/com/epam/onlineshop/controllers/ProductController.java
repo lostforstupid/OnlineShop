@@ -78,18 +78,17 @@ public class ProductController {
         productValidator.validate(product, bindingResult);
 
         model.setViewName(getViewName(Role.ADMIN));
-        //if (!bindingResult.hasErrors()) {
-            long currentTime = new Date().getTime();
-            String name = String.valueOf(currentTime);
+        long currentTime = new Date().getTime();
+        String name = String.valueOf(currentTime);
 
-            if(file.isEmpty()){
-                product.setImageLink("default.jpg");
-            }else {
-                model = ImageWriter.writeImage(model, file, name);
-                product.setImageLink(name + ".jpg");
-            }
-            productService.saveProduct(product);
-        //}
+        if(file.isEmpty()){
+            product.setImageLink("default.jpg");
+        } else {
+            model = ImageWriter.writeImage(model, file, name);
+            product.setImageLink(name + ".jpg");
+        }
+
+        productService.saveProduct(product);
 
         model.addObject(productService.getAllProducts());
         return model;
