@@ -10,8 +10,8 @@ import com.epam.onlineshop.repository.ProductRepository;
 import com.epam.onlineshop.services.ProductInOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -107,5 +107,19 @@ public class ProductInOrderServiceImpl implements ProductInOrderService {
             product.getOrder().setStatus(PREPAID);
         }
         productInOrderRepository.saveAll(orders);
+    }
+
+    @Override
+    public List<ProductInOrder> getProductsFromThisOrder(Long id) {
+        return productInOrderRepository.findByOrderId(id);
+    }
+
+    @Override
+    public List<ProductInOrder> saveProductsInOrder(List<ProductInOrder> productsInOrder) {
+        for (ProductInOrder productInOrder : productsInOrder) {
+            productInOrderRepository.save(productInOrder);
+        }
+
+        return productsInOrder;
     }
 }

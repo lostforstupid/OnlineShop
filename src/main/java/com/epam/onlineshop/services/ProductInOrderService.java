@@ -22,4 +22,8 @@ public interface ProductInOrderService {
     Integer getQuantityById(Long id);
 
     void makeOrder(User user);
+
+    List<ProductInOrder> getProductsFromThisOrder(Long id);
+
+    List<ProductInOrder> saveProductsInOrder(List<ProductInOrder> productsInOrder);
 }
