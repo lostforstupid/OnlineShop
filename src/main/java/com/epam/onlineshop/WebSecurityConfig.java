@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -37,14 +38,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers(  "/registration", "/images/**").permitAll()
-                    .antMatchers("/admin", "/catalog", "/h2/**").hasRole("ADMIN").anyRequest()
+                    .antMatchers("/users/**", "/orders/**", "/products/**", "/catalog", "/h2/**").hasRole("ADMIN").anyRequest()
                     .authenticated()
                     .and()
                 .formLogin()
                     .loginPage("/login")
                     .defaultSuccessUrl("/welcome", true)
-                    .permitAll();
-        http.exceptionHandling().accessDeniedPage("/403");
+                    .permitAll()
+                    .and()
+                .logout()
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/deny-access");
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }

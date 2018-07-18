@@ -8,9 +8,9 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background:;
+  /*background:;*/
   position: relative;
-  font-weight:400px;
+  /*font-weight:400px;*/
 }
 
 ul li {
@@ -280,7 +280,7 @@ a#scrollUp i{
   outline: medium none;
   padding-left: 10px;
   width: 155px;
-  background-image: url(../images/home/searchicon.png);
+  /*background-image: url(../images/home/searchicon.png);*/
   background-repeat: no-repeat;
   background-position: 130px;
 }
@@ -992,7 +992,7 @@ h2.title {
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  opacity:;
+  /*opacity:;*/
 }
 
 .single-products:hover .product-overlay {
@@ -2234,7 +2234,7 @@ h2.title {
 
 .rating-area {
   border: 1px solid #F7F7F0;
-  direction: block;
+  /*direction: block;*/
   overflow: hidden;
 }
 
@@ -2614,5 +2614,59 @@ h2.title {
 .contact-info .social-networks ul li a:hover{
   color: #FE980F;
 }
+
+/*orders table -----*/
+
+.orders-table tr{
+  width: 100%;
+}
+
+.orders-table td {
+  width: 20%;
+}
+
+.products-table tr {
+  width: 100%;
+}
+
+.products-table .name {
+  width: 60%;
+}
+
+.products-table .quantity {
+  width: 40%;
+}
+
+.admin-menu-button {
+  width: 250px;
+  height: 45px;
+}
+
+.orange {
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.orange:hover {
+  background-color: #FE980F;
+  color: #FFFFFF;
+}
+
+.small-button {
+  height: 15px;
+  width: 40px;
+  font-size: 14px;
+}
+
+.admin-table th, td {
+  text-align: left;
+  height: 60px;
+}
+
+
+
 
 
