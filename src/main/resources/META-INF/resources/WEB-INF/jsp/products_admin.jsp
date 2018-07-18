@@ -9,7 +9,7 @@
     <title>Products</title>
 </head>
 <body>
-    <jsp:include page="add_product.jsp"/>
+    <jsp:include page="edit_product.jsp"/>
     <jsp:include page="main.jsp"/>
 </body>
 </html>
