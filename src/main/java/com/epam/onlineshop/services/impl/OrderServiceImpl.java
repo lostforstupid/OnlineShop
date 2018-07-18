@@ -5,6 +5,7 @@ import com.epam.onlineshop.repository.OrderRepository;
 import com.epam.onlineshop.services.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,7 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.save(order);
     }
 
+    @Transactional
     @Override
     public Integer setStatusById(Order order, Long id) {
         return orderRepository.setStatusById(order.getStatus(), id);
