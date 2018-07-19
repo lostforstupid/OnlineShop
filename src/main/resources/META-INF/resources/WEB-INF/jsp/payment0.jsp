@@ -21,7 +21,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <h4 class="text-left"><a href="${pageContext.request.contextPath}/cart">Back to the cart</a></h4>
-                        </form>
+                        </form>0
                     </div><!--/login form-->
                 </div>
             </div>
