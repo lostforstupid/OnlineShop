@@ -38,15 +38,14 @@ public class OrderController {
     @GetMapping("/orders/{id}/edit")
     public ModelAndView editOrder(ModelAndView model, @PathVariable("id") Long orderId) {
         model.setViewName("edit_order");
-        Order order = orderService.findById(orderId);
-        model.addObject("order", order);
-        System.out.println(productInOrderService.getProductsFromThisOrder(orderId));
+        model.addObject("order", orderService.findById(orderId));
+        model.addObject("productsInOrder", productInOrderService.getProductsFromThisOrder(orderId));
         return model;
     }
 
     @PostMapping("/orders/{id}/save")
     public ModelAndView saveOrder(@PathVariable Long id, @ModelAttribute("order") Order order) {
-        orderService.saveOrder(order);
+        orderService.setStatusById(order, id);
         return new ModelAndView("redirect:/orders");
     }
 }
