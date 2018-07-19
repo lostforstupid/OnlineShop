@@ -42,7 +42,6 @@
 
 
 </div>
-<br>
 <form action="${pageContext.request.contextPath}/welcome">
     <table class="products-pages">
         <tr>

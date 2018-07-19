@@ -25,6 +25,10 @@ public class Product {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "category", nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private Category category;
+
     @Column(name = "price", nullable = false)
     private Integer price;
 

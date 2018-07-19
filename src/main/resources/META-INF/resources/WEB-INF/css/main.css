@@ -81,7 +81,35 @@ a#scrollUp i{
   font-family: 'Roboto', sans-serif;
 }
 
+.category-button{text-decoration:none; text-align:center;
+  padding:11px 32px;
+  border:none;
 
+  font:18px Arial, Helvetica, sans-serif;
+  font-weight:bold;
+  color:#878177;
+  background:#ffffff;
+  -webkit-box-shadow:0px 0px 2px #ffffff, inset 0px 0px 1px #ffffff;
+  -moz-box-shadow: 0px 0px 2px #ffffff,  inset 0px 0px 1px #ffffff;
+  box-shadow:0px 0px 2px #ffffff, inset 0px 0px 1px #ffffff;
+
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition:  all 0.1s ease-out;
+  -o-transition:  all 0.1s ease-out;
+  transition:  all 0.1s ease-out;}
+.category-button:hover{
+                                    padding:11px 32px;
+                                    border:none;
+
+                                    font:18px Arial, Helvetica, sans-serif;
+                                    font-weight:bold;
+                                    color:#fca000;
+                                    background:#ffffff;
+                                    -webkit-box-shadow:0px 0px 2px #ffffff, inset 0px 0px 1px #ffffff;
+                                    -moz-box-shadow: 0px 0px 2px #ffffff,  inset 0px 0px 1px #ffffff;
+                                    box-shadow:0px 0px 2px #ffffff, inset 0px 0px 1px #ffffff;
+
+                                  }
 .contactinfo ul li a:hover{
 	background:inherit;
 }
