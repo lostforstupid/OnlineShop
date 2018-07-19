@@ -29,12 +29,13 @@
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             <c:if test="${pageContext.request.remoteUser != null}">
-                                <li><a href="/cart"><i class="fa fa-shopping-cart"></i> <spring:message code="label.cart"/></a></li>
-                                <li><a href="/profile"><i class="fa fa-profile"></i> <spring:message code="label.profile"/></a></li>
-                                <li><a href="/logout"><i class="fa fa-log-out"></i> <spring:message code="label.logout"/></a></li>
+
+                                <li><a href="/cart"><img src="${pageContext.request.contextPath}/images/content/cart.png" /> <spring:message code="label.cart"/></a></li>
+                                <li><a href="/profile"><img src="${pageContext.request.contextPath}/images/content/profile.png" /> <spring:message code="label.profile"/></a></li>
+                                <li><a href="/logout"><img src="${pageContext.request.contextPath}/images/content/logout.png" /> <spring:message code="label.logout"/></a></li>
                             </c:if>
                             <c:if test="${pageContext.request.remoteUser == null}">
-                                <li><a href="login"><i class="fa fa-lock"></i> <spring:message code="label.login"/></a></li>
+                                <li><a href="login"><img src="${pageContext.request.contextPath}/images/content/login.png" /> <spring:message code="label.login"/></a></li>
                             </c:if>
                         </ul>
                     </div>
