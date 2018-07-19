@@ -55,10 +55,4 @@ public class ProductServiceImpl implements ProductService {
         productRepository.delete(product);
         return (!isProductExist(product.getName()));
     }
-
-    @Override
-    public Product getById(Long id) {
-        Optional<Product> result = productRepository.findById(id);
-        return (result.isPresent()) ? result.get() : null;
-    }
 }
