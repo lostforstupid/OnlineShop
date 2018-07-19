@@ -14,6 +14,7 @@
                                     document.write('</h4>');
                                     document.write('</div>');
                                     document.write('</div>');
+
                             </script>
 
             </c:forEach>
