@@ -41,5 +41,18 @@
 
     </c:forEach>
 
+
 </div>
+<br>
+<form action="${pageContext.request.contextPath}/welcome">
+    <table class="products-pages">
+        <tr>
+            <script>
+                for(var i = 1; i < ${pages};i++){
+                    document.write('<td><input class="btn btn-primary btn-hover btn-pages" type = submit name="page" value="'+i+'"/></td>');
+                }
+            </script>
+        </tr>
+    </table>
+</form>
 <!--features_items-->

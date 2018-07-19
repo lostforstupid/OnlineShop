@@ -2186,6 +2186,12 @@ h2.title {
   margin-top:45px
 }
 
+.btn-pages{
+    margin: 5px;
+}
+.products-pages{
+
+}
 .pagination-area 
 .pagination li a {
   background:#F0F0E9;
