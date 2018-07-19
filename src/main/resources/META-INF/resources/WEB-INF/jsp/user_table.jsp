@@ -9,6 +9,13 @@
     <h3 class = "navbar-header"><spring:message code="label.users"/></h3>
     <table class = "table table-condensed admin-table">
         <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Address</th>
+            <th>First name</th>
+            <th>Second name</th>
+            <th>Phone number</th>
+            <th>Block</th>
             <th><spring:message code="label.userName"/></th>
             <th><spring:message code="label.role"/></th>
             <th><spring:message code="label.address"/></th>
@@ -16,20 +23,24 @@
         </tr>
         <c:forEach var = "user" items = "${userList}">
             <tr>
-                <td>"${user.username}"</td>
-                <td>"${user.role}"</td>
-                <td>"${user.address}"</td>
+                <td>${user.username}</td>
+                <td>${user.role}</td>
+                <td>${user.address}</td>
+                <td>${user.firstName}</td>
+                <td>${user.secondName}</td>
+                <td>${user.phoneNumber}</td>
                 <td>
                     <blocking:form action = "users/${user.id}/block" method = "post">
 
                         <c:if test = "${user.role != 'ADMIN'}">
-                            <button type="submit" class="btn btn-default">
                                 <c:choose>
                                     <c:when test="${user.isBlocked == 'false'}">
                                         <spring:message code="label.block"/>
+                                        <button type="submit" class="btn btn-default block-button">Block</button>
                                     </c:when>
                                     <c:otherwise>
                                         <spring:message code="label.unblock"/>
+                                        <button type="submit" class="btn btn-default block-button">Unblock</button>
                                     </c:otherwise>
                                 </c:choose>
                             </button>
