@@ -17,11 +17,11 @@
                                     <button class="btn btn-default" type="submit">PAY</button>
                                 </c:when>
                                 <c:otherwise>
-                                    <button class="btn btn-disabled" type="submit" disabled="disabled">PAY</button>
+                                    <button class="btn btn-disabled" type="submit" disabled="disabled" >PAY</button>
                                 </c:otherwise>
                             </c:choose>
                             <h4 class="text-left"><a href="${pageContext.request.contextPath}/cart">Back to the cart</a></h4>
-                        </form>
+                        </form>0
                     </div><!--/login form-->
                 </div>
             </div>
