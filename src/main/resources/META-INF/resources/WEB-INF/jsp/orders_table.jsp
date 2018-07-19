@@ -23,8 +23,8 @@
                 <table class = "table table-condensed orders-table">
                     <tr>
                         <%--<edit:form action = "/orders/${order.id}/edit" method="get"--%>
-                            <td class = "username">"${order.user.username}"</td>
-                            <td class = "status">"${order.status}"</td>
+                            <td class = "username">${order.user.username}</td>
+                            <td class = "status">${order.status}</td>
                             <td class = "button">
                                 <button class = "btn btn-default" type = "submit">Edit</button>
                                 <%--<button class = "btn btn-default" onclick = "show(${order.id})">Show products</button>--%>

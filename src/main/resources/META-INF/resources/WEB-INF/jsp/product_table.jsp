@@ -8,8 +8,8 @@
 <div class = "container">
     <div class = "login-form">
         <add:form action = "/products/add" method="get">
-            <h3 class = "navbar-header">Products</h3>
-            <button style="margin-left: 40px;" class="btn btn-default" type = "submit">Add product</button>
+            <h3 class = "navbar-header">Products</h3><br><br>
+            <button class="btn btn-default" type = "submit">Add product</button>
         </add:form>
     </div>
     <table class = "table table-condensed">
@@ -22,12 +22,12 @@
         <c:forEach var = "product" items = "${productList}">
                 <tr>
                     <td><img style = "height: 40px;" src = "${pageContext.request.contextPath}/images/products/${product.imageLink}"></td>
-                    <td>"${product.name}"</td>
-                    <td>"${product.price}"</td>
+                    <td>${product.name}</td>
+                    <td>$${product.price}</td>
                     <td>
                         <div class = "login-form">
                             <editing:form action = "${pageContext.request.contextPath}/products/${product.id}/edit" method = "get">
-                                <button type="submit" class="btn btn-default">Edit</button>
+                                <button type="submit" class="btn btn-default ">Edit</button>
                             </editing:form>
                         </div>
                     </td>
