@@ -23,7 +23,7 @@
                         <h2>$${item.price}</h2>
                         <p>${item.name}</p>
 >>>>>>>>> Temporary merge branch 2--%>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
+                        <a href="#" class="btn btn-default add-to-cart"><img style="max-width:16px" src="${pageContext.request.contextPath}/images/content/cart.png" /> Add
                             to cart</a>
                          </div>
                     </div>
@@ -31,8 +31,7 @@
                         <div class="overlay-content">
                             <h2>$${product.price}</h2>
                             <p>${product.name}</p>
-                            <a href="cart/${product.id}/add" class="btn btn-default add-to-cart"><i
-                                    class="fa fa-shopping-cart"></i>Add to cart</a>
+                            <a href="cart/${product.id}/add" class="btn btn-default add-to-cart"><img style="max-width:16px" src="${pageContext.request.contextPath}/images/content/cart.png" /> Add to cart</a>
                         </div>
                     </div>
                 </div>
