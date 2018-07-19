@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.epam.onlineshop.entities.Product;
 import com.epam.onlineshop.services.ProductService;
+import org.apache.log4j.Logger;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 public class HelloController {
     private final ProductService productService;
+    private final static Logger logger = Logger.getLogger(HelloController.class);
 
     private final UserService userService;
 
@@ -33,7 +35,7 @@ public class HelloController {
         return modelAndView;
     }
 
-    @GetMapping("/deny_access")
+    @GetMapping("/deny-access")
     public ModelAndView denyAccess() {
         return new ModelAndView("access_denied");
     }

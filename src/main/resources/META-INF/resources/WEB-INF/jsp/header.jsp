@@ -25,12 +25,12 @@
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             <c:if test="${pageContext.request.remoteUser != null}">
-                                <li><a href="/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="/profile"><i class="fa fa-profile"></i> Profile</a></li>
-                                <li><a href="/logout"><i class="fa fa-log-out"></i> Logout</a></li>
+                                <li><a href="/cart"><img src="${pageContext.request.contextPath}/images/content/cart.png" /> Cart</a></li>
+                                <li><a href="/profile"><img src="${pageContext.request.contextPath}/images/content/profile.png" /> Profile</a></li>
+                                <li><a href="/logout"><img src="${pageContext.request.contextPath}/images/content/logout.png" /> Logout</a></li>
                             </c:if>
                             <c:if test="${pageContext.request.remoteUser == null}">
-                                <li><a href="login"><i class="fa fa-lock"></i> Login</a></li>
+                                <li><a href="login"><img src="${pageContext.request.contextPath}/images/content/login.png" /> Login</a></li>
                             </c:if>
                         </ul>
                     </div>
