@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8" %>
+<%@ page session="false"%>
 <%--@elvariable id="userJSP" type=""--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -5,7 +7,7 @@
 
 <div class="container">
     <div class="col-sm-4 col-sm-offset-1">
-        <h2>New User Signup!</h2>
+        <h2><spring:message code="label.signUp"/>!</h2>
 
 
 
@@ -13,21 +15,21 @@
             <spring:bind path="username">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="username" name="username" id="username" minLength="6" maxlength="32" class="form-control form_margin" placeholder="Username"
-                                autofocus="true" required="true" oninput="validate()"/> <span id="nameInfo" class="form_hint" style="background: #46b8da" >Enter username</span>
+                                autofocus="true" required="true" oninput="validate()"/> <span id="nameInfo" class="form_hint" style="background: #46b8da" ><spring:message code="label.enterUsername"/></span>
                     <form:errors path="username"/>
                 </div>
             </spring:bind>
             <spring:bind path="address">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="address" name="address" id="address" minLength="10" class="form-control form_margin" placeholder="Address"
-                                autofocus="true" required="true" oninput="validate()"/> <span id="addressInfo" class="form_hint" style="background: #46b8da" >Enter address</span>
+                                autofocus="true" required="true" oninput="validate()"/> <span id="addressInfo" class="form_hint" style="background: #46b8da" ><spring:message code="label.enterAddress"/></span>
                     <form:errors path="address"/>
                 </div>
             </spring:bind>
             <spring:bind path="password">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="password" path="password" name="password" minLength="8" maxlength="32" id="password" class="form-control form_margin"
-                                placeholder="Password" required="true" oninput="validate()"/> <span id="passwordInfo" class="form_hint" style="background: #46b8da">Enter password</span>
+                                placeholder="Password" required="true" oninput="validate()"/> <span id="passwordInfo" class="form_hint" style="background: #46b8da"><spring:message code="label.EnterPassword"/></span>
                     <form:errors path="password"/>
                 </div>
             </spring:bind>

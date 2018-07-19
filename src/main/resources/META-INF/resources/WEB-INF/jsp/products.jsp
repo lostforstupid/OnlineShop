@@ -1,7 +1,10 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8" %>
+<%@ page session="false"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="features_items"><!--features_items-->
-    <h2 class="title text-center">Products</h2>
+    <h2 class="title text-center"><spring:message code="label.products"/></h2>
 
     <c:forEach var="product" items="${productList}">
 
@@ -23,8 +26,7 @@
                         <h2>$${item.price}</h2>
                         <p>${item.name}</p>
 >>>>>>>>> Temporary merge branch 2--%>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
-                            to cart</a>
+                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><spring:message code="label.addToCart"/></a>
                          </div>
                     </div>
                     <div class="product-overlay">
@@ -32,7 +34,7 @@
                             <h2>$${product.price}</h2>
                             <p>${product.name}</p>
                             <a href="cart/${product.id}/add" class="btn btn-default add-to-cart"><i
-                                    class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    class="fa fa-shopping-cart"></i><spring:message code="label.addToCart"/></a>
                         </div>
                     </div>
                 </div>

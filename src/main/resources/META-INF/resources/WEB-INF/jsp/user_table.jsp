@@ -1,15 +1,18 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8" %>
+<%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="blocking" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <div class="container">
     <div class = "login-form">
-    <h3 class = "navbar-header">Users</h3>
+    <h3 class = "navbar-header"><spring:message code="label.users"/></h3>
     <table class = "table table-condensed admin-table">
         <tr>
-            <th>Username</th>
-            <th>Role</th>
-            <th>Address</th>
-            <th>Block</th>
+            <th><spring:message code="label.userName"/></th>
+            <th><spring:message code="label.role"/></th>
+            <th><spring:message code="label.address"/></th>
+            <th><spring:message code="label.block"/></th>
         </tr>
         <c:forEach var = "user" items = "${userList}">
             <tr>
@@ -23,10 +26,10 @@
                             <button type="submit" class="btn btn-default">
                                 <c:choose>
                                     <c:when test="${user.isBlocked == 'false'}">
-                                        Block
+                                        <spring:message code="label.block"/>
                                     </c:when>
                                     <c:otherwise>
-                                        Unblock
+                                        <spring:message code="label.unblock"/>
                                     </c:otherwise>
                                 </c:choose>
                             </button>
