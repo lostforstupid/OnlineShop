@@ -25,7 +25,7 @@ INSERT INTO product (id, name, category, price, image_url) VALUES
     (16, 'Imperator-I', 'STAR_WARS' ,7500, 'imperator1.jpg'),
     (17, 'Imperator-II', 'STAR_WARS' ,7500, 'imperator.jpg');
 
-/*INSERT INTO order_table (id, status, user_id) VALUES
+INSERT INTO order_table (id, status, user_id) VALUES
     (1, 'NEW', 1),
     (2, 'NEW', 2);
 
@@ -33,4 +33,4 @@ INSERT INTO product_in_order (id, quantity, order_id, product_id) VALUES
     (default , 9, 1, 2),
     (default , 6, 1, 3),
     (default , 3, 1, 1),
-    (default , 1, 2, 4);*/
+    (default , 1, 2, 4);
