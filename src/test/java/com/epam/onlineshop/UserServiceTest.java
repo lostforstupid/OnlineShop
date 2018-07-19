@@ -4,6 +4,7 @@ import com.epam.onlineshop.entities.Role;
 import com.epam.onlineshop.entities.User;
 import com.epam.onlineshop.repository.UserRepository;
 import com.epam.onlineshop.services.UserService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,23 +26,41 @@ public class UserServiceTest {
     @Autowired
     private UserRepository userRepository;
 
-    private static String username_alex = "username_alex";
-    private static String password_alex = "123";
-    private static String firstname_alex = "Alex";
-    private static String secondname_alex = "Petrov";
-    private static String phonenumber_alex = "+ 7 999 021 06 14";
-    private static String address_alex = "aaa";
+    private final static String USERNAME = "USERNAME";
+    private final static String PASSWORD = "123";
+    private final static String FIRSTNAME = "Alex";
+    private final static String SECONDNAME = "Petrov";
+    private final static String PHONENUMBER = "+ 7 999 021 06 14";
+    private final static String ADDRESS = "aaa";
 
 
-    private static String firstname_new_alex = "Alex123";
-    private static String secondname_new_alex = "Petrov123";
-    private static String phonenumber_new_alex = "+ 7 999 888 77 66";
-    private static String address_new_alex = "aaa123";
+    private final static String FIRSTNAME_NEW = "Alex123";
+    private final static String SECONDNAME_NEW = "Petrov123";
+    private final static String PHONENUMBER_NEW = "+ 7 999 888 77 66";
+    private final static String ADDRESS_NEW = "aaa123";
+
+    private User expected;
+
+    public static User createUser() {
+        return User.builder().id(5L)
+                .username(USERNAME)
+                .password(PASSWORD)
+                .role(Role.USER)
+                .firstName(FIRSTNAME)
+                .secondName(SECONDNAME)
+                .phoneNumber(PHONENUMBER)
+                .address(ADDRESS)
+                .isBlocked(false)
+                .build();
+    }
+
+    @Before
+    public void setUp(){
+        expected = createUser();
+    }
 
     @Test
     public void shouldReturnNewUserFromDB() {
-        User expected = createUser();
-
         userService.addUser(expected);
 
         User actual = userRepository.findByUsername(expected.getUsername());
@@ -77,10 +96,10 @@ public class UserServiceTest {
         User expected = createUser();
         userRepository.save(expected);
 
-        expected.setFirstName(firstname_new_alex);
-        expected.setSecondName(secondname_new_alex);
-        expected.setAddress(address_new_alex);
-        expected.setPhoneNumber(phonenumber_new_alex);
+        expected.setFirstName(FIRSTNAME_NEW);
+        expected.setSecondName(SECONDNAME_NEW);
+        expected.setAddress(ADDRESS_NEW);
+        expected.setPhoneNumber(PHONENUMBER_NEW);
         userService.updateUser(expected);
 
         User actual = userRepository.findByUsername(expected.getUsername());
@@ -156,18 +175,5 @@ public class UserServiceTest {
         assertEquals(expected.getRole(), actual.getRole());
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getIsBlocked(), actual.getIsBlocked());
-    }
-
-    private static User createUser() {
-        return User.builder().id(5L)
-                .username(username_alex)
-                .password(password_alex)
-                .role(Role.USER)
-                .firstName(firstname_alex)
-                .secondName(secondname_alex)
-                .phoneNumber(phonenumber_alex)
-                .address(address_alex)
-                .isBlocked(false)
-                .build();
     }
 }

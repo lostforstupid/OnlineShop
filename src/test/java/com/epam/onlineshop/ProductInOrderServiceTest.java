@@ -6,6 +6,7 @@ import com.epam.onlineshop.repository.ProductInOrderRepository;
 import com.epam.onlineshop.repository.ProductRepository;
 import com.epam.onlineshop.repository.UserRepository;
 import com.epam.onlineshop.services.ProductInOrderService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,40 +40,30 @@ public class ProductInOrderServiceTest {
     @Autowired
     private OrderRepository orderRepository;
 
-    private static String usernameAlex = "usernameAlex";
-    private static String passwordAlex = "123";
-    private static String firstnameAlex = "Alex";
-    private static String secondnameAlex = "Petrov";
-    private static String phonenumberAlex = "+ 7 999 021 06 14";
-    private static String addressAlex = "aaa";
+    private final static String PRODUCT_IMG_LINK = "";
+    private final static String PRODUCT_NAME = "Qwerty";
+    private final static Integer PRODUCT_PRICE = 10;
+    private final static Integer PRODUCT_IN_ORDER_QUANTITY = 1;
 
-    private static String productImgLink = "";
-    private static String productName = "Qwerty";
-    private static Integer productPrice = 10;
-
-    private static Integer productInOrderQuantity = 1;
-
-    @Test
-    public void shouldReturnAddedProductInOrderInCart() {
-        User user = userRepository.save(createUser());
-        Product productFromCatalog = productRepository.save(createProduct());
-        Order orderInCart = orderRepository.save(createOrder(user));
-        ProductInOrder expectation = createProductInOrder(productFromCatalog, orderInCart);
-
-        ProductInOrder result = productInOrderService.addOrderInCart(productFromCatalog.getId(), user);
-
-        Optional<ProductInOrder> actual = productInOrderRepository.findById(result.getId());
-
-        assertNotNull(actual);
-        assertEquals(expectation, actual.get());
-    }
+    private User user;
+    private Product productFromCatalog;
+    private Order orderInCart;
+    private ProductInOrder expectation;
 
     private static ProductInOrder createProductInOrder(Product productFromCatalog, Order orderInCart) {
         return ProductInOrder.builder()
                 .id(5L)
                 .order(orderInCart)
                 .product(productFromCatalog)
-                .quantity(productInOrderQuantity)
+                .quantity(PRODUCT_IN_ORDER_QUANTITY)
+                .build();
+    }
+
+    private static Product createProduct() {
+        return Product.builder()
+                .imageLink(PRODUCT_IMG_LINK)
+                .name(PRODUCT_NAME)
+                .price(PRODUCT_PRICE)
                 .build();
     }
 
@@ -83,24 +74,22 @@ public class ProductInOrderServiceTest {
                 .build();
     }
 
-    private static Product createProduct() {
-        return Product.builder()
-                .imageLink(productImgLink)
-                .name(productName)
-                .price(productPrice)
-                .build();
+    @Before
+    public void setUp(){
+        user = userRepository.save(UserServiceTest.createUser());
+        productFromCatalog = productRepository.save(createProduct());
+        orderInCart = orderRepository.save(createOrder(user));
+        expectation = createProductInOrder(productFromCatalog, orderInCart);
     }
 
-    private static User createUser() {
-        return User.builder()
-                .username(usernameAlex)
-                .password(passwordAlex)
-                .role(Role.USER)
-                .firstName(firstnameAlex)
-                .secondName(secondnameAlex)
-                .phoneNumber(phonenumberAlex)
-                .address(addressAlex)
-                .isBlocked(false)
-                .build();
+    @Test
+    public void shouldReturnAddedProductInOrderInCart() {
+
+        ProductInOrder result = productInOrderService.addOrderInCart(productFromCatalog.getId(), user);
+
+        Optional<ProductInOrder> actual = productInOrderRepository.findById(result.getId());
+
+        assertNotNull(actual);
+        assertEquals(expectation, actual.get());
     }
 }
