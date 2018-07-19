@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Home | Online Shop</title>
+<title>Online Shop</title>
 <style>
     <%@include file='../css/bootstrap.min.css' %>
 </style>
