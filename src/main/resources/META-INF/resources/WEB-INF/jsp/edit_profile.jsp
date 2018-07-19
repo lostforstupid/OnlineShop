@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8" %>
+<%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -8,39 +10,41 @@
 
     <div class="container">
         <div class="col-sm-4 col-sm-offset-1">
-            <h2>Edit your profile!</h2>
+
+            <h2><spring:message code="label.editProfile"/>!</h2>
             <form:form method="POST" action="edit" modelAttribute="userJSP" class="form-signin form_register" id="jform" name = "form_register">
                 <spring:bind path="firstName">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
                         <form:input type="text" path="firstName" name="firstName" id="firstName" minLength="1" maxlength="32" class="form-control form_margin" placeholder="First name"
-                                    autofocus="true" required="true" oninput="validate()"/> <span id="firstNameInfo" class="form_hint" style="background: #46b8da" >Enter first name</span>
+                                    autofocus="true" required="true" oninput="validate()"/> <span id="firstNameInfo" class="form_hint" style="background: #46b8da" ><spring:message code="label.enterName"/></span>
                         <form:errors path="firstName"/>
                     </div>
                 </spring:bind>
                 <spring:bind path="secondName">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
                         <form:input type="text" path="secondName" name="secondName" id="secondName" minLength="1" maxlength="32" class="form-control form_margin" placeholder="Second name"
-                                    autofocus="true" required="true" oninput="validate()"/> <span id="secondNameInfo" class="form_hint" style="background: #46b8da" >Enter second name</span>
+                                    autofocus="true" required="true" oninput="validate()"/> <span id="secondNameInfo" class="form_hint" style="background: #46b8da" ><spring:message code="label.enterSurname"/></span>
                         <form:errors path="secondName"/>
                     </div>
                 </spring:bind>
                 <spring:bind path="phoneNumber">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
                         <form:input type="text" path="phoneNumber" name="phoneNumber" id="phoneNumber" minLength="8" maxlength="32" class="form-control form_margin" placeholder="Phone number"
-                                    autofocus="true" required="true" oninput="validate()"/> <span id="phoneNumberInfo" class="form_hint" style="background: #46b8da" >Enter phone number</span>
+                                    autofocus="true" required="true" oninput="validate()"/> <span id="phoneNumberInfo" class="form_hint" style="background: #46b8da" ><spring:message code="label.enterPhone"/></span>
                         <form:errors path="phoneNumber"/>
                     </div>
                 </spring:bind>
                 <spring:bind path="address">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
                         <form:input type="text" path="address" name="address" id="address" minLength="10" class="form-control form_margin" placeholder="Address"
-                                    autofocus="true" required="true" oninput="validate()"/> <span id="addressInfo" class="form_hint" style="background: #46b8da" >Enter address</span>
+                                    autofocus="true" required="true" oninput="validate()"/> <span id="addressInfo" class="form_hint" style="background: #46b8da" ><spring:message code="label.enterAddress"/></span>
                         <form:errors path="address"/>
                     </div>
                 </spring:bind>
-                <button class="btn btn-default" type="submit" id="send">Submit</button>
+                <button class="btn btn-default" type="submit" id="send"><spring:message code="label.submit"/></button>
                 <form:form method="GET" action="/profile">
-                    <button class="btn btn-default" type="submit">Cancel</button>
+                    <button class="btn btn-default" type="submit"><spring:message code="label.cancel"/></button>
+
                 </form:form>
             </form:form>
         </div>

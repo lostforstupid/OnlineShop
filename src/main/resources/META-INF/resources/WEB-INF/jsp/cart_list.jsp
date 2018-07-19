@@ -1,26 +1,30 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8" %>
+<%@ page session="false"%>
 <%--@elvariable id="products" type="java.util.List"--%>
 <%--@elvariable id="TotalPrice" type=""--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <script>
     var totalPrice = 0;
 </script>
+
 <section id="cart_items">
     <div class="container">
         <div class="breadcrumbs">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class="active">Shopping Cart</li>
+                <li><a href="#"><spring:message code="label.home"/></a></li>
+                <li class="active"><spring:message code="label.cart"/></li>
             </ol>
         </div>
         <div class="table-responsive cart_info">
             <table class="table table-condensed">
                 <thead>
                 <tr class="cart_menu">
-                    <td class="image">Item</td>
+                    <td class="image"><spring:message code="label.item"/></td>
                     <td class="description"></td>
-                    <td class="price">Price</td>
-                    <td class="quantity">Quantity</td>
-                    <td class="total">Total</td>
+                    <td class="price"><spring:message code="label.price"/></td>
+                    <td class="quantity"><spring:message code="label.quantity"/></td>
+                    <td class="total"><spring:message code="label.total"/></td>
                     <td></td>
                 </tr>
                 </thead>
@@ -30,7 +34,7 @@
                     <c:when test="${products.size() <= 0}">
                         <tr>
                             <td class="cart_description">
-                                <h4><a href=""> You didn't add any product yet :( </a></h4>
+                                <h4><a href=""> <spring:message code="message.buy.error"/> </a></h4>
                             </td>
                         </tr>
                     </c:when>
@@ -80,8 +84,9 @@
             </table>
             <div class="login-form">
                 <form method="GET" action="${contextPath}/cart/payment" class="form-signin">
+
                     <div>
-                        <h4>Total price: <p id="p2"></p></h4>
+                        <h4><spring:message code="label.finalPrice"/>: <p id="p2"></p></h4>
                     </div>
                     <script>
                         document.getElementById("p2").innerHTML = totalPrice;
@@ -92,6 +97,7 @@
                         </c:when>
                         <c:otherwise>
                             <button class="btn btn-disabled" type="submit">Order</button>
+
                         </c:otherwise>
                     </c:choose>
                 </form>
