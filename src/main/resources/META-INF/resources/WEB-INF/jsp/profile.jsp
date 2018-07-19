@@ -1,7 +1,11 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8" %>
+<%@ page session="false"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="userJSP" type=""--%>
 <jsp:include page="init.jsp"/>
 <jsp:include page="header.jsp"/>
+
 <c:if test="${pageContext.request.userPrincipal.name != null}">
     <script>
         var orderId = -2;
@@ -11,8 +15,8 @@
     <section>
         <table class="table-profile min-width-for-table">
             <tr class="tr-allorders-table">
-                <td class="profile-orders-table"><h3>Profile</h3></td>
-                <td class="orders-table"><h3>Your orders</h3></td>
+                <td class="profile-orders-table"><h3><spring:message code="label.profile"/></h3></td>
+                <td class="orders-table"><h3><spring:message code="label.yourOrders"/></h3></td>
             </tr>
             <tr>
                 <td class="profile-table td-with-orders table-min-first">
@@ -21,19 +25,19 @@
                         <form method="GET" action="${pageContext.request.contextPath}/edit" class="form-signin">
                             <table>
                                 <tr>
-                                    <td><h4>First name: </h4></td>
+                                    <td><h4><spring:message code="label.firstName"/>: </h4></td>
                                     <td><h5>${userJSP.firstName}</h5></td>
                                 </tr>
                                 <tr>
-                                    <td><h4>Second name: </h4></td>
+                                    <td><h4><spring:message code="label.lastName"/>: </h4></td>
                                     <td><h5>${userJSP.secondName}</h5></td>
                                 </tr>
                                 <tr>
-                                    <td><h4>Address: </h4></td>
+                                    <td><h4><spring:message code="label.address"/>: </h4></td>
                                     <td><h5> ${userJSP.address} </h5></td>
                                 </tr>
                                 <tr>
-                                    <td><h4>Phone number: </h4></td>
+                                    <td><h4><spring:message code="label.phoneNumber"/>: </h4></td>
                                     <td><h5> ${userJSP.phoneNumber} </h5></td>
                                 </tr>
                             </table>
@@ -49,7 +53,7 @@
                                 <c:when test="${products.size() <= 0}">
                                     <tr>
                                         <td class="cart_description">
-                                            <h4> You didn't add any product yet :( </h4>
+                                            <h4> <spring:message code="message.buy.error"/> </h4>
                                         </td>
                                     </tr>
                                 </c:when>
@@ -83,10 +87,10 @@
 
                                                     if(isOrder){
                                                         document.write('<td class="table-center td-in-orders">Image</td>\n' +
-                                                            '<td class="table-center td-in-orders">Name</td>\n' +
+                                                            '<td class="table-center td-in-orders"><spring:message code="label.name"/></td>\n' +
                                                             '<td class="table-center td-in-orders">Web ID</td>\n' +
-                                                            '<td class="table-center td-in-orders">Price</td>\n' +
-                                                            '<td class="table-center td-in-orders">Quantity</td></tr>');
+                                                            '<td class="table-center td-in-orders"><spring:message code="label.price"/></td>\n' +
+                                                            '<td class="table-center td-in-orders"><spring:message code="label.quantity"/></td></tr>');
                                                         document.write(' <tr class="hidden${item.order.id}" style="display: none">');
                                                         isOrder = false;
                                                     }
@@ -112,6 +116,7 @@
         </table>
     </section>
 </c:if>
+
 </body>
 </html>
 <script type="text/javascript">
