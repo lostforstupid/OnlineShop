@@ -9,7 +9,7 @@
         <form:form method="POST" action="registration" modelAttribute="userJSP" class="form-signin form_register" id="jform" name = "form_register">
             <spring:bind path="username">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="text" path="username" name="username" id="username" minLength="6" maxlength="32" class="form-control form_margin" placeholder="Username"
+                    <form:input type="text" path="username" name="username" id="username" minLength="1" maxlength="32" class="form-control form_margin" placeholder="Username"
                                 autofocus="true" required="true" oninput="validate()"/> <span id="nameInfo" class="form_hint" style="background: #46b8da" >Enter username</span>
                     <form:errors path="username"/>
                 </div>
@@ -67,7 +67,7 @@
                 $('body').append('');
                 var nameInfo = $('#nameInfo');
                 var ele = $('#username');
-                if((ele.val().length < 6)||(ele.val().length > 32)) {
+                if((ele.val().length < 1)||(ele.val().length > 32)) {
                     jVal.errorUsername = true;
                     nameInfo.removeClass('hint_green').addClass('hint_red').html('must be 6 - 32 characters').show();
                 } else {
