@@ -9,7 +9,7 @@
                 <div class="col-sm-4 col-sm-offset-1">
                     <div class="login-form"><!--login form-->
                         <h2>To pay for your order - click on the button and in any convenient way for you</h2>
-                        <form method="POST" action="${pageContext.request.contextPath}/cart/order" class="form-signin" onsubmit="checkAlert()">
+                        <form method="POST" action="${pageContext.request.contextPath}/cart/order" class="form-signin">
                             <span class="message-success">${message}</span>
                             <%--@elvariable id="isPaid" type=""--%>
                             <c:choose>
@@ -30,9 +30,3 @@
 </section>
 </body>
 </html>
-
-<script Language="JavaScript">
-    function checkAlert(){
-        alert("Are you sure? If yes click OK.");
-    }
-</script>

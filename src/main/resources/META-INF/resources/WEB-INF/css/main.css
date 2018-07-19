@@ -908,6 +908,9 @@ h2.title {
     width:33%;
 
 }
+.table-min-first{
+  min-width: 350px;
+}
 .heavy-weight{
     font-weight: bold;
 }
