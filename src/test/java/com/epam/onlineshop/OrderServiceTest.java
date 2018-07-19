@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -34,91 +37,63 @@ public class OrderServiceTest {
     @Autowired
     OrderService orderService;
 
-    private Order order;
     private User user;
-    private ProductInOrder productInOrder;
     private Product product;
-
-    private static Long USER_ID = 4L;
-    private static Role ROLE = Role.USER;
-    private static String USERNAME = "user";
-    private static String PASSWORD = "pass";
-    private static Boolean IS_BLOCKED = false;
-    private static String ADDRESS = "address";
-
-    private static Long PRODUCT_ID = 5L;
-    private static String PRODUCT_NAME = "product";
-    private static Integer PRICE = 200;
-    private static String IMAGE_URL = "url.jpg";
-
-    private static Long ORDER_ID = 3L;
-    private static Status STATUS = Status.NEW;
-
-    private static Long PRODUCT_IN_ORDER_ID = 5L;
-    private static Integer QUANTITY = 12;
-
-    public User getUser() {
-        return User.builder()
-                .id(USER_ID)
-                .username(USERNAME)
-                .password(PASSWORD)
-                .role(ROLE)
-                .address(ADDRESS)
-                .isBlocked(IS_BLOCKED)
-                .build();
-    }
-
-    public Product getProduct() {
-        return Product.builder()
-                .id(PRODUCT_ID)
-                .name(PRODUCT_NAME)
-                .price(PRICE)
-                .imageLink(IMAGE_URL)
-                .build();
-    }
-
-    public Order getOrder() {
-        return Order.builder()
-                .id(ORDER_ID)
-                .status(STATUS)
-                .build();
-    }
-
-    public ProductInOrder getProductInOrder() {
-        return ProductInOrder.builder()
-                .id(PRODUCT_IN_ORDER_ID)
-                .quantity(QUANTITY)
-                .build();
-    }
+    private Order expected;
 
     @Before
     public void setUp() {
-        order = getOrder();
-        user = getUser();
-        product = getProduct();
-        productInOrder = getProductInOrder();
+        user = UserServiceTest.createUser();
+        product = ProductInOrderServiceTest.createProduct();
+        expected = ProductInOrderServiceTest.createOrder(user);
 
-        productInOrder.setOrder(order);
-        productInOrder.setProduct(product);
-
-        order.setUser(user);
+        userRepository.save(user);
+        productRepository.save(product);
+        orderRepository.save(expected);
+        productInOrderRepository.save(ProductInOrderServiceTest.createProductInOrder(product, expected));
     }
 
     @Test
-    public void testSettingStatusById() {
-        productRepository.save(product);
-        userRepository.save(user);
-        orderRepository.save(order);
-        productInOrderRepository.save(productInOrder);
-
-        Order orderReceived = getOrder();
-        orderReceived.setUser(user);
+    public void shouldSetStatusById() {
+        Order orderReceived = ProductInOrderServiceTest.createOrder(user);
         Status expected = Status.PREPAID;
         orderReceived.setStatus(expected);
 
-        orderService.setStatusById(orderReceived, order.getId());
-        Status actual = orderRepository.findById(ORDER_ID).get().getStatus();
+        orderService.setStatusById(orderReceived, this.expected.getId());
+        Status actual = orderRepository.findById(this.expected.getId()).get().getStatus();
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindOrderById() {
+        Order expected = this.expected;
+        Order actual = orderService.findById(this.expected.getId());
+
+        assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getStatus(), actual.getStatus());
+    }
+
+    @Test
+    public void shouldSaveOrder() {
+        orderService.saveOrder(expected);
+        Order actual = orderService.findById(expected.getId());
+
+        assertNotNull(actual);
+        assertEquals(expected.getId(), actual.getId());
+        assertEquals(expected.getStatus(), actual.getStatus());
+    }
+
+    @Test
+    public void shouldReturnAllOrders() {
+        List<Order> expected = orderRepository.findAll();
+        List<Order> actual = orderService.getAllOrders();
+
+        assertEquals(expected.size(), actual.size());
+
+        for (int i = 0; i < expected.size(); i++) {
+            assertEquals(expected.get(i).getId(), actual.get(i).getId());
+            assertEquals(expected.get(i).getStatus(), actual.get(i).getStatus());
+        }
     }
 }
