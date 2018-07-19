@@ -9,6 +9,9 @@
             <th>Username</th>
             <th>Role</th>
             <th>Address</th>
+            <th>First name</th>
+            <th>Second name</th>
+            <th>Phone number</th>
             <th>Block</th>
         </tr>
         <c:forEach var = "user" items = "${userList}">
@@ -16,6 +19,9 @@
                 <td>${user.username}</td>
                 <td>${user.role}</td>
                 <td>${user.address}</td>
+                <td>${user.firstName}</td>
+                <td>${user.secondName}</td>
+                <td>${user.phoneNumber}</td>
                 <td>
                     <blocking:form action = "users/${user.id}/block" method = "post">
 
