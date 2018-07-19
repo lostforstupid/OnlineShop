@@ -16,7 +16,7 @@
                             <img class="border-for-img"
                                  src="${pageContext.request.contextPath}/images/products/${product.imageLink}" alt=""/>
                         </div>
-                        <h2>$${product.price}</h2>
+                        <h2>${product.price} ¤</h2>
                         <p>${product.name}</p>
                         <div class="for-cart">
                         <a href="#" class="btn btn-default add-to-cart"><img style="max-width:16px" src="${pageContext.request.contextPath}/images/content/cart.png" /> Add
@@ -25,10 +25,10 @@
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
-                            <h2>$${product.price}</h2>
+                            <h2>${product.price} ¤</h2>
                             <p>${product.name}</p>
 
-                            <a href="cart/${product.id}/add" class="btn btn-default add-to-cart"><img style="max-width:16px" src="${pageContext.request.contextPath}/images/content/cart.png" /> <spring:message code="label.addToCart"/></a>
+                            <a href="cart/${product.id}/add" class="btn btn-default add-to-cart"><img style="max-width:16px" src="${pageContext.request.contextPath}/images/content/cart.png" /><spring:message code="label.addToCart"/></a>
 
                         </div>
                     </div>
