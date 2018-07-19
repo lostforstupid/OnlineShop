@@ -13,29 +13,29 @@
         <form:form method="POST" action="registration" modelAttribute="userJSP" class="form-signin form_register" id="jform" name = "form_register">
             <spring:bind path="username">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
-                    <form:input type="text" path="username" name="username" id="username" minLength="6" maxlength="32" class="form-control form_margin" placeholder="Username"
-                                autofocus="true" required="true" oninput="validate()"/> <span id="nameInfo" class="form_hint" style="background: #46b8da" ><spring:message code="label.enterUsername"/></span>
+                    <form:input type="text" path="username" name="username" id="username" minLength="1" maxlength="32" class="form-control form_margin" placeholder="Username"
+                                autofocus="true" required="true" oninput="validate()"/> <span id="nameInfo" class="form_hint" style="background: #46b8da" ><spring:message code="label.enterName"/></span>
                     <form:errors path="username"/>
                 </div>
             </spring:bind>
             <spring:bind path="firstName">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="firstName" name="firstName" id="firstName" minLength="1" maxlength="32" class="form-control form_margin" placeholder="First name"
-                                autofocus="true" required="true" oninput="validate()"/> <span id="firstNameInfo" class="form_hint" style="background: #46b8da" >Enter first name</span>
+                                autofocus="true" required="true" oninput="validate()"/> <span id="firstNameInfo" class="form_hint" style="background: #46b8da" ><spring:message code="label.enterAddress"/></span>
                     <form:errors path="firstName"/>
                 </div>
             </spring:bind>
             <spring:bind path="secondName">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="secondName" name="secondName" id="secondName" minLength="1" maxlength="32" class="form-control form_margin" placeholder="Second name"
-                                autofocus="true" required="true" oninput="validate()"/> <span id="secondNameInfo" class="form_hint" style="background: #46b8da" >Enter second name</span>
+                                autofocus="true" required="true" oninput="validate()"/> <span id="secondNameInfo" class="form_hint" style="background: #46b8da" ><spring:message code="label.enterSurname"/></span>
                     <form:errors path="secondName"/>
                 </div>
             </spring:bind>
             <spring:bind path="phoneNumber">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <form:input type="text" path="phoneNumber" name="phoneNumber" id="phoneNumber" minLength="8" maxlength="32" class="form-control form_margin" placeholder="Phone number"
-                                autofocus="true" required="true" oninput="validate()"/> <span id="phoneNumberInfo" class="form_hint" style="background: #46b8da" >Enter phone number</span>
+                                autofocus="true" required="true" oninput="validate()"/> <span id="phoneNumberInfo" class="form_hint" style="background: #46b8da" ><spring:message code="label.enterPhone"/></span>
                     <form:errors path="phoneNumber"/>
                 </div>
             </spring:bind>
@@ -53,7 +53,7 @@
                     <form:errors path="password"/>
                 </div>
             </spring:bind>
-            <button class="btn btn-lg btn-primary btn-block" type="submit" id="send">Submit</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" id="send"><spring:message code="label.submit"/></button>
         </form:form>
     </div>
     <div class="col-sm-1">
@@ -71,7 +71,7 @@
                 $('body').append('');
                 var nameInfo = $('#nameInfo');
                 var ele = $('#username');
-                if((ele.val().length < 6)||(ele.val().length > 32)) {
+                if((ele.val().length < 1)||(ele.val().length > 32)) {
                     jVal.errorUsername = true;
                     nameInfo.removeClass('hint_green').addClass('hint_red').html('must be 6 - 32 characters').show();
                 } else {

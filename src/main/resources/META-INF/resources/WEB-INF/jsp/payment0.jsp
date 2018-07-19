@@ -24,7 +24,8 @@
                                 </c:otherwise>
                             </c:choose>
                             <h4 class="text-left"><a href="${pageContext.request.contextPath}/cart"><spring:message code="label.backToCart"/></a></h4>
-                        </form>
+                        </form>0
+
                     </div><!--/login form-->
                 </div>
             </div>
